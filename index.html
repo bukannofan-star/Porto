@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nofantyo — Portofolio</title>
+  <meta name="description" content="Portofolio profesional Nofantyo">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f8fa;
+      --surface: #ffffff;
+      --text: #14171f;
+      --muted: #5b6372;
+      --border: #e3e6ec;
+      --accent: #2557d6;
+      --accent-soft: #e8eefc;
+      --shadow: 0 1px 2px rgba(20, 23, 31, .04), 0 4px 16px rgba(20, 23, 31, .06);
+    }
+    :root[data-theme="dark"] {
+      --bg: #0e1116;
+      --surface: #161a22;
+      --text: #e8ebf1;
+      --muted: #9aa3b2;
+      --border: #262c37;
+      --accent: #6d95ff;
+      --accent-soft: #1b2540;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 4px 16px rgba(0, 0, 0, .25);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #0e1116;
+        --surface: #161a22;
+        --text: #e8ebf1;
+        --muted: #9aa3b2;
+        --border: #262c37;
+        --accent: #6d95ff;
+        --accent-soft: #1b2540;
+        --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 4px 16px rgba(0, 0, 0, .25);
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 16px; }
+
+    /* Nav */
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      background: color-mix(in srgb, var(--bg) 85%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav .container { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 16px; }
+    .brand { font-weight: 800; color: var(--text); letter-spacing: -.02em; }
+    .nav-links { display: flex; gap: 20px; list-style: none; align-items: center; }
+    .nav-links a { color: var(--muted); font-size: .92rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
+    .theme-btn {
+      background: var(--surface); border: 1px solid var(--border); color: var(--text);
+      width: 36px; height: 36px; border-radius: 10px; cursor: pointer; font-size: 1rem;
+    }
+    @media (max-width: 680px) { .nav-links li.link { display: none; } }
+
+    /* Hero */
+    .hero { padding: 72px 0 56px; display: grid; grid-template-columns: auto 1fr; gap: 36px; align-items: center; }
+    .avatar {
+      width: 140px; height: 140px; border-radius: 50%;
+      background: var(--accent-soft); color: var(--accent);
+      display: grid; place-items: center; font-size: 3rem; font-weight: 800;
+      border: 4px solid var(--surface); box-shadow: var(--shadow); overflow: hidden;
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1.15; letter-spacing: -.03em; }
+    .headline { font-size: 1.15rem; color: var(--muted); margin: 8px 0 6px; }
+    .location { color: var(--muted); font-size: .95rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px;
+      border-radius: 10px; font-weight: 600; font-size: .92rem; border: 1px solid var(--border);
+      background: var(--surface); color: var(--text);
+    }
+    .btn:hover { text-decoration: none; border-color: var(--accent); }
+    .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    @media (max-width: 680px) {
+      .hero { grid-template-columns: 1fr; text-align: center; padding-top: 48px; }
+      .avatar { margin: 0 auto; width: 112px; height: 112px; font-size: 2.4rem; }
+      .actions { justify-content: center; }
+    }
+
+    /* Sections */
+    section { padding: 40px 0; }
+    section h2 {
+      font-size: 1.4rem; letter-spacing: -.02em; margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    section h2::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+    .card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+      padding: 22px; box-shadow: var(--shadow);
+    }
+    .about p { color: var(--muted); white-space: pre-line; }
+
+    /* Timeline */
+    .timeline { display: grid; gap: 14px; }
+    .item { display: grid; grid-template-columns: 48px 1fr; gap: 16px; }
+    .logo {
+      width: 48px; height: 48px; border-radius: 10px; background: var(--accent-soft);
+      color: var(--accent); display: grid; place-items: center; font-weight: 700;
+    }
+    .item h3 { font-size: 1.05rem; }
+    .meta { color: var(--muted); font-size: .9rem; }
+    .item p, .item ul { color: var(--muted); margin-top: 8px; font-size: .95rem; }
+    .item ul { padding-left: 18px; }
+
+    /* Skills */
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      background: var(--accent-soft); color: var(--accent); padding: 6px 12px;
+      border-radius: 999px; font-size: .88rem; font-weight: 500;
+    }
+
+    /* Projects & certs */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+    .grid .card h3 { font-size: 1.02rem; margin-bottom: 6px; }
+    .grid .card p { color: var(--muted); font-size: .93rem; }
+    .grid .card .chips { margin-top: 12px; }
+    .grid .card .chip { font-size: .78rem; padding: 4px 10px; }
+
+    /* Contact */
+    .contact { text-align: center; }
+    .contact p { color: var(--muted); margin-bottom: 18px; }
+    .contact .actions { justify-content: center; }
+
+    footer { padding: 32px 0; text-align: center; color: var(--muted); font-size: .85rem; border-top: 1px solid var(--border); margin-top: 24px; }
+
+    .reveal { opacity: 0; transform: translateY(12px); transition: opacity .5s ease, transform .5s ease; }
+    .reveal.show { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <a href="#top" class="brand" id="brand"></a>
+      <ul class="nav-links">
+        <li class="link"><a href="#tentang">Tentang</a></li>
+        <li class="link"><a href="#pengalaman">Pengalaman</a></li>
+        <li class="link"><a href="#pendidikan">Pendidikan</a></li>
+        <li class="link"><a href="#keahlian">Keahlian</a></li>
+        <li class="link"><a href="#kontak">Kontak</a></li>
+        <li><button class="theme-btn" id="themeBtn" aria-label="Ganti tema">◐</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container" id="top">
+    <header class="hero">
+      <div class="avatar" id="avatar"></div>
+      <div>
+        <h1 id="name"></h1>
+        <div class="headline" id="headline"></div>
+        <div class="location" id="location"></div>
+        <div class="actions" id="heroActions"></div>
+      </div>
+    </header>
+
+    <section id="tentang" class="about reveal">
+      <h2>Tentang Saya</h2>
+      <div class="card"><p id="about"></p></div>
+    </section>
+
+    <section id="pengalaman" class="reveal">
+      <h2>Pengalaman</h2>
+      <div class="timeline" id="experience"></div>
+    </section>
+
+    <section id="pendidikan" class="reveal">
+      <h2>Pendidikan</h2>
+      <div class="timeline" id="education"></div>
+    </section>
+
+    <section id="keahlian" class="reveal">
+      <h2>Keahlian</h2>
+      <div class="card"><div class="chips" id="skills"></div></div>
+    </section>
+
+    <section id="proyek" class="reveal">
+      <h2>Proyek</h2>
+      <div class="grid" id="projects"></div>
+    </section>
+
+    <section id="sertifikasi" class="reveal">
+      <h2>Lisensi &amp; Sertifikasi</h2>
+      <div class="grid" id="certs"></div>
+    </section>
+
+    <section id="kontak" class="contact reveal">
+      <h2>Kontak</h2>
+      <div class="card">
+        <p>Terbuka untuk peluang kerja, kolaborasi, atau sekadar berdiskusi.</p>
+        <div class="actions" id="contactActions"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer><span id="footer"></span></footer>
+
+  <script>
+    // ================================================================
+    //  EDIT DATA DI BAWAH INI sesuai profil LinkedIn Anda.
+    //  Semua teks bertanda [ ... ] adalah placeholder.
+    // ================================================================
+    const DATA = {
+      name: "Nofantyo",
+      photo: "",                       // contoh: "foto.jpg" (taruh file di folder yang sama)
+      headline: "[Jabatan / Headline LinkedIn]",
+      location: "[Kota], Indonesia",
+      about: "[Tulis ringkasan 'About' dari LinkedIn di sini. Ceritakan siapa Anda, bidang keahlian, dan apa yang sedang Anda kerjakan.]",
+      links: {
+        email: "",                     // contoh: "nama@email.com"
+        linkedin: "https://www.linkedin.com/in/nofantyo/",
+        github: "",
+        cv: ""                         // contoh: "cv.pdf"
+      },
+      experience: [
+        {
+          title: "[Posisi]",
+          company: "[Nama Perusahaan]",
+          period: "[Bulan Tahun] – Sekarang",
+          location: "[Kota]",
+          points: [
+            "[Tanggung jawab atau pencapaian utama]",
+            "[Tanggung jawab atau pencapaian lain]"
+          ]
+        },
+        {
+          title: "[Posisi Sebelumnya]",
+          company: "[Nama Perusahaan]",
+          period: "[Bulan Tahun] – [Bulan Tahun]",
+          location: "[Kota]",
+          points: ["[Deskripsi singkat]"]
+        }
+      ],
+      education: [
+        {
+          school: "[Nama Kampus / Sekolah]",
+          degree: "[Gelar, Jurusan]",
+          period: "[Tahun] – [Tahun]",
+          note: ""
+        }
+      ],
+      skills: ["[Skill 1]", "[Skill 2]", "[Skill 3]", "[Skill 4]", "[Skill 5]"],
+      projects: [
+        { name: "[Nama Proyek]", desc: "[Deskripsi singkat proyek]", tags: ["[Teknologi]"], url: "" }
+      ],
+      certifications: [
+        { name: "[Nama Sertifikasi]", issuer: "[Penerbit]", date: "[Bulan Tahun]", url: "" }
+      ]
+    };
+
+    // ================================================================
+    //  Rendering — tidak perlu diubah.
+    // ================================================================
+    const $ = (id) => document.getElementById(id);
+    const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    const initials = (s) => s.replace(/[\[\]]/g, "").split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0].toUpperCase()).join("") || "•";
+
+    document.title = `${DATA.name} — Portofolio`;
+    $("brand").textContent = DATA.name;
+    $("name").textContent = DATA.name;
+    $("headline").textContent = DATA.headline;
+    $("location").textContent = DATA.location ? `📍 ${DATA.location}` : "";
+    $("about").textContent = DATA.about;
+    $("avatar").innerHTML = DATA.photo ? `<img src="${esc(DATA.photo)}" alt="${esc(DATA.name)}">` : esc(initials(DATA.name));
+    $("footer").textContent = `© ${new Date().getFullYear()} ${DATA.name}`;
+
+    const L = DATA.links;
+    const buttons = [
+      L.email && `<a class="btn primary" href="mailto:${esc(L.email)}">✉ Email</a>`,
+      L.linkedin && `<a class="btn" href="${esc(L.linkedin)}" target="_blank" rel="noopener">in LinkedIn</a>`,
+      L.github && `<a class="btn" href="${esc(L.github)}" target="_blank" rel="noopener">⌥ GitHub</a>`,
+      L.cv && `<a class="btn" href="${esc(L.cv)}" download>⬇ Unduh CV</a>`
+    ].filter(Boolean).join("");
+    $("heroActions").innerHTML = buttons;
+    $("contactActions").innerHTML = buttons;
+
+    $("experience").innerHTML = DATA.experience.map((e) => `
+      <div class="card item">
+        <div class="logo">${esc(initials(e.company))}</div>
+        <div>
+          <h3>${esc(e.title)}</h3>
+          <div class="meta">${esc(e.company)}${e.location ? " · " + esc(e.location) : ""}</div>
+          <div class="meta">${esc(e.period)}</div>
+          ${e.points?.length ? `<ul>${e.points.map((p) => `<li>${esc(p)}</li>`).join("")}</ul>` : ""}
+        </div>
+      </div>`).join("");
+
+    $("education").innerHTML = DATA.education.map((e) => `
+      <div class="card item">
+        <div class="logo">${esc(initials(e.school))}</div>
+        <div>
+          <h3>${esc(e.school)}</h3>
+          <div class="meta">${esc(e.degree)}</div>
+          <div class="meta">${esc(e.period)}</div>
+          ${e.note ? `<p>${esc(e.note)}</p>` : ""}
+        </div>
+      </div>`).join("");
+
+    $("skills").innerHTML = DATA.skills.map((s) => `<span class="chip">${esc(s)}</span>`).join("");
+
+    const hideIfEmpty = (sectionId, arr) => { if (!arr.length) $(sectionId).style.display = "none"; };
+
+    $("projects").innerHTML = DATA.projects.map((p) => `
+      <div class="card">
+        <h3>${p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.name)} ↗</a>` : esc(p.name)}</h3>
+        <p>${esc(p.desc)}</p>
+        ${p.tags?.length ? `<div class="chips">${p.tags.map((t) => `<span class="chip">${esc(t)}</span>`).join("")}</div>` : ""}
+      </div>`).join("");
+    hideIfEmpty("proyek", DATA.projects);
+
+    $("certs").innerHTML = DATA.certifications.map((c) => `
+      <div class="card">
+        <h3>${c.url ? `<a href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.name)} ↗</a>` : esc(c.name)}</h3>
+        <p>${esc(c.issuer)}${c.date ? " · " + esc(c.date) : ""}</p>
+      </div>`).join("");
+    hideIfEmpty("sertifikasi", DATA.certifications);
+
+    // Tema terang/gelap
+    const root = document.documentElement;
+    try { const t = localStorage.getItem("theme"); if (t) root.dataset.theme = t; } catch (e) {}
+    $("themeBtn").addEventListener("click", () => {
+      const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+      root.dataset.theme = dark ? "light" : "dark";
+      try { localStorage.setItem("theme", root.dataset.theme); } catch (e) {}
+    });
+
+    // Animasi muncul saat scroll
+    const io = new IntersectionObserver((entries) => entries.forEach((en) => {
+      if (en.isIntersecting) { en.target.classList.add("show"); io.unobserve(en.target); }
+    }), { threshold: 0.1 });
+    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+  </script>
+</body>
+</html>
