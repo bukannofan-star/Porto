@@ -100,7 +100,8 @@
     }
 
     /* Sections */
-    section { padding: 40px 0; }
+    section { padding: 40px 0; scroll-margin-top: 60px; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
     section h2 {
       font-size: 1.4rem; letter-spacing: -.02em; margin-bottom: 20px;
       display: flex; align-items: center; gap: 12px;
@@ -159,6 +160,7 @@
         <li class="link"><a href="#pengalaman">Pengalaman</a></li>
         <li class="link"><a href="#pendidikan">Pendidikan</a></li>
         <li class="link"><a href="#keahlian">Keahlian</a></li>
+        <li class="link"><a href="#proyek">Proyek</a></li>
         <li class="link"><a href="#kontak">Kontak</a></li>
         <li><button class="theme-btn" id="themeBtn" aria-label="Ganti tema">◐</button></li>
       </ul>
@@ -219,8 +221,9 @@
 
   <script>
     // ================================================================
-    //  EDIT DATA DI BAWAH INI sesuai profil LinkedIn Anda.
-    //  Semua teks bertanda [ ... ] adalah placeholder.
+    //  EDIT DATA DI BAWAH INI sesuai profil Anda.
+    //  Bagian dengan array kosong (mis. education, certifications)
+    //  otomatis disembunyikan beserta tautan navigasinya.
     // ================================================================
     const DATA = {
       name: "Nofantyo Mahendra",
@@ -306,7 +309,7 @@
         </div>
       </div>`).join("");
 
-    const hideIfEmpty0 = (sectionId, arr) => { if (!arr.length) { const el = document.getElementById(sectionId); if (el) el.style.display = "none"; } };
+    const hideIfEmpty = (sectionId, arr) => { if (!arr.length) $(sectionId).style.display = "none"; };
     $("education").innerHTML = DATA.education.map((e) => `
       <div class="card item">
         <div class="logo">${esc(initials(e.school))}</div>
@@ -318,10 +321,8 @@
         </div>
       </div>`).join("");
 
-    hideIfEmpty0("pendidikan", DATA.education);
+    hideIfEmpty("pendidikan", DATA.education);
     $("skills").innerHTML = DATA.skills.map((s) => `<span class="chip">${esc(s)}</span>`).join("");
-
-    const hideIfEmpty = (sectionId, arr) => { if (!arr.length) $(sectionId).style.display = "none"; };
 
     $("projects").innerHTML = DATA.projects.map((p) => `
       <div class="card">
@@ -354,10 +355,14 @@
     });
 
     // Animasi muncul saat scroll
-    const io = new IntersectionObserver((entries) => entries.forEach((en) => {
-      if (en.isIntersecting) { en.target.classList.add("show"); io.unobserve(en.target); }
-    }), { threshold: 0.1 });
-    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver((entries) => entries.forEach((en) => {
+        if (en.isIntersecting) { en.target.classList.add("show"); io.unobserve(en.target); }
+      }), { threshold: 0.1 });
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+    } else {
+      document.querySelectorAll(".reveal").forEach((el) => el.classList.add("show"));
+    }
   </script>
 </body>
 </html>
