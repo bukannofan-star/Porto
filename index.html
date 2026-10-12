@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Nofantyo — Portofolio</title>
-  <meta name="description" content="Portofolio profesional Nofantyo">
+  <title>Nofantyo Mahendra — Portofolio</title>
+  <meta name="description" content="Portofolio Nofantyo Mahendra: System Engineer dan DevSecOps (Kubernetes, CI/CD aman, observabilitas).">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -223,51 +223,50 @@
     //  Semua teks bertanda [ ... ] adalah placeholder.
     // ================================================================
     const DATA = {
-      name: "Nofantyo",
-      photo: "",                       // contoh: "foto.jpg" (taruh file di folder yang sama)
-      headline: "[Jabatan / Headline LinkedIn]",
-      location: "[Kota], Indonesia",
-      about: "[Tulis ringkasan 'About' dari LinkedIn di sini. Ceritakan siapa Anda, bidang keahlian, dan apa yang sedang Anda kerjakan.]",
+      name: "Nofantyo Mahendra",
+      photo: "",                       // opsional: "foto.jpg" (taruh di folder yang sama)
+      headline: "System Engineer · DevSecOps · Platform Kubernetes & Infrastruktur",
+      location: "Depok, Jawa Barat",
+      about: "System Engineer dengan fokus pada platform Kubernetes, pipeline CI/CD yang aman (DevSecOps), observabilitas, dan keandalan infrastruktur hybrid (Linux, Windows Server, VMware).\nMengelola klaster produksi dengan GitOps, menegakkan kebijakan keamanan sebagai kode, dan membangun pemantauan yang membuat masalah terlihat sebelum pengguna merasakannya.",
       links: {
-        email: "",                     // contoh: "nama@email.com"
+        email: "bukannofan@gmail.com",
         linkedin: "https://www.linkedin.com/in/nofantyo/",
         github: "",
         cv: ""                         // contoh: "cv.pdf"
       },
       experience: [
         {
-          title: "[Posisi]",
-          company: "[Nama Perusahaan]",
-          period: "[Bulan Tahun] – Sekarang",
-          location: "[Kota]",
+          title: "System Engineer / DevSecOps",
+          company: "PNM Venture Capital",
+          period: "Saat ini",
+          location: "Indonesia",
           points: [
-            "[Tanggung jawab atau pencapaian utama]",
-            "[Tanggung jawab atau pencapaian lain]"
+            "Mengelola klaster Kubernetes produksi (9 node, v1.36) dengan GitOps: 51 aplikasi ArgoCD, 11 Helm chart, 20 namespace, 31 Sealed Secret, dan 14 volume persisten Longhorn.",
+            "Membangun template CI/CD GitLab bersama dengan 20 job: pemindaian rahasia (Gitleaks), SAST (Semgrep), quality gate SonarQube, pemindaian kerentanan (Trivy), DAST (ZAP), pelaporan ke DefectDojo, penandatanganan image Cosign dengan SBOM, dan verifikasi sebelum deploy.",
+            "Menegakkan keamanan cluster sebagai kode: kebijakan Kyverno (larangan tag latest, batas sumber daya wajib, verifikasi tanda tangan image), Pod Security restricted, dan 16 NetworkPolicy.",
+            "Membangun observabilitas terpadu: 42 aturan alert Prometheus, 20 ServiceMonitor, 36 dashboard Grafana, log (Loki), trace (Tempo, Alloy), error tracking (GlitchTip), serta pemantauan jaringan (SNMP) dan 24 server Linux dan Windows.",
+            "Mengotomasi hardening dan patching server dengan Ansible (baseline keamanan, audit, sinkronisasi waktu, pembersihan kernel lama, DNS BIND primer dan sekunder, YARA, Lynis).",
+            "Mengoperasikan registry Harbor, SonarQube, GitLab Runner, SIEM Wazuh, portal developer Backstage, dan inventaris aset GLPI.",
+            "Menyusun threat model, playbook respons insiden, runbook, dan panduan onboarding developer; menguji backup dan pemulihan etcd serta volume Longhorn."
           ]
-        },
-        {
-          title: "[Posisi Sebelumnya]",
-          company: "[Nama Perusahaan]",
-          period: "[Bulan Tahun] – [Bulan Tahun]",
-          location: "[Kota]",
-          points: ["[Deskripsi singkat]"]
         }
       ],
-      education: [
-        {
-          school: "[Nama Kampus / Sekolah]",
-          degree: "[Gelar, Jurusan]",
-          period: "[Tahun] – [Tahun]",
-          note: ""
-        }
+      education: [],                   // isi: [{ school: "...", degree: "...", period: "...", note: "" }]
+      skills: [
+        "Kubernetes", "ArgoCD (GitOps)", "Helm", "Kustomize", "Sealed Secrets", "Kyverno", "GitLab CI/CD",
+        "SonarQube", "Trivy", "Semgrep", "Cosign / SBOM", "DefectDojo", "Harbor", "Longhorn",
+        "Prometheus", "Grafana", "Loki", "Tempo", "OpenTelemetry (Alloy)", "Alertmanager", "Wazuh (SIEM)",
+        "Ansible", "Linux (Ubuntu)", "Windows Server", "VMware vSphere", "Traefik / HAProxy / MetalLB",
+        "BIND DNS", "cert-manager", "SNMP"
       ],
-      skills: ["[Skill 1]", "[Skill 2]", "[Skill 3]", "[Skill 4]", "[Skill 5]"],
       projects: [
-        { name: "[Nama Proyek]", desc: "[Deskripsi singkat proyek]", tags: ["[Teknologi]"], url: "" }
+        { name: "Platform GitOps Kubernetes", desc: "Seluruh konfigurasi klaster dan aplikasi dikelola dari Git dengan pola app-of-apps ArgoCD, rahasia terenkripsi, dan promosi dev → staging → prod.", tags: ["ArgoCD", "Kustomize", "Helm"], url: "" },
+        { name: "CI/CD dengan rantai pasok aman", desc: "Template pipeline bersama: pemindaian, quality gate, tanda tangan dan SBOM image, verifikasi tanda tangan sebelum deploy, dan kebijakan admission yang menolak image tak bertanda.", tags: ["GitLab CI", "Cosign", "Kyverno", "SonarQube"], url: "" },
+        { name: "Observabilitas hybrid", desc: "Metrik, log, trace, dan alert untuk Kubernetes, server Linux dan Windows (termasuk SQL Server dan IIS), dan perangkat jaringan.", tags: ["Prometheus", "Grafana", "Loki", "Tempo"], url: "" },
+        { name: "Hardening dan patching terotomasi", desc: "Baseline keamanan server dengan Ansible, UFW, auditd, dan sinkronisasi waktu; perubahan diuji dengan mode check/diff sebelum diterapkan.", tags: ["Ansible", "Linux", "Wazuh"], url: "" },
+        { name: "Tata kelola akses agen AI untuk operasi klaster", desc: "Perancangan alat MCP read-only dengan RBAC terpisah, allowlist target, dan pemisahan identitas agar asisten AI dapat membantu investigasi tanpa hak tulis.", tags: ["RBAC", "MCP", "Kubernetes"], url: "" }
       ],
-      certifications: [
-        { name: "[Nama Sertifikasi]", issuer: "[Penerbit]", date: "[Bulan Tahun]", url: "" }
-      ]
+      certifications: []               // isi: [{ name: "...", issuer: "...", date: "...", url: "" }]
     };
 
     // ================================================================
@@ -307,6 +306,7 @@
         </div>
       </div>`).join("");
 
+    const hideIfEmpty0 = (sectionId, arr) => { if (!arr.length) { const el = document.getElementById(sectionId); if (el) el.style.display = "none"; } };
     $("education").innerHTML = DATA.education.map((e) => `
       <div class="card item">
         <div class="logo">${esc(initials(e.school))}</div>
@@ -318,6 +318,7 @@
         </div>
       </div>`).join("");
 
+    hideIfEmpty0("pendidikan", DATA.education);
     $("skills").innerHTML = DATA.skills.map((s) => `<span class="chip">${esc(s)}</span>`).join("");
 
     const hideIfEmpty = (sectionId, arr) => { if (!arr.length) $(sectionId).style.display = "none"; };
@@ -336,6 +337,12 @@
         <p>${esc(c.issuer)}${c.date ? " · " + esc(c.date) : ""}</p>
       </div>`).join("");
     hideIfEmpty("sertifikasi", DATA.certifications);
+
+    // Hapus tautan navigasi untuk bagian yang disembunyikan
+    document.querySelectorAll('.nav-links a[href^="#"]').forEach((a) => {
+      const t = document.querySelector(a.getAttribute("href"));
+      if (t && t.style.display === "none") a.parentElement.remove();
+    });
 
     // Tema terang/gelap
     const root = document.documentElement;
