@@ -182,9 +182,12 @@
     .dg .ln path { fill: none; stroke: currentColor; stroke-width: 1.5; }
 
     /* Cuplikan layar (sudah dipotong; tanpa nama host/IP/akun) */
-    .shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+    .shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 14px; }
+    .shot.wide { grid-column: 1 / -1; }
     .shot { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 12px; box-shadow: var(--shadow); margin: 0; }
-    .shot img { width: 100%; height: auto; max-height: 340px; object-fit: contain; display: block; border-radius: 8px; background: #0e1116; }
+    .shot img { width: 100%; height: auto; max-height: 440px; object-fit: contain; display: block; border-radius: 8px; background: var(--surface); }
+    .shot.wide img { max-height: none; }
+    .shot a { display: block; }
     .shot figcaption { color: var(--muted); font-size: .88rem; margin-top: 10px; }
     .shots-note { color: var(--muted); font-size: .85rem; margin-top: 12px; }
 
@@ -272,7 +275,7 @@
     <section id="cuplikan" class="reveal">
       <h2>Cuplikan Platform</h2>
       <div class="shots" id="shots"></div>
-      <p class="shots-note">Cuplikan dipotong ke bagian grafik saja; identitas sistem (nama host, alamat, akun) tidak ditampilkan.</p>
+      <p class="shots-note">Identitas sistem (nama host, alamat, repositori, akun) disamarkan atau dipotong. Klik gambar untuk memperbesar.</p>
     </section>
 
     <section id="sertifikasi" class="reveal">
@@ -406,7 +409,8 @@
       ],
       // Cuplikan layar: file di folder img/. Hanya potongan grafik tanpa nama host/IP/akun/versi.
       screens: [
-        { src: "img/argocd-status.png", w: 202, h: 588, alt: "Panel filter ArgoCD: status sinkron dan kesehatan aplikasi", caption: "ArgoCD: status sinkron dan kesehatan seluruh aplikasi." },
+        { src: "img/argocd-apps.png", w: 1905, h: 937, wide: true, alt: "Daftar aplikasi ArgoCD: semua Synced dan Healthy", caption: "ArgoCD: aplikasi dikelola lewat GitOps, semuanya Synced dan Healthy (repositori dan sebagian nama disamarkan)." },
+        { src: "img/vsphere-vm.png", w: 1112, h: 842, alt: "Ringkasan VM di vSphere dengan proteksi HA aktif", caption: "VMware vSphere: ringkasan VM dan proteksi HA (alamat jaringan disamarkan)." },
         { src: "img/defectdojo-severity.png", w: 818, h: 390, alt: "Grafik donat tingkat keparahan temuan di DefectDojo", caption: "DefectDojo: distribusi tingkat keparahan temuan dari semua pemindaian." },
         { src: "img/wazuh-alerts.png", w: 943, h: 354, alt: "Grafik tren alert per grup aturan di Wazuh", caption: "Wazuh (SIEM): tren alert per grup aturan." },
         { src: "img/grafana-cpu.png", w: 935, h: 292, alt: "Grafik pemakaian CPU per mode di Grafana", caption: "Grafana: pemakaian CPU per mode, rata-rata seluruh server." },
@@ -530,8 +534,8 @@
     hideIfEmpty("arsitektur", DATA.diagrams || []);
 
     $("shots").innerHTML = (DATA.screens || []).map((s) => `
-      <figure class="shot">
-        <img src="${esc(s.src)}" width="${esc(s.w)}" height="${esc(s.h)}" alt="${esc(s.alt)}" loading="lazy">
+      <figure class="shot${s.wide ? " wide" : ""}">
+        <a href="${esc(s.src)}" target="_blank" rel="noopener"><img src="${esc(s.src)}" width="${esc(s.w)}" height="${esc(s.h)}" alt="${esc(s.alt)}" loading="lazy"></a>
         <figcaption>${esc(s.caption)}</figcaption>
       </figure>`).join("");
     hideIfEmpty("cuplikan", DATA.screens || []);
