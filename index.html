@@ -88,13 +88,19 @@
     /* Hero */
     .hero { padding: 72px 0 56px; display: grid; grid-template-columns: auto 1fr; gap: 36px; align-items: center; }
     .avatar {
-      width: 160px; height: 160px; border-radius: 50%;
+      --d: 160px; width: var(--d); height: var(--d); border-radius: 50%;
       background: var(--accent-soft); color: var(--accent);
       display: grid; place-items: center; font-size: 3rem; font-weight: 800;
       border: 4px solid var(--surface); box-shadow: var(--shadow); overflow: hidden;
     }
-    .avatar.photo { background: #dfe3e8; }  /* senada dengan latar foto agar tepi tidak terlihat */
-    .avatar img { width: 94%; height: 100%; object-fit: cover; object-position: 50% 49%; } /* setengah badan: kepala sampai dada */
+    .avatar.photo { background: #dfe3e8; place-items: end center; }  /* latar senada foto; foto bertumpu di tengah-bawah */
+    /* Potret tegak: tinggi 124% lingkaran, dasar foto rata dengan dasar lingkaran, kepala tetap utuh.
+       Tepi kiri-kanan memudar ke latar agar tidak terlihat garis sambungan. */
+    .avatar.photo img {
+      width: auto; max-width: none; height: calc(var(--d) * 1.24); object-fit: contain;
+      -webkit-mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
+    }
     .hero h1 { font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1.15; letter-spacing: -.03em; }
     .headline { font-size: 1.15rem; color: var(--muted); margin: 8px 0 6px; }
     .location { color: var(--muted); font-size: .95rem; }
@@ -116,7 +122,7 @@
     .stat span { color: var(--muted); font-size: .88rem; }
     @media (max-width: 680px) {
       .hero { grid-template-columns: 1fr; text-align: center; padding-top: 48px; }
-      .avatar { margin: 0 auto; width: 112px; height: 112px; font-size: 2.4rem; }
+      .avatar { margin: 0 auto; --d: 112px; font-size: 2.4rem; }
       .actions { justify-content: center; }
       .highlights { grid-template-columns: 1fr; }
     }
