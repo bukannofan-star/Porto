@@ -160,6 +160,23 @@
     .grid .card .chips { margin-top: 12px; }
     .grid .card .chip { font-size: .78rem; padding: 4px 10px; }
 
+    /* Diagram arsitektur (SVG dibuat dari DATA.diagrams, ikut tema terang/gelap) */
+    .diagrams { display: grid; gap: 14px; }
+    .diagrams .card h3 { font-size: 1.02rem; margin-bottom: 12px; }
+    .diagrams .card p { color: var(--muted); font-size: .9rem; margin-top: 12px; }
+    .dg { width: 100%; height: auto; display: block; color: var(--muted); }
+    .dg rect { fill: var(--accent-soft); stroke: var(--border); stroke-width: 1; }
+    .dg rect.hl { stroke: var(--accent); stroke-width: 1.5; }
+    .dg text { fill: var(--text); font-size: 12px; font-family: inherit; text-anchor: middle; }
+    .dg .ln path { fill: none; stroke: currentColor; stroke-width: 1.5; }
+
+    /* Cuplikan layar (sudah dipotong; tanpa nama host/IP/akun) */
+    .shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+    .shot { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 12px; box-shadow: var(--shadow); margin: 0; }
+    .shot img { width: 100%; height: auto; max-height: 340px; object-fit: contain; display: block; border-radius: 8px; background: #0e1116; }
+    .shot figcaption { color: var(--muted); font-size: .88rem; margin-top: 10px; }
+    .shots-note { color: var(--muted); font-size: .85rem; margin-top: 12px; }
+
     /* Contact */
     .contact { text-align: center; }
     .contact p { color: var(--muted); margin-bottom: 18px; }
@@ -182,6 +199,8 @@
         <li class="link"><a href="#pendidikan">Pendidikan</a></li>
         <li class="link"><a href="#keahlian">Keahlian</a></li>
         <li class="link"><a href="#proyek">Proyek</a></li>
+        <li class="link"><a href="#arsitektur">Arsitektur</a></li>
+        <li class="link"><a href="#cuplikan">Cuplikan</a></li>
         <li class="link"><a href="#kontak">Kontak</a></li>
         <li><button class="theme-btn" id="themeBtn" aria-label="Ganti tema">◐</button></li>
       </ul>
@@ -224,6 +243,17 @@
     <section id="proyek" class="reveal">
       <h2>Proyek</h2>
       <div class="grid" id="projects"></div>
+    </section>
+
+    <section id="arsitektur" class="reveal">
+      <h2>Arsitektur</h2>
+      <div class="diagrams" id="diagrams"></div>
+    </section>
+
+    <section id="cuplikan" class="reveal">
+      <h2>Cuplikan Platform</h2>
+      <div class="shots" id="shots"></div>
+      <p class="shots-note">Cuplikan dipotong ke bagian grafik saja; identitas sistem (nama host, alamat, akun) tidak ditampilkan.</p>
     </section>
 
     <section id="sertifikasi" class="reveal">
@@ -282,14 +312,32 @@
             "Otomasi dan hardening: Ansible untuk baseline keamanan, patching, audit, pembersihan kernel lama, DNS BIND, YARA, dan Lynis.",
             "Operasi dan tata kelola: Mengoperasikan Harbor, SonarQube, GitLab Runner, Wazuh (SIEM), Backstage, dan GLPI; menyusun threat model, playbook insiden, runbook, dan menguji pemulihan backup etcd dan volume."
           ]
+        },
+        {
+          title: "Network Engineer",
+          company: "Bank Mandiri",
+          period: "Mei 2013 – Mei 2016",
+          location: "",                // isi bila perlu, mis. "Jakarta"
+          points: [
+            "Infrastruktur jaringan: Mengelola jaringan WAN/LAN gedung kantor dan cabang berbasis Cisco dan MikroTik.",
+            "Routing dan switching: Konfigurasi dan troubleshooting router/switch Cisco (VLAN, OSPF, BGP, ACL).",
+            "MikroTik RouterOS: Implementasi dan maintenance router untuk konektivitas cabang, firewall rule, NAT, dan bandwidth management (queue).",
+            "Ketersediaan: Menjaga konektivitas antar gedung dan cabang melalui MPLS serta link backup/failover.",
+            "Monitoring dan insiden: Memantau jaringan dan menangani insiden untuk menjaga uptime layanan.",
+            "Koordinasi vendor: Bekerja dengan vendor/ISP untuk provisioning dan eskalasi gangguan."
+          ]
         }
       ],
-      education: [],                   // isi: [{ school: "...", degree: "...", period: "...", note: "" }]
+      // TODO cocokkan nama kampus dan program dengan ijazah (kampus ini dulu bernama STMIK Nusa Mandiri?).
+      education: [
+        { school: "Universitas Nusa Mandiri", degree: "S1 Informatika", period: "Lulus 2015", note: "" }
+      ],                               // format: [{ school, degree, period, note }]
       skills: {
         "Platform & GitOps": ["Kubernetes", "ArgoCD", "Helm", "Kustomize", "Sealed Secrets", "Kyverno", "Longhorn", "cert-manager"],
         "CI/CD & Keamanan": ["GitLab CI/CD", "SonarQube", "Trivy", "Semgrep", "Cosign / SBOM", "DefectDojo", "Harbor", "Wazuh (SIEM)"],
         "Observabilitas": ["Prometheus", "Grafana", "Loki", "Tempo", "OpenTelemetry (Alloy)", "Alertmanager", "SNMP"],
-        "Infrastruktur": ["Ansible", "Linux (Ubuntu)", "Windows Server", "VMware vSphere", "Traefik / HAProxy / MetalLB", "BIND DNS"]
+        "Infrastruktur": ["Ansible", "Linux (Ubuntu)", "Windows Server", "VMware vSphere", "Traefik / HAProxy / MetalLB", "BIND DNS"],
+        "Jaringan": ["Cisco", "MikroTik RouterOS", "OSPF / BGP", "MPLS", "VLAN / ACL", "Firewall & NAT", "WAN / LAN"]
       },
       projects: [
         { name: "Platform GitOps Kubernetes", desc: "Seluruh konfigurasi klaster dan aplikasi dikelola dari Git dengan pola app-of-apps ArgoCD, rahasia terenkripsi, dan promosi dev → staging → prod.", tags: ["ArgoCD", "Kustomize", "Helm"], url: "" },
@@ -298,7 +346,55 @@
         { name: "Hardening dan patching terotomasi", desc: "Baseline keamanan server dengan Ansible, UFW, auditd, dan sinkronisasi waktu; perubahan diuji dengan mode check/diff sebelum diterapkan.", tags: ["Ansible", "Linux", "Wazuh"], url: "" },
         { name: "Tata kelola akses agen AI untuk operasi klaster", desc: "Perancangan alat MCP read-only dengan RBAC terpisah, allowlist target, dan pemisahan identitas agar asisten AI dapat membantu investigasi tanpa hak tulis.", tags: ["RBAC", "MCP", "Kubernetes"], url: "" }
       ],
-      certifications: []               // isi: [{ name: "...", issuer: "...", date: "...", url: "" }]
+      // Diagram generik (tanpa nama host/IP/namespace). Tiap baris = satu deret kotak berurutan;
+      // awalan "!" menandai tahap keamanan (garis aksen); "\n" memecah label jadi dua baris.
+      diagrams: [
+        {
+          title: "Platform GitOps",
+          caption: "Perubahan hanya lewat Git; ArgoCD menyinkronkan ke klaster, Kyverno menjadi gerbang admission.",
+          rows: [
+            ["Developer\ncommit & MR", "Repo Git", "Pipeline CI\nbuild + scan", "Registry\nimage"],
+            ["ArgoCD\napp-of-apps", "!Kyverno\nkebijakan admission", "Kubernetes\ndev → staging → prod", "Sealed Secrets\nrahasia di Git"]
+          ]
+        },
+        {
+          title: "CI/CD dengan rantai pasok aman",
+          caption: "Setiap commit melewati pemindaian dan quality gate; image ditandatangani dan diverifikasi sebelum deploy.",
+          rows: [
+            ["Commit", "!Secret scan\nGitleaks", "!SAST\nSemgrep", "!Quality gate\nSonarQube"],
+            ["Build image", "!Scan image\nTrivy", "!Tanda tangan\nCosign + SBOM", "!Verifikasi\ntanda tangan"],
+            ["Deploy\ndev/staging/prod", "!DAST\nZAP", "Pelaporan\nDefectDojo"]
+          ]
+        },
+        {
+          title: "Observabilitas hybrid",
+          caption: "Metrik, log, trace, dan event keamanan dari klaster, server, dan jaringan dikumpulkan ke satu tampilan dan alert.",
+          rows: [
+            ["Kubernetes", "Server Linux\n& Windows", "Perangkat jaringan\n(SNMP)", "Aplikasi\n& log akses"],
+            ["Prometheus\nmetrik", "Loki + Alloy\nlog", "Tempo\ntrace", "!Wazuh\nSIEM"],
+            ["Grafana\ndashboard", "Alertmanager\nalert", "Notifikasi\nemail"]
+          ]
+        }
+      ],
+      // Cuplikan layar: file di folder img/. Hanya potongan grafik tanpa nama host/IP/akun/versi.
+      screens: [
+        { src: "img/argocd-status.png", w: 202, h: 588, alt: "Panel filter ArgoCD: status sinkron dan kesehatan aplikasi", caption: "ArgoCD: status sinkron dan kesehatan seluruh aplikasi." },
+        { src: "img/defectdojo-severity.png", w: 818, h: 390, alt: "Grafik donat tingkat keparahan temuan di DefectDojo", caption: "DefectDojo: distribusi tingkat keparahan temuan dari semua pemindaian." },
+        { src: "img/wazuh-alerts.png", w: 943, h: 354, alt: "Grafik tren alert per grup aturan di Wazuh", caption: "Wazuh (SIEM): tren alert per grup aturan." },
+        { src: "img/grafana-cpu.png", w: 935, h: 292, alt: "Grafik pemakaian CPU per mode di Grafana", caption: "Grafana: pemakaian CPU per mode, rata-rata seluruh server." },
+        { src: "img/gitlab-pipeline.png", w: 829, h: 269, alt: "Tahap verifikasi, deploy, dan pelaporan pada pipeline GitLab CI yang lulus", caption: "GitLab CI: tahap verifikasi tanda tangan image, deploy, dan pelaporan keamanan (semua lulus)." },
+        { src: "img/sonarqube-gate.png", w: 377, h: 106, alt: "Ringkasan quality gate SonarQube: semua project lulus", caption: "SonarQube: quality gate semua project lulus." }
+      ],
+      // Nomor kandidat CompTIA (COMP...) sengaja TIDAK dicantumkan; kode verifikasi di bawah memang untuk dicek publik.
+      certifications: [
+        {
+          name: "CompTIA Security+ (SY0-701)",
+          issuer: "CompTIA",
+          date: "Terbit 25 Sep 2026",
+          note: "Berlaku hingga 25 Sep 2029 · Kode verifikasi: cf2b7584825541069f16951d5fb000d3",
+          url: "https://verify.comptia.org"
+        }
+      ]                                // format: [{ name, issuer, date, note, url }]
     };
 
     // ================================================================
@@ -369,10 +465,49 @@
       </div>`).join("");
     hideIfEmpty("proyek", DATA.projects);
 
+    // Diagram alur: kotak per baris, panah antar kotak, penghubung "zig-zag" antar baris.
+    const flow = (rows, uid, label) => {
+      const W = 720, bh = 46, gap = 30, rg = 40, pad = 8;
+      let y = pad, g = "";
+      rows.forEach((row, ri) => {
+        const n = row.length, bw = (W - 2 * pad - (n - 1) * gap) / n;
+        row.forEach((raw, i) => {
+          const hl = raw.startsWith("!"), lines = (hl ? raw.slice(1) : raw).split("\n");
+          const x = pad + i * (bw + gap), cx = x + bw / 2;
+          g += `<rect class="${hl ? "hl" : ""}" x="${x}" y="${y}" width="${bw}" height="${bh}" rx="9"/>`;
+          g += `<text y="${y + bh / 2 + 4 - (lines.length - 1) * 7}">${lines.map((l, k) => `<tspan x="${cx}" dy="${k ? 14 : 0}">${esc(l)}</tspan>`).join("")}</text>`;
+          if (i < n - 1) g += `<g class="ln"><path d="M${x + bw + 3} ${y + bh / 2}H${x + bw + gap - 3}" marker-end="url(#ah${uid})"/></g>`;
+        });
+        if (ri < rows.length - 1) {
+          const m = rows[ri + 1].length, nbw = (W - 2 * pad - (m - 1) * gap) / m;
+          const lastX = pad + (n - 1) * (bw + gap) + bw / 2, firstX = pad + nbw / 2, mid = y + bh + rg / 2;
+          g += `<g class="ln"><path d="M${lastX} ${y + bh + 2}V${mid}H${firstX}V${y + bh + rg - 3}" marker-end="url(#ah${uid})"/></g>`;
+        }
+        y += bh + rg;
+      });
+      const H = y - rg + pad;
+      return `<svg class="dg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(label)}"><defs><marker id="ah${uid}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker></defs>${g}</svg>`;
+    };
+    $("diagrams").innerHTML = (DATA.diagrams || []).map((d, i) => `
+      <div class="card">
+        <h3>${esc(d.title)}</h3>
+        ${flow(d.rows, i, d.title)}
+        ${d.caption ? `<p>${esc(d.caption)}</p>` : ""}
+      </div>`).join("");
+    hideIfEmpty("arsitektur", DATA.diagrams || []);
+
+    $("shots").innerHTML = (DATA.screens || []).map((s) => `
+      <figure class="shot">
+        <img src="${esc(s.src)}" width="${esc(s.w)}" height="${esc(s.h)}" alt="${esc(s.alt)}" loading="lazy">
+        <figcaption>${esc(s.caption)}</figcaption>
+      </figure>`).join("");
+    hideIfEmpty("cuplikan", DATA.screens || []);
+
     $("certs").innerHTML = DATA.certifications.map((c) => `
       <div class="card">
         <h3>${c.url ? `<a href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.name)} ↗</a>` : esc(c.name)}</h3>
         <p>${esc(c.issuer)}${c.date ? " · " + esc(c.date) : ""}</p>
+        ${c.note ? `<p style="margin-top:6px;font-size:.85rem;word-break:break-all">${esc(c.note)}</p>` : ""}
       </div>`).join("");
     hideIfEmpty("sertifikasi", DATA.certifications);
 
