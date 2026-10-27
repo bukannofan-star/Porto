@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Nofantyo Mahendra — Portofolio</title>
   <meta name="description" content="Portofolio Nofantyo Mahendra: System Engineer dan DevSecOps (Kubernetes, CI/CD aman, observabilitas).">
+  <meta name="theme-color" content="#2557d6">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Nofantyo Mahendra — Portofolio">
+  <meta property="og:description" content="System Engineer dan DevSecOps: Kubernetes, CI/CD aman, observabilitas.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232557d6'/%3E%3Ctext x='32' y='42' font-family='Arial' font-size='28' font-weight='700' fill='white' text-anchor='middle'%3ENM%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -71,7 +76,14 @@
       background: var(--surface); border: 1px solid var(--border); color: var(--text);
       width: 36px; height: 36px; border-radius: 10px; cursor: pointer; font-size: 1rem;
     }
-    @media (max-width: 680px) { .nav-links li.link { display: none; } }
+    /* HP: brand disembunyikan, menu bisa digeser horizontal (tidak lagi hilang) */
+    @media (max-width: 680px) {
+      .brand { display: none; }
+      nav .container { gap: 8px; }
+      .nav-links { overflow-x: auto; gap: 16px; white-space: nowrap; scrollbar-width: none; flex: 1; }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links li:last-child { margin-left: auto; position: sticky; right: 0; background: var(--bg); padding-left: 8px; }
+    }
 
     /* Hero */
     .hero { padding: 72px 0 56px; display: grid; grid-template-columns: auto 1fr; gap: 36px; align-items: center; }
@@ -93,10 +105,15 @@
     }
     .btn:hover { text-decoration: none; border-color: var(--accent); }
     .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .highlights { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 8px; }
+    .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; box-shadow: var(--shadow); }
+    .stat b { display: block; font-size: 1.7rem; line-height: 1.1; letter-spacing: -.03em; color: var(--accent); }
+    .stat span { color: var(--muted); font-size: .88rem; }
     @media (max-width: 680px) {
       .hero { grid-template-columns: 1fr; text-align: center; padding-top: 48px; }
       .avatar { margin: 0 auto; width: 112px; height: 112px; font-size: 2.4rem; }
       .actions { justify-content: center; }
+      .highlights { grid-template-columns: 1fr; }
     }
 
     /* Sections */
@@ -123,9 +140,13 @@
     .item h3 { font-size: 1.05rem; }
     .meta { color: var(--muted); font-size: .9rem; }
     .item p, .item ul { color: var(--muted); margin-top: 8px; font-size: .95rem; }
-    .item ul { padding-left: 18px; }
+    .item ul { padding-left: 18px; display: grid; gap: 8px; }
+    .item li strong { color: var(--text); font-weight: 600; }
+    .item .period { color: var(--accent); font-weight: 600; }
 
     /* Skills */
+    .skill-group + .skill-group { margin-top: 18px; }
+    .skill-group h3 { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 8px; }
     .chips { display: flex; flex-wrap: wrap; gap: 8px; }
     .chip {
       background: var(--accent-soft); color: var(--accent); padding: 6px 12px;
@@ -178,6 +199,8 @@
       </div>
     </header>
 
+    <div class="highlights" id="highlights"></div>
+
     <section id="tentang" class="about reveal">
       <h2>Tentang Saya</h2>
       <div class="card"><p id="about"></p></div>
@@ -217,6 +240,7 @@
     </section>
   </main>
 
+  <noscript><p style="text-align:center;padding:24px">Halaman ini membutuhkan JavaScript untuk menampilkan isi portofolio.</p></noscript>
   <footer><span id="footer"></span></footer>
 
   <script>
@@ -231,6 +255,12 @@
       headline: "System Engineer · DevSecOps · Platform Kubernetes & Infrastruktur",
       location: "Depok, Jawa Barat",
       about: "System Engineer dengan fokus pada platform Kubernetes, pipeline CI/CD yang aman (DevSecOps), observabilitas, dan keandalan infrastruktur hybrid (Linux, Windows Server, VMware).\nMengelola klaster produksi dengan GitOps, menegakkan kebijakan keamanan sebagai kode, dan membangun pemantauan yang membuat masalah terlihat sebelum pengguna merasakannya.",
+      // Angka sengaja dibulatkan; tidak perlu menampilkan hitungan persis lingkungan produksi.
+      highlights: [
+        { n: "50+", l: "aplikasi dikelola lewat GitOps" },
+        { n: "20+", l: "job pipeline keamanan CI/CD" },
+        { n: "40+", l: "aturan alert dan 35+ dashboard" }
+      ],
       links: {
         email: "bukannofan@gmail.com",
         linkedin: "https://www.linkedin.com/in/nofantyo/",
@@ -243,25 +273,24 @@
           company: "PNM Venture Capital",
           period: "Saat ini",
           location: "Indonesia",
+          // Format poin: "Judul: isi" — teks sebelum ": " ditebalkan.
           points: [
-            "Mengelola klaster Kubernetes produksi (9 node, v1.36) dengan GitOps: 51 aplikasi ArgoCD, 11 Helm chart, 20 namespace, 31 Sealed Secret, dan 14 volume persisten Longhorn.",
-            "Membangun template CI/CD GitLab bersama dengan 20 job: pemindaian rahasia (Gitleaks), SAST (Semgrep), quality gate SonarQube, pemindaian kerentanan (Trivy), DAST (ZAP), pelaporan ke DefectDojo, penandatanganan image Cosign dengan SBOM, dan verifikasi sebelum deploy.",
-            "Menegakkan keamanan cluster sebagai kode: kebijakan Kyverno (larangan tag latest, batas sumber daya wajib, verifikasi tanda tangan image), Pod Security restricted, dan 16 NetworkPolicy.",
-            "Membangun observabilitas terpadu: 42 aturan alert Prometheus, 20 ServiceMonitor, 36 dashboard Grafana, log (Loki), trace (Tempo, Alloy), error tracking (GlitchTip), serta pemantauan jaringan (SNMP) dan 24 server Linux dan Windows.",
-            "Mengotomasi hardening dan patching server dengan Ansible (baseline keamanan, audit, sinkronisasi waktu, pembersihan kernel lama, DNS BIND primer dan sekunder, YARA, Lynis).",
-            "Mengoperasikan registry Harbor, SonarQube, GitLab Runner, SIEM Wazuh, portal developer Backstage, dan inventaris aset GLPI.",
-            "Menyusun threat model, playbook respons insiden, runbook, dan panduan onboarding developer; menguji backup dan pemulihan etcd serta volume Longhorn."
+            "Platform GitOps: Mengelola klaster Kubernetes produksi dengan ArgoCD, Helm, dan Kustomize untuk 50+ aplikasi, dengan rahasia terenkripsi (Sealed Secrets), penyimpanan Longhorn, dan promosi dev → staging → prod.",
+            "CI/CD aman: Membangun template GitLab CI bersama (20+ job): Gitleaks, Semgrep, quality gate SonarQube, Trivy, ZAP, pelaporan ke DefectDojo, tanda tangan image Cosign dengan SBOM, dan verifikasi sebelum deploy.",
+            "Keamanan sebagai kode: Menegakkan kebijakan Kyverno (tanpa tag latest, batas sumber daya wajib, verifikasi tanda tangan image), Pod Security restricted, dan NetworkPolicy.",
+            "Observabilitas: Prometheus, Grafana, Loki, Tempo/Alloy, GlitchTip, dan SNMP, dengan 40+ aturan alert untuk klaster, 20+ server Linux dan Windows, serta perangkat jaringan.",
+            "Otomasi dan hardening: Ansible untuk baseline keamanan, patching, audit, pembersihan kernel lama, DNS BIND, YARA, dan Lynis.",
+            "Operasi dan tata kelola: Mengoperasikan Harbor, SonarQube, GitLab Runner, Wazuh (SIEM), Backstage, dan GLPI; menyusun threat model, playbook insiden, runbook, dan menguji pemulihan backup etcd dan volume."
           ]
         }
       ],
       education: [],                   // isi: [{ school: "...", degree: "...", period: "...", note: "" }]
-      skills: [
-        "Kubernetes", "ArgoCD (GitOps)", "Helm", "Kustomize", "Sealed Secrets", "Kyverno", "GitLab CI/CD",
-        "SonarQube", "Trivy", "Semgrep", "Cosign / SBOM", "DefectDojo", "Harbor", "Longhorn",
-        "Prometheus", "Grafana", "Loki", "Tempo", "OpenTelemetry (Alloy)", "Alertmanager", "Wazuh (SIEM)",
-        "Ansible", "Linux (Ubuntu)", "Windows Server", "VMware vSphere", "Traefik / HAProxy / MetalLB",
-        "BIND DNS", "cert-manager", "SNMP"
-      ],
+      skills: {
+        "Platform & GitOps": ["Kubernetes", "ArgoCD", "Helm", "Kustomize", "Sealed Secrets", "Kyverno", "Longhorn", "cert-manager"],
+        "CI/CD & Keamanan": ["GitLab CI/CD", "SonarQube", "Trivy", "Semgrep", "Cosign / SBOM", "DefectDojo", "Harbor", "Wazuh (SIEM)"],
+        "Observabilitas": ["Prometheus", "Grafana", "Loki", "Tempo", "OpenTelemetry (Alloy)", "Alertmanager", "SNMP"],
+        "Infrastruktur": ["Ansible", "Linux (Ubuntu)", "Windows Server", "VMware vSphere", "Traefik / HAProxy / MetalLB", "BIND DNS"]
+      },
       projects: [
         { name: "Platform GitOps Kubernetes", desc: "Seluruh konfigurasi klaster dan aplikasi dikelola dari Git dengan pola app-of-apps ArgoCD, rahasia terenkripsi, dan promosi dev → staging → prod.", tags: ["ArgoCD", "Kustomize", "Helm"], url: "" },
         { name: "CI/CD dengan rantai pasok aman", desc: "Template pipeline bersama: pemindaian, quality gate, tanda tangan dan SBOM image, verifikasi tanda tangan sebelum deploy, dan kebijakan admission yang menolak image tak bertanda.", tags: ["GitLab CI", "Cosign", "Kyverno", "SonarQube"], url: "" },
@@ -298,14 +327,19 @@
     $("heroActions").innerHTML = buttons;
     $("contactActions").innerHTML = buttons;
 
+    $("highlights").innerHTML = (DATA.highlights || []).map((h) => `<div class="stat"><b>${esc(h.n)}</b><span>${esc(h.l)}</span></div>`).join("");
+    if (!DATA.highlights?.length) $("highlights").style.display = "none";
+
+    // "Judul: isi" -> <strong>Judul</strong>: isi (hanya bila ada ": " di 40 karakter pertama)
+    const point = (p) => { const i = p.indexOf(": "); return i > 0 && i < 40 ? `<strong>${esc(p.slice(0, i))}</strong>: ${esc(p.slice(i + 2))}` : esc(p); };
+
     $("experience").innerHTML = DATA.experience.map((e) => `
       <div class="card item">
         <div class="logo">${esc(initials(e.company))}</div>
         <div>
           <h3>${esc(e.title)}</h3>
-          <div class="meta">${esc(e.company)}${e.location ? " · " + esc(e.location) : ""}</div>
-          <div class="meta">${esc(e.period)}</div>
-          ${e.points?.length ? `<ul>${e.points.map((p) => `<li>${esc(p)}</li>`).join("")}</ul>` : ""}
+          <div class="meta">${esc(e.company)}${e.location ? " · " + esc(e.location) : ""} · <span class="period">${esc(e.period)}</span></div>
+          ${e.points?.length ? `<ul>${e.points.map((p) => `<li>${point(p)}</li>`).join("")}</ul>` : ""}
         </div>
       </div>`).join("");
 
@@ -322,7 +356,10 @@
       </div>`).join("");
 
     hideIfEmpty("pendidikan", DATA.education);
-    $("skills").innerHTML = DATA.skills.map((s) => `<span class="chip">${esc(s)}</span>`).join("");
+    $("skills").innerHTML = Object.entries(DATA.skills).map(([group, items]) => `
+      <div class="skill-group"><h3>${esc(group)}</h3>
+        <div class="chips">${items.map((s) => `<span class="chip">${esc(s)}</span>`).join("")}</div>
+      </div>`).join("");
 
     $("projects").innerHTML = DATA.projects.map((p) => `
       <div class="card">
