@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Nofantyo Mahendra — Portofolio</title>
-  <meta name="description" content="Portofolio Nofantyo Mahendra: System Engineer dan DevSecOps (Kubernetes, CI/CD aman, observabilitas).">
+  <meta name="description" content="Nofantyo Mahendra: System Engineer & DevSecOps (CompTIA Security+). Platform Kubernetes, CI/CD aman, dan observabilitas — dari jaringan sampai aplikasi.">
   <meta name="theme-color" content="#2557d6">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Nofantyo Mahendra — Portofolio">
-  <meta property="og:description" content="System Engineer dan DevSecOps: Kubernetes, CI/CD aman, observabilitas.">
+  <meta property="og:description" content="System Engineer & DevSecOps (CompTIA Security+): Kubernetes, CI/CD aman, observabilitas.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232557d6'/%3E%3Ctext x='32' y='42' font-family='Arial' font-size='28' font-weight='700' fill='white' text-anchor='middle'%3ENM%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -88,12 +88,12 @@
     /* Hero */
     .hero { padding: 72px 0 56px; display: grid; grid-template-columns: auto 1fr; gap: 36px; align-items: center; }
     .avatar {
-      width: 140px; height: 140px; border-radius: 50%;
+      width: 160px; height: 160px; border-radius: 50%;
       background: var(--accent-soft); color: var(--accent);
       display: grid; place-items: center; font-size: 3rem; font-weight: 800;
       border: 4px solid var(--surface); box-shadow: var(--shadow); overflow: hidden;
     }
-    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 23%; } /* potret tegak: fokus ke kepala dan bahu */
     .hero h1 { font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1.15; letter-spacing: -.03em; }
     .headline { font-size: 1.15rem; color: var(--muted); margin: 8px 0 6px; }
     .location { color: var(--muted); font-size: .95rem; }
@@ -105,6 +105,10 @@
     }
     .btn:hover { text-decoration: none; border-color: var(--accent); }
     .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .tagline { font-size: 1.05rem; color: var(--text); margin: 4px 0 10px; max-width: 46ch; }
+    .badges { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 4px; }
+    .badges .chip { font-size: .8rem; }
+    @media (max-width: 680px) { .badges { justify-content: center; } .tagline { margin-left: auto; margin-right: auto; } }
     .highlights { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 8px; }
     .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; box-shadow: var(--shadow); }
     .stat b { display: block; font-size: 1.7rem; line-height: 1.1; letter-spacing: -.03em; color: var(--accent); }
@@ -195,6 +199,7 @@
       <a href="#top" class="brand" id="brand"></a>
       <ul class="nav-links">
         <li class="link"><a href="#tentang">Tentang</a></li>
+        <li class="link"><a href="#sorotan">Sorotan</a></li>
         <li class="link"><a href="#pengalaman">Pengalaman</a></li>
         <li class="link"><a href="#pendidikan">Pendidikan</a></li>
         <li class="link"><a href="#keahlian">Keahlian</a></li>
@@ -213,7 +218,9 @@
       <div>
         <h1 id="name"></h1>
         <div class="headline" id="headline"></div>
+        <p class="tagline" id="tagline"></p>
         <div class="location" id="location"></div>
+        <div class="badges" id="badges"></div>
         <div class="actions" id="heroActions"></div>
       </div>
     </header>
@@ -223,6 +230,11 @@
     <section id="tentang" class="about reveal">
       <h2>Tentang Saya</h2>
       <div class="card"><p id="about"></p></div>
+    </section>
+
+    <section id="sorotan" class="reveal">
+      <h2>Sorotan</h2>
+      <div class="grid" id="sorotanList"></div>
     </section>
 
     <section id="pengalaman" class="reveal">
@@ -281,10 +293,19 @@
     // ================================================================
     const DATA = {
       name: "Nofantyo Mahendra",
-      photo: "",                       // opsional: "foto.jpg" (taruh di folder yang sama)
+      photo: "img/foto.jpg",
       headline: "System Engineer · DevSecOps · Platform Kubernetes & Infrastruktur",
       location: "Depok, Jawa Barat",
-      about: "System Engineer dengan fokus pada platform Kubernetes, pipeline CI/CD yang aman (DevSecOps), observabilitas, dan keandalan infrastruktur hybrid (Linux, Windows Server, VMware).\nMengelola klaster produksi dengan GitOps, menegakkan kebijakan keamanan sebagai kode, dan membangun pemantauan yang membuat masalah terlihat sebelum pengguna merasakannya.",
+      tagline: "Saya membangun platform yang membuat rilis cepat, aman, dan terpantau — dari jaringan sampai aplikasi.",
+      badges: ["CompTIA Security+ (SY0-701)", "Infrastruktur sejak 2013", "Jaringan → Platform → DevSecOps"],
+      about: "Saya memulai karier sebagai Network Engineer (Cisco, MikroTik, MPLS) di Bank Mandiri, lalu berkembang ke sisi platform. Sekarang saya System Engineer / DevSecOps yang mengelola klaster Kubernetes produksi dengan GitOps.\nFokus saya: pipeline CI/CD yang aman (image ditandatangani dan diverifikasi sebelum deploy), keamanan sebagai kode, dan observabilitas yang membuat masalah terlihat sebelum pengguna merasakannya.\nLatar jaringan membuat saya terbiasa menelusuri masalah dari kabel sampai aplikasi; sertifikasi CompTIA Security+ melengkapinya di sisi keamanan.",
+      // Sorotan: hasil kerja utama (tanpa angka internal). Tambahkan angka dampak bila sudah ada data yang pasti.
+      sorotan: [
+        { title: "Rantai pasok aman", text: "Image ditandatangani (Cosign) dengan SBOM dan diverifikasi di pipeline sebelum deploy; Kyverno menegakkan larangan tag latest dan batas sumber daya wajib." },
+        { title: "Deteksi dan observabilitas", text: "Metrik, log, trace, dan SIEM (Wazuh) terpadu: alert untuk klaster, server, dan jaringan, plus aturan deteksi serangan web (SQL injection, XSS) dari log gateway." },
+        { title: "GitOps tanpa perubahan manual", text: "Aplikasi dan konfigurasi klaster dikelola dari Git (ArgoCD), rahasia terenkripsi di repo, dan promosi dev → staging → prod yang konsisten." },
+        { title: "Ketahanan dan akses terkunci", text: "Pemulihan backup diuji; akses diperketat dengan 2FA, push langsung ke branch utama ditutup, dan Pod Security restricted di produksi." }
+      ],
       // Angka sengaja dibulatkan; tidak perlu menampilkan hitungan persis lingkungan produksi.
       highlights: [
         { n: "50+", l: "aplikasi dikelola lewat GitOps" },
@@ -295,13 +316,13 @@
         email: "bukannofan@gmail.com",
         linkedin: "https://www.linkedin.com/in/nofantyo/",
         github: "",
-        cv: ""                         // contoh: "cv.pdf"
+        cv: "cv-nofantyo-mahendra.pdf"
       },
       experience: [
         {
           title: "System Engineer / DevSecOps",
           company: "PNM Venture Capital",
-          period: "Saat ini",
+          period: "2016 – Sekarang",
           location: "Indonesia",
           // Format poin: "Judul: isi" — teks sebelum ": " ditebalkan.
           points: [
@@ -410,6 +431,10 @@
     $("headline").textContent = DATA.headline;
     $("location").textContent = DATA.location ? `📍 ${DATA.location}` : "";
     $("about").textContent = DATA.about;
+    $("tagline").textContent = DATA.tagline || "";
+    $("badges").innerHTML = (DATA.badges || []).map((b) => `<span class="chip">${esc(b)}</span>`).join("");
+    $("sorotanList").innerHTML = (DATA.sorotan || []).map((s) => `<div class="card"><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></div>`).join("");
+    if (!DATA.sorotan?.length) $("sorotan").style.display = "none";
     $("avatar").innerHTML = DATA.photo ? `<img src="${esc(DATA.photo)}" alt="${esc(DATA.name)}">` : esc(initials(DATA.name));
     $("footer").textContent = `© ${new Date().getFullYear()} ${DATA.name}`;
 
