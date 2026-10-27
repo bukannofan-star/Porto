@@ -19,11 +19,11 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
 endobj
 7 0 obj
-<< /Length 32384 >>
+<< /Length 32374 >>
 stream
 BT 0.080 0.090 0.120 rg /F2 22.00 Tf 1 0 0 1 46.00 773.89 Tm (Nofantyo Mahendra) Tj ET
 BT 0.350 0.390 0.450 rg /F1 10.50 Tf 1 0 0 1 46.00 755.39 Tm (System Engineer · DevSecOps · Platform Kubernetes & Infrastruktur) Tj ET
-BT 0.350 0.390 0.450 rg /F1 9.00 Tf 1 0 0 1 46.00 740.89 Tm (Depok, Jawa Barat · bukannofan@gmail.com · linkedin.com/in/nofantyo) Tj ET
+BT 0.350 0.390 0.450 rg /F1 9.00 Tf 1 0 0 1 46.00 740.89 Tm (Jakarta · bukannofan@gmail.com · linkedin.com/in/nofantyo) Tj ET
 0.145 0.341 0.839 RG 1.40 w 46.00 735.89 m 549.28 735.89 l S
 BT 0.080 0.090 0.120 rg /F1 10.00 Tf 1 0 0 1 46.00 715.89 Tm (Saya) Tj ET
 BT 0.080 0.090 0.120 rg /F1 10.00 Tf 1 0 0 1 71.57 715.89 Tm (membangun) Tj ET
@@ -457,5 +457,5 @@ xref
 trailer
 << /Size 8 /Root 1 0 R /Info 5 0 R >>
 startxref
-33010
+33000
 %%EOF
