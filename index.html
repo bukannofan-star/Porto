@@ -208,13 +208,9 @@
     <div class="container">
       <a href="#top" class="brand" id="brand"></a>
       <ul class="nav-links">
-        <li class="link"><a href="#tentang">Tentang</a></li>
         <li class="link"><a href="#sorotan">Sorotan</a></li>
         <li class="link"><a href="#pengalaman">Pengalaman</a></li>
-        <li class="link"><a href="#pendidikan">Pendidikan</a></li>
         <li class="link"><a href="#keahlian">Keahlian</a></li>
-        <li class="link"><a href="#proyek">Proyek</a></li>
-        <li class="link"><a href="#arsitektur">Arsitektur</a></li>
         <li class="link"><a href="#cuplikan">Cuplikan</a></li>
         <li class="link"><a href="#kontak">Kontak</a></li>
         <li><button class="theme-btn" id="themeBtn" aria-label="Ganti tema">◐</button></li>
@@ -237,13 +233,8 @@
 
     <div class="highlights" id="highlights"></div>
 
-    <section id="tentang" class="about reveal">
-      <h2>Tentang Saya</h2>
-      <div class="card"><p id="about"></p></div>
-    </section>
-
     <section id="sorotan" class="reveal">
-      <h2>Sorotan</h2>
+      <h2>Yang Saya Bawa</h2>
       <div class="grid" id="sorotanList"></div>
     </section>
 
@@ -262,20 +253,15 @@
       <div class="card"><div class="chips" id="skills"></div></div>
     </section>
 
-    <section id="proyek" class="reveal">
-      <h2>Proyek</h2>
-      <div class="grid" id="projects"></div>
-    </section>
-
     <section id="arsitektur" class="reveal">
-      <h2>Arsitektur</h2>
+      <h2>Alur Rilis Aman</h2>
       <div class="diagrams" id="diagrams"></div>
     </section>
 
     <section id="cuplikan" class="reveal">
-      <h2>Cuplikan Platform</h2>
+      <h2>Platform Nyata, Bukan Slide</h2>
       <div class="shots" id="shots"></div>
-      <p class="shots-note">Identitas sistem (nama host, alamat, repositori, akun) disamarkan atau dipotong. Klik gambar untuk memperbesar.</p>
+      <p class="shots-note">Identitas sistem disamarkan. Klik gambar untuk memperbesar.</p>
     </section>
 
     <section id="sertifikasi" class="reveal">
@@ -286,7 +272,7 @@
     <section id="kontak" class="contact reveal">
       <h2>Kontak</h2>
       <div class="card">
-        <p>Terbuka untuk peluang kerja, kolaborasi, atau sekadar berdiskusi.</p>
+        <p>Butuh engineer yang bisa membuat rilis cepat <em>dan</em> aman? Mari bicara.</p>
         <div class="actions" id="contactActions"></div>
       </div>
     </section>
@@ -338,9 +324,6 @@
           points: [
             "Platform GitOps: Mengelola klaster Kubernetes produksi dengan ArgoCD, Helm, dan Kustomize untuk 50+ aplikasi, dengan rahasia terenkripsi (Sealed Secrets), penyimpanan Longhorn, dan promosi dev → staging → prod.",
             "CI/CD aman: Membangun template GitLab CI bersama (20+ job): Gitleaks, Semgrep, quality gate SonarQube, Trivy, ZAP, pelaporan ke DefectDojo, tanda tangan image Cosign dengan SBOM, dan verifikasi sebelum deploy.",
-            "Keamanan sebagai kode: Menegakkan kebijakan Kyverno (tanpa tag latest, batas sumber daya wajib, verifikasi tanda tangan image), Pod Security restricted, dan NetworkPolicy.",
-            "Observabilitas: Prometheus, Grafana, Loki, Tempo/Alloy, GlitchTip, dan SNMP, dengan 40+ aturan alert untuk klaster, 20+ server Linux dan Windows, serta perangkat jaringan.",
-            "Otomasi dan hardening: Ansible untuk baseline keamanan, patching, audit, pembersihan kernel lama, DNS BIND, YARA, dan Lynis.",
             "Operasi dan tata kelola: Mengoperasikan Harbor, SonarQube, GitLab Runner, Wazuh (SIEM), Backstage, dan GLPI; menyusun threat model, playbook insiden, runbook, dan menguji pemulihan backup etcd dan volume."
           ]
         },
@@ -352,10 +335,7 @@
           points: [
             "Infrastruktur jaringan: Mengelola jaringan WAN/LAN gedung kantor dan cabang berbasis Cisco dan MikroTik.",
             "Routing dan switching: Konfigurasi dan troubleshooting router/switch Cisco (VLAN, OSPF, BGP, ACL).",
-            "MikroTik RouterOS: Implementasi dan maintenance router untuk konektivitas cabang, firewall rule, NAT, dan bandwidth management (queue).",
-            "Ketersediaan: Menjaga konektivitas antar gedung dan cabang melalui MPLS serta link backup/failover.",
-            "Monitoring dan insiden: Memantau jaringan dan menangani insiden untuk menjaga uptime layanan.",
-            "Koordinasi vendor: Bekerja dengan vendor/ISP untuk provisioning dan eskalasi gangguan."
+            "MikroTik RouterOS: Implementasi dan maintenance router untuk konektivitas cabang, firewall rule, NAT, dan bandwidth management (queue)."
           ]
         }
       ],
@@ -370,24 +350,9 @@
         "Infrastruktur": ["Ansible", "Linux (Ubuntu)", "Windows Server", "VMware vSphere", "Traefik / HAProxy / MetalLB", "BIND DNS"],
         "Jaringan": ["Cisco", "MikroTik RouterOS", "OSPF / BGP", "MPLS", "VLAN / ACL", "Firewall & NAT", "WAN / LAN"]
       },
-      projects: [
-        { name: "Platform GitOps Kubernetes", desc: "Seluruh konfigurasi klaster dan aplikasi dikelola dari Git dengan pola app-of-apps ArgoCD, rahasia terenkripsi, dan promosi dev → staging → prod.", tags: ["ArgoCD", "Kustomize", "Helm"], url: "" },
-        { name: "CI/CD dengan rantai pasok aman", desc: "Template pipeline bersama: pemindaian, quality gate, tanda tangan dan SBOM image, verifikasi tanda tangan sebelum deploy, dan kebijakan admission yang menolak image tak bertanda.", tags: ["GitLab CI", "Cosign", "Kyverno", "SonarQube"], url: "" },
-        { name: "Observabilitas hybrid", desc: "Metrik, log, trace, dan alert untuk Kubernetes, server Linux dan Windows (termasuk SQL Server dan IIS), dan perangkat jaringan.", tags: ["Prometheus", "Grafana", "Loki", "Tempo"], url: "" },
-        { name: "Hardening dan patching terotomasi", desc: "Baseline keamanan server dengan Ansible, UFW, auditd, dan sinkronisasi waktu; perubahan diuji dengan mode check/diff sebelum diterapkan.", tags: ["Ansible", "Linux", "Wazuh"], url: "" },
-        { name: "Tata kelola akses agen AI untuk operasi klaster", desc: "Perancangan alat MCP read-only dengan RBAC terpisah, allowlist target, dan pemisahan identitas agar asisten AI dapat membantu investigasi tanpa hak tulis.", tags: ["RBAC", "MCP", "Kubernetes"], url: "" }
-      ],
       // Diagram generik (tanpa nama host/IP/namespace). Tiap baris = satu deret kotak berurutan;
       // awalan "!" menandai tahap keamanan (garis aksen); "\n" memecah label jadi dua baris.
       diagrams: [
-        {
-          title: "Platform GitOps",
-          caption: "Perubahan hanya lewat Git; ArgoCD menyinkronkan ke klaster, Kyverno menjadi gerbang admission.",
-          rows: [
-            ["Developer\ncommit & MR", "Repo Git", "Pipeline CI\nbuild + scan", "Registry\nimage"],
-            ["ArgoCD\napp-of-apps", "!Kyverno\nkebijakan admission", "Kubernetes\ndev → staging → prod", "Sealed Secrets\nrahasia di Git"]
-          ]
-        },
         {
           title: "CI/CD dengan rantai pasok aman",
           caption: "Setiap commit melewati pemindaian dan quality gate; image ditandatangani dan diverifikasi sebelum deploy.",
@@ -396,26 +361,14 @@
             ["Build image", "!Scan image\nTrivy", "!Tanda tangan\nCosign + SBOM", "!Verifikasi\ntanda tangan"],
             ["Deploy\ndev/staging/prod", "!DAST\nZAP", "Pelaporan\nDefectDojo"]
           ]
-        },
-        {
-          title: "Observabilitas hybrid",
-          caption: "Metrik, log, trace, dan event keamanan dari klaster, server, dan jaringan dikumpulkan ke satu tampilan dan alert.",
-          rows: [
-            ["Kubernetes", "Server Linux\n& Windows", "Perangkat jaringan\n(SNMP)", "Aplikasi\n& log akses"],
-            ["Prometheus\nmetrik", "Loki + Alloy\nlog", "Tempo\ntrace", "!Wazuh\nSIEM"],
-            ["Grafana\ndashboard", "Alertmanager\nalert", "Notifikasi\nemail"]
-          ]
         }
       ],
       // Cuplikan layar: file di folder img/. Hanya potongan grafik tanpa nama host/IP/akun/versi.
       screens: [
         { src: "img/argocd-apps.png", w: 1905, h: 937, wide: true, alt: "Daftar aplikasi ArgoCD: semua Synced dan Healthy", caption: "ArgoCD: aplikasi dikelola lewat GitOps, semuanya Synced dan Healthy (repositori dan sebagian nama disamarkan)." },
-        { src: "img/vsphere-vm.png", w: 1112, h: 842, alt: "Ringkasan VM di vSphere dengan proteksi HA aktif", caption: "VMware vSphere: ringkasan VM dan proteksi HA (alamat jaringan disamarkan)." },
         { src: "img/defectdojo-severity.png", w: 818, h: 390, alt: "Grafik donat tingkat keparahan temuan di DefectDojo", caption: "DefectDojo: distribusi tingkat keparahan temuan dari semua pemindaian." },
         { src: "img/wazuh-alerts.png", w: 943, h: 354, alt: "Grafik tren alert per grup aturan di Wazuh", caption: "Wazuh (SIEM): tren alert per grup aturan." },
-        { src: "img/grafana-cpu.png", w: 935, h: 292, alt: "Grafik pemakaian CPU per mode di Grafana", caption: "Grafana: pemakaian CPU per mode, rata-rata seluruh server." },
-        { src: "img/gitlab-pipeline.png", w: 829, h: 269, alt: "Tahap verifikasi, deploy, dan pelaporan pada pipeline GitLab CI yang lulus", caption: "GitLab CI: tahap verifikasi tanda tangan image, deploy, dan pelaporan keamanan (semua lulus)." },
-        { src: "img/sonarqube-gate.png", w: 377, h: 106, alt: "Ringkasan quality gate SonarQube: semua project lulus", caption: "SonarQube: quality gate semua project lulus." }
+        { src: "img/gitlab-pipeline.png", w: 829, h: 269, alt: "Tahap verifikasi, deploy, dan pelaporan pada pipeline GitLab CI yang lulus", caption: "GitLab CI: tahap verifikasi tanda tangan image, deploy, dan pelaporan keamanan (semua lulus)." }
       ],
       // Nomor kandidat CompTIA (COMP...) sengaja TIDAK dicantumkan; kode verifikasi di bawah memang untuk dicek publik.
       certifications: [
@@ -441,7 +394,6 @@
     $("name").textContent = DATA.name;
     $("headline").textContent = DATA.headline;
     $("location").textContent = DATA.location ? `📍 ${DATA.location}` : "";
-    $("about").textContent = DATA.about;
     $("tagline").textContent = DATA.tagline || "";
     $("badges").innerHTML = (DATA.badges || []).map((b) => `<span class="chip">${esc(b)}</span>`).join("");
     $("sorotanList").innerHTML = (DATA.sorotan || []).map((s) => `<div class="card"><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></div>`).join("");
@@ -493,14 +445,6 @@
       <div class="skill-group"><h3>${esc(group)}</h3>
         <div class="chips">${items.map((s) => `<span class="chip">${esc(s)}</span>`).join("")}</div>
       </div>`).join("");
-
-    $("projects").innerHTML = DATA.projects.map((p) => `
-      <div class="card">
-        <h3>${p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.name)} ↗</a>` : esc(p.name)}</h3>
-        <p>${esc(p.desc)}</p>
-        ${p.tags?.length ? `<div class="chips">${p.tags.map((t) => `<span class="chip">${esc(t)}</span>`).join("")}</div>` : ""}
-      </div>`).join("");
-    hideIfEmpty("proyek", DATA.projects);
 
     // Diagram alur: kotak per baris, panah antar kotak, penghubung "zig-zag" antar baris.
     const flow = (rows, uid, label) => {
