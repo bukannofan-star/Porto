@@ -171,6 +171,9 @@
     .grid .card .chips { margin-top: 12px; }
     .grid .card .chip { font-size: .78rem; padding: 4px 10px; }
 
+    #sorotanList { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 680px) { #sorotanList { grid-template-columns: 1fr; } }
+
     /* Diagram arsitektur (SVG dibuat dari DATA.diagrams, ikut tema terang/gelap) */
     .diagrams { display: grid; gap: 14px; }
     .diagrams .card h3 { font-size: 1.02rem; margin-bottom: 12px; }
@@ -208,7 +211,7 @@
     <div class="container">
       <a href="#top" class="brand" id="brand"></a>
       <ul class="nav-links">
-        <li class="link"><a href="#sorotan">Sorotan</a></li>
+        <li class="link"><a href="#sorotan">Hasil Kerja</a></li>
         <li class="link"><a href="#pengalaman">Pengalaman</a></li>
         <li class="link"><a href="#keahlian">Keahlian</a></li>
         <li class="link"><a href="#cuplikan">Cuplikan</a></li>
@@ -234,7 +237,7 @@
     <div class="highlights" id="highlights"></div>
 
     <section id="sorotan" class="reveal">
-      <h2>Yang Saya Bawa</h2>
+      <h2>Hasil Kerja Utama</h2>
       <div class="grid" id="sorotanList"></div>
     </section>
 
