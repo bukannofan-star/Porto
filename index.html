@@ -15,7 +15,7 @@
   <meta name="twitter:card" content="summary">
   <meta property="og:title" content="Nofantyo Mahendra — Portofolio">
   <meta property="og:description" content="System Engineer & DevSecOps (CompTIA Security+): Kubernetes, pipeline CI/CD dengan pemeriksaan keamanan, observabilitas.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232557d6'/%3E%3Ctext x='32' y='42' font-family='Arial' font-size='28' font-weight='700' fill='white' text-anchor='middle'%3ENM%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -231,12 +231,16 @@
     <header class="hero">
       <div class="avatar" id="avatar"></div>
       <div>
-        <h1 id="name"></h1>
-        <div class="headline" id="headline"></div>
-        <p class="tagline" id="tagline"></p>
+        <h1 id="name">Nofantyo Mahendra</h1>
+        <div class="headline" id="headline">System Engineer · DevSecOps · Platform Kubernetes &amp; Infrastruktur</div>
+        <p class="tagline" id="tagline">Saya membangun platform yang membuat rilis cepat, aman, dan terpantau — dari jaringan sampai aplikasi.</p>
         <div class="location" id="location"></div>
         <div class="badges" id="badges"></div>
-        <div class="actions" id="heroActions"></div>
+        <div class="actions" id="heroActions">
+          <a class="btn primary" href="cv-nofantyo-mahendra.pdf" download>⬇ Unduh CV</a>
+          <a class="btn" href="#kontak">✉ Hubungi Saya</a>
+          <a class="btn" href="https://www.linkedin.com/in/nofantyo/" target="_blank" rel="noopener" aria-label="LinkedIn Nofantyo Mahendra">in LinkedIn</a>
+        </div>
       </div>
     </header>
 
@@ -418,7 +422,6 @@
       L.github && `<a class="btn" href="${esc(L.github)}" target="_blank" rel="noopener">⌥ GitHub</a>`,
       L.cv && `<a class="btn" href="${esc(L.cv)}" download>⬇ Unduh CV</a>`
     ].filter(Boolean).join("");
-    $("heroActions").innerHTML = buttons;
     $("contactActions").innerHTML = buttons;
 
     $("highlights").innerHTML = (DATA.highlights || []).map((h) => `<div class="stat"><b>${esc(h.n)}</b><span>${esc(h.l)}</span></div>`).join("");
