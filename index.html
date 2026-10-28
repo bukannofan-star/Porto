@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Nofantyo Mahendra — Portofolio</title>
-  <meta name="description" content="Nofantyo Mahendra: System Engineer & DevSecOps (CompTIA Security+). Platform Kubernetes, CI/CD aman, dan observabilitas — dari jaringan sampai aplikasi.">
+  <meta name="description" content="Nofantyo Mahendra: System Engineer & DevSecOps (CompTIA Security+). Platform Kubernetes, pipeline CI/CD dengan pemeriksaan keamanan, dan observabilitas — dari jaringan sampai aplikasi.">
   <meta name="theme-color" content="#2557d6">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Nofantyo Mahendra — Portofolio">
-  <meta property="og:description" content="System Engineer & DevSecOps (CompTIA Security+): Kubernetes, CI/CD aman, observabilitas.">
+  <meta property="og:description" content="System Engineer & DevSecOps (CompTIA Security+): Kubernetes, pipeline CI/CD dengan pemeriksaan keamanan, observabilitas.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232557d6'/%3E%3Ctext x='32' y='42' font-family='Arial' font-size='28' font-weight='700' fill='white' text-anchor='middle'%3ENM%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -294,10 +294,10 @@
       location: "Jakarta",
       tagline: "Saya membangun platform yang membuat rilis cepat, aman, dan terpantau — dari jaringan sampai aplikasi.",
       badges: ["CompTIA Security+ (SY0-701)", "Infrastruktur sejak 2013", "Jaringan → Platform → DevSecOps"],
-      about: "Saya memulai karier sebagai Network Engineer (Cisco, MikroTik, MPLS) di Bank Mandiri, lalu berkembang ke sisi platform. Sekarang saya System Engineer / DevSecOps yang mengelola klaster Kubernetes produksi dengan GitOps.\nFokus saya: pipeline CI/CD yang aman (image ditandatangani dan diverifikasi sebelum deploy), keamanan sebagai kode, dan observabilitas yang membuat masalah terlihat sebelum pengguna merasakannya.\nLatar jaringan membuat saya terbiasa menelusuri masalah dari kabel sampai aplikasi; sertifikasi CompTIA Security+ melengkapinya di sisi keamanan.",
+      about: "Saya memulai karier sebagai Network Engineer (Cisco, MikroTik, MPLS) di Bank Mandiri, lalu berkembang ke sisi platform. Sekarang saya System Engineer / DevSecOps yang mengelola klaster Kubernetes produksi dengan GitOps.\nFokus saya: pipeline CI/CD dengan pemeriksaan keamanan (image ditandatangani dan diverifikasi sebelum deploy), keamanan sebagai kode, dan observabilitas yang membuat masalah terlihat sebelum pengguna merasakannya.\nLatar jaringan membuat saya terbiasa menelusuri masalah dari kabel sampai aplikasi; sertifikasi CompTIA Security+ melengkapinya di sisi keamanan.",
       // Sorotan: hasil kerja utama (tanpa angka internal). Tambahkan angka dampak bila sudah ada data yang pasti.
       sorotan: [
-        { title: "Rantai pasok aman", text: "Image ditandatangani (Cosign) dengan SBOM dan diverifikasi di pipeline sebelum deploy; Kyverno menegakkan larangan tag latest dan batas sumber daya wajib." },
+        { title: "Rilis yang terjamin keasliannya", text: "Setiap image ditandatangani (Cosign) dan diperiksa sebelum dijalankan, sehingga hanya hasil build resmi yang bisa naik ke produksi. Kyverno menolak konfigurasi yang berisiko." },
         { title: "Deteksi dan observabilitas", text: "Metrik, log, trace, dan SIEM (Wazuh) terpadu: alert untuk klaster, server, dan jaringan, plus aturan deteksi serangan web (SQL injection, XSS) dari log gateway." },
         { title: "GitOps tanpa perubahan manual", text: "Aplikasi dan konfigurasi klaster dikelola dari Git (ArgoCD), rahasia terenkripsi di repo, dan promosi dev → staging → prod yang konsisten." },
         { title: "Ketahanan dan akses terkunci", text: "Pemulihan backup diuji; akses diperketat dengan 2FA, push langsung ke branch utama ditutup, dan Pod Security restricted di produksi." }
@@ -305,7 +305,7 @@
       // Angka sengaja dibulatkan; tidak perlu menampilkan hitungan persis lingkungan produksi.
       highlights: [
         { n: "50+", l: "aplikasi dikelola lewat GitOps" },
-        { n: "20+", l: "job pipeline keamanan CI/CD" },
+        { n: "20+", l: "pemeriksaan keamanan otomatis di pipeline" },
         { n: "40+", l: "aturan alert dan 35+ dashboard" }
       ],
       links: {
@@ -323,7 +323,7 @@
           // Format poin: "Judul: isi" — teks sebelum ": " ditebalkan.
           points: [
             "Platform GitOps: Mengelola klaster Kubernetes produksi dengan ArgoCD, Helm, dan Kustomize untuk 50+ aplikasi, dengan rahasia terenkripsi (Sealed Secrets), penyimpanan Longhorn, dan promosi dev → staging → prod.",
-            "CI/CD aman: Membangun template GitLab CI bersama (20+ job): Gitleaks, Semgrep, quality gate SonarQube, Trivy, ZAP, pelaporan ke DefectDojo, tanda tangan image Cosign dengan SBOM, dan verifikasi sebelum deploy.",
+            "CI/CD dengan pemeriksaan keamanan: Satu template GitLab CI bersama (20+ job) memeriksa kebocoran rahasia (Gitleaks), kode (Semgrep, SonarQube), image (Trivy), dan aplikasi yang berjalan (ZAP), lalu mengumpulkan hasilnya di DefectDojo. Image ditandatangani (Cosign, SBOM) dan diverifikasi sebelum deploy.",
             "Operasi dan tata kelola: Mengoperasikan Harbor, SonarQube, GitLab Runner, Wazuh (SIEM), Backstage, dan GLPI; menyusun threat model, playbook insiden, runbook, dan menguji pemulihan backup etcd dan volume."
           ]
         },
@@ -354,7 +354,7 @@
       // awalan "!" menandai tahap keamanan (garis aksen); "\n" memecah label jadi dua baris.
       diagrams: [
         {
-          title: "CI/CD dengan rantai pasok aman",
+          title: "CI/CD dengan pemeriksaan keamanan otomatis",
           caption: "Setiap commit melewati pemindaian dan quality gate; image ditandatangani dan diverifikasi sebelum deploy.",
           rows: [
             ["Commit", "!Secret scan\nGitleaks", "!SAST\nSemgrep", "!Quality gate\nSonarQube"],

@@ -19,7 +19,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
 endobj
 7 0 obj
-<< /Length 25316 >>
+<< /Length 25482 >>
 stream
 BT 0.080 0.090 0.120 rg /F2 22.00 Tf 1 0 0 1 46.00 773.89 Tm (Nofantyo Mahendra) Tj ET
 BT 0.350 0.390 0.450 rg /F1 10.50 Tf 1 0 0 1 46.00 755.39 Tm (System Engineer · DevSecOps · Platform Kubernetes & Infrastruktur) Tj ET
@@ -76,26 +76,27 @@ BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 46.00 648.89 Tm (Fokus) Tj ET
 BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 73.61 648.89 Tm (saya:) Tj ET
 BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 98.15 648.89 Tm (pipeline) Tj ET
 BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 132.42 648.89 Tm (CI/CD) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 160.02 648.89 Tm (yang) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 182.52 648.89 Tm (aman) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 208.09 648.89 Tm (\(image) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 238.76 648.89 Tm (ditandatangani) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 301.67 648.89 Tm (dan) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 319.57 648.89 Tm (diverifikasi) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 365.07 648.89 Tm (sebelum) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 402.39 648.89 Tm (deploy\),) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 437.67 648.89 Tm (keamanan) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 483.18 648.89 Tm (sebagai) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 517.96 648.89 Tm (kode,) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 46.00 636.99 Tm (dan) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 63.90 636.99 Tm (observabilitas) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 122.70 636.99 Tm (yang) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 145.20 636.99 Tm (membuat) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 186.11 636.99 Tm (masalah) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 223.43 636.99 Tm (terlihat) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 253.60 636.99 Tm (sebelum) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 290.92 636.99 Tm (pengguna) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 334.40 636.99 Tm (merasakannya.) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 160.02 648.89 Tm (dengan) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 193.26 648.89 Tm (pemeriksaan) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 248.48 648.89 Tm (keamanan) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 294.00 648.89 Tm (\(image) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 324.67 648.89 Tm (ditandatangani) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 387.58 648.89 Tm (dan) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 405.48 648.89 Tm (diverifikasi) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 450.97 648.89 Tm (sebelum) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 488.30 648.89 Tm (deploy\),) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 46.00 636.99 Tm (keamanan) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 91.51 636.99 Tm (sebagai) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 126.29 636.99 Tm (kode,) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 151.35 636.99 Tm (dan) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 169.25 636.99 Tm (observabilitas) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 228.05 636.99 Tm (yang) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 250.55 636.99 Tm (membuat) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 291.46 636.99 Tm (masalah) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 328.78 636.99 Tm (terlihat) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 358.95 636.99 Tm (sebelum) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 396.27 636.99 Tm (pengguna) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 439.75 636.99 Tm (merasakannya.) Tj ET
 BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 46.00 622.09 Tm (Latar) Tj ET
 BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 69.52 622.09 Tm (jaringan) Tj ET
 BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 104.81 622.09 Tm (membuat) Tj ET
@@ -149,43 +150,44 @@ BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 424.60 529.39 Tm (staging) Tj ET
 BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 456.81 529.39 Tm (›) Tj ET
 BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 464.49 529.39 Tm (prod.) Tj ET
 BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 49.00 516.29 Tm (•) Tj ET
-BT 0.080 0.090 0.120 rg /F2 9.20 Tf 1 0 0 1 60.00 516.29 Tm (Pipeline) Tj ET
-BT 0.080 0.090 0.120 rg /F2 9.20 Tf 1 0 0 1 97.84 516.29 Tm (CI/CD) Tj ET
-BT 0.080 0.090 0.120 rg /F2 9.20 Tf 1 0 0 1 125.44 516.29 Tm (berlapis:) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 166.34 516.29 Tm (Satu) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 187.82 516.29 Tm (template) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 225.66 516.29 Tm (GitLab) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 255.33 516.29 Tm (CI) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 267.08 516.29 Tm (bersama) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 305.43 516.29 Tm (\(20+) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 326.65 516.29 Tm (job\)) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 344.55 516.29 Tm (memeriksa) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 392.08 516.29 Tm (kebocoran) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 437.60 516.29 Tm (rahasia) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 470.32 516.29 Tm (\(Gitleaks\),) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 514.79 516.29 Tm (kode) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 60.00 504.39 Tm (\(Semgrep,) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 105.50 504.39 Tm (SonarQube\),) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 160.73 504.39 Tm (image) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 188.34 504.39 Tm (\(Trivy\),) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 219.51 504.39 Tm (dan) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 237.41 504.39 Tm (aplikasi) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 270.64 504.39 Tm (yang) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 293.15 504.39 Tm (berjalan) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 328.43 504.39 Tm (\(ZAP\),) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 357.56 504.39 Tm (lalu) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 374.44 504.39 Tm (mengumpulkan) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 439.89 504.39 Tm (hasilnya) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 476.19 504.39 Tm (di) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 485.90 504.39 Tm (DefectDojo.) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 60.00 492.49 Tm (Image) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 88.12 492.49 Tm (ditandatangani) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 151.03 492.49 Tm (\(Cosign,) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 187.84 492.49 Tm (SBOM\)) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 220.56 492.49 Tm (dan) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 238.46 492.49 Tm (diverifikasi) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 283.96 492.49 Tm (sebelum) Tj ET
-BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 321.28 492.49 Tm (deploy.) Tj ET
+BT 0.080 0.090 0.120 rg /F2 9.20 Tf 1 0 0 1 60.00 516.29 Tm (CI/CD) Tj ET
+BT 0.080 0.090 0.120 rg /F2 9.20 Tf 1 0 0 1 87.60 516.29 Tm (dengan) Tj ET
+BT 0.080 0.090 0.120 rg /F2 9.20 Tf 1 0 0 1 122.87 516.29 Tm (pemeriksaan) Tj ET
+BT 0.080 0.090 0.120 rg /F2 9.20 Tf 1 0 0 1 181.68 516.29 Tm (keamanan:) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 232.30 516.29 Tm (Satu) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 253.78 516.29 Tm (template) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 291.62 516.29 Tm (GitLab) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 321.28 516.29 Tm (CI) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 333.04 516.29 Tm (bersama) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 371.38 516.29 Tm (\(20+) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 392.61 516.29 Tm (job\)) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 410.50 516.29 Tm (memeriksa) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 458.04 516.29 Tm (kebocoran) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 503.55 516.29 Tm (rahasia) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 60.00 504.39 Tm (\(Gitleaks\),) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 104.47 504.39 Tm (kode) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 126.98 504.39 Tm (\(Semgrep,) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 172.48 504.39 Tm (SonarQube\),) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 227.71 504.39 Tm (image) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 255.32 504.39 Tm (\(Trivy\),) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 286.49 504.39 Tm (dan) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 304.39 504.39 Tm (aplikasi) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 337.62 504.39 Tm (yang) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 360.12 504.39 Tm (berjalan) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 395.40 504.39 Tm (\(ZAP\),) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 424.54 504.39 Tm (lalu) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 441.41 504.39 Tm (mengumpulkan) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 506.86 504.39 Tm (hasilnya) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 60.00 492.49 Tm (di) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 69.72 492.49 Tm (DefectDojo.) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 120.33 492.49 Tm (Image) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 148.46 492.49 Tm (ditandatangani) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 211.37 492.49 Tm (\(Cosign,) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 248.18 492.49 Tm (SBOM\)) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 280.89 492.49 Tm (dan) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 298.80 492.49 Tm (diverifikasi) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 344.29 492.49 Tm (sebelum) Tj ET
+BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 381.61 492.49 Tm (deploy.) Tj ET
 BT 0.080 0.090 0.120 rg /F1 9.20 Tf 1 0 0 1 49.00 479.39 Tm (•) Tj ET
 BT 0.080 0.090 0.120 rg /F2 9.20 Tf 1 0 0 1 60.00 479.39 Tm (Operasi) Tj ET
 BT 0.080 0.090 0.120 rg /F2 9.20 Tf 1 0 0 1 96.82 479.39 Tm (dan) Tj ET
@@ -364,5 +366,5 @@ xref
 trailer
 << /Size 8 /Root 1 0 R /Info 5 0 R >>
 startxref
-25942
+26108
 %%EOF
