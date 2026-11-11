@@ -16,6 +16,7 @@
   <meta property="og:title" content="Nofantyo Mahendra — Portofolio">
   <meta property="og:description" content="System Engineer & DevSecOps (CompTIA Security+): Kubernetes, pipeline CI/CD dengan pemeriksaan keamanan, observabilitas.">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Nofantyo Mahendra", "url": "https://porto-bay-six.vercel.app/", "image": "https://porto-bay-six.vercel.app/img/foto.jpg", "jobTitle": "System Engineer / DevSecOps", "worksFor": {"@type": "Organization", "name": "PNM Venture Capital"}, "alumniOf": {"@type": "CollegeOrUniversity", "name": "Universitas Nusa Mandiri"}, "address": {"@type": "PostalAddress", "addressLocality": "Jakarta", "addressCountry": "ID"}, "sameAs": ["https://www.linkedin.com/in/nofantyo/"], "knowsAbout": ["Kubernetes", "GitOps", "DevSecOps", "CI/CD", "Observabilitas", "Keamanan jaringan"]}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -65,6 +66,9 @@
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
     .container { max-width: 960px; margin: 0 auto; padding: 0 16px; }
+
+    .skip { position: absolute; left: 8px; top: -48px; z-index: 20; background: var(--accent); color: #fff; padding: 8px 14px; border-radius: 8px; font-weight: 600; }
+    .skip:focus { top: 8px; text-decoration: none; }
 
     /* Nav */
     nav {
@@ -213,6 +217,7 @@
   </style>
 </head>
 <body>
+  <a class="skip" href="#top">Lewati ke konten</a>
   <nav aria-label="Navigasi utama">
     <div class="container">
       <a href="#top" class="brand" id="brand"></a>
