@@ -70,6 +70,64 @@
     .skip { position: absolute; left: 8px; top: -48px; z-index: 20; background: var(--accent); color: #fff; padding: 8px 14px; border-radius: 8px; font-weight: 600; }
     .skip:focus { top: 8px; text-decoration: none; }
 
+
+    /* Tema "ruang kendali": mode Defend (merah) / Build (biru), tampilan terminal ringan */
+    :root[data-mode="defend"] { --accent: #c62828; --accent-soft: #fdeaea; }
+    :root[data-theme="dark"][data-mode="defend"] { --accent: #ff6b6b; --accent-soft: #2b1618; }
+    /* Latar: pendar aksen + garis kisi yang memudar ke bawah (statis, tanpa animasi; ikut warna mode) */
+    body::before, body::after { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+    body::before {
+      background-image: linear-gradient(color-mix(in srgb, var(--accent) 14%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--accent) 14%, transparent) 1px, transparent 1px);
+      background-size: 44px 44px;
+      -webkit-mask-image: linear-gradient(to bottom, #000, transparent 75%); mask-image: linear-gradient(to bottom, #000, transparent 75%);
+    }
+    body::after {
+      background: radial-gradient(60rem 36rem at 12% -8%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 70%),
+                  radial-gradient(48rem 32rem at 105% 38%, color-mix(in srgb, var(--accent) 11%, transparent), transparent 70%);
+    }
+    .chip, .stat b, .skill-group h3, .item .period, .mode button, #boot, .eyebrow { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    section h2::before { content: "$"; color: var(--accent); font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .card { transition: border-color .2s; }
+    .card:hover { border-color: var(--accent); }
+    .mode-row { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+    .mode-row small { color: var(--muted); font-size: .8rem; }
+    .mode { display: inline-flex; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--surface); }
+    .mode button { border: 0; background: none; color: var(--muted); padding: 7px 16px; font-size: .82rem; font-weight: 600; cursor: pointer; }
+    .mode button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+    @media (max-width: 680px) { .mode-row { justify-content: center; } }
+
+    /* Layar pembuka ala terminal: hujan kode di latar + gembok yang terbuka saat MASUK (dibuat oleh JS; tanpa JS halaman langsung tampil) */
+    #boot { position: fixed; inset: 0; z-index: 100; background: #0a0d12; color: #9fe8b0; display: grid; place-items: center; padding: 16px; transition: opacity .4s ease; }
+    #boot.out { opacity: 0; pointer-events: none; }
+    #bootRain { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .5; }
+    .boot-box { position: relative; width: min(520px, 100%); padding: 22px; background: rgba(10, 13, 18, .85); border: 1px solid #2d4a37; border-radius: 10px; }
+    .boot-stage { display: grid; place-items: center; height: 132px; margin-bottom: 10px; }
+    .boot-stage > * { grid-area: 1 / 1; }
+    .boot-lock { display: block; width: 64px; height: 80px; color: #ff6b6b; transition: color .35s, opacity .3s; }
+    .boot-mascot { width: 132px; height: 132px; opacity: 0; transform: translateY(14px) scale(.88); transition: opacity .4s, transform .45s cubic-bezier(.3, 1.4, .5, 1); }
+    #boot.hack .boot-lock { opacity: 0; }
+    #boot.hack .boot-mascot { opacity: 1; transform: none; }
+    .boot-mascot .eye { transform-box: fill-box; transform-origin: center; animation: eyeblink 2.2s infinite; }
+    @keyframes eyeblink { 0%, 90%, 100% { transform: scaleY(1); } 94% { transform: scaleY(.1); } }
+    .boot-mascot .ln { transform-box: fill-box; transform-origin: left center; transform: scaleX(0); }
+    #boot.hack .boot-mascot .ln { animation: typeln .4s ease-out forwards; animation-delay: calc(var(--d) * .28s + .35s); }
+    @keyframes typeln { to { transform: scaleX(1); } }
+    .boot-lock .shackle { fill: none; stroke: currentColor; stroke-width: 5; stroke-linecap: round; transform-origin: 44px 36px; transition: transform .5s cubic-bezier(.3, 1.4, .5, 1); }
+    .boot-lock .body { fill: currentColor; }
+    .boot-lock .hole { fill: #0a0d12; }
+    #boot.open .boot-lock { color: #52d273; }
+    #boot.open .boot-lock .shackle { transform: translateY(-9px) rotate(-32deg); }
+    #bootLog { white-space: pre-wrap; min-height: 7.5em; font-size: .92rem; line-height: 1.7; }
+    #bootLog::after { content: "\258B"; margin-left: 2px; animation: blink 1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .boot-bar { height: 6px; border: 1px solid #2d4a37; border-radius: 4px; margin: 14px 0; overflow: hidden; }
+    .boot-bar i { display: block; height: 100%; width: 100%; background: #52d273; transform: scaleX(0); transform-origin: left; transition: transform .06s linear; }
+    .boot-row { display: flex; align-items: center; gap: 10px; }
+    .boot-row span { margin-right: auto; }
+    #bootGo { font-family: inherit; cursor: pointer; background: #52d273; color: #06110a; border: 1px solid #52d273; border-radius: 10px; padding: 10px 22px; font-weight: 700; letter-spacing: .06em; }
+    #bootGo:disabled { opacity: .35; cursor: default; }
+    #bootGo:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
     /* Nav */
     nav {
       position: sticky; top: 0; z-index: 10;
@@ -207,7 +265,15 @@
 
     .reveal { opacity: 0; transform: translateY(12px); transition: opacity .5s ease, transform .5s ease; }
     .reveal.show { opacity: 1; transform: none; }
-    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+    /* Kartu muncul bertahap saat bagian di-scroll (hanya transform dan opacity) */
+    .reveal .grid > .card, .reveal .shots > .shot, .reveal .skill-group { opacity: 0; transform: translateY(12px); transition: opacity .5s ease, transform .5s ease, border-color .2s; transition-delay: calc(var(--i, 0) * 80ms); }
+    .reveal.show .grid > .card, .reveal.show .shots > .shot, .reveal.show .skill-group { opacity: 1; transform: none; }
+    .grid > :nth-child(2), .shots > :nth-child(2), .skill-group:nth-child(2) { --i: 1; }
+    .grid > :nth-child(3), .shots > :nth-child(3), .skill-group:nth-child(3) { --i: 2; }
+    .grid > :nth-child(4), .skill-group:nth-child(4) { --i: 3; }
+    .skill-group:nth-child(5) { --i: 4; }
+    @media (prefers-reduced-motion: reduce) { .reveal, .reveal .grid > .card, .reveal .shots > .shot, .reveal .skill-group { opacity: 1; transform: none; transition: none; } #bootLog::after { animation: none; } }
   </style>
 </head>
 <body>
@@ -235,6 +301,7 @@
         <p class="tagline" id="tagline">Saya membangun platform yang membuat rilis cepat, aman, dan terpantau — dari jaringan sampai aplikasi.</p>
         <div class="location" id="location"></div>
         <div class="badges" id="badges"></div>
+        <div class="mode-row" id="modeSwitch"></div>
         <div class="actions" id="heroActions">
           <a class="btn primary" href="cv-nofantyo-mahendra.pdf" download>⬇ Unduh CV</a>
           <a class="btn" href="#kontak">✉ Hubungi Saya</a>
@@ -396,7 +463,7 @@
     $("location").textContent = DATA.location ? `📍 ${DATA.location}` : "";
     $("tagline").textContent = DATA.tagline || "";
     $("badges").innerHTML = (DATA.badges || []).map((b) => `<span class="chip">${esc(b)}</span>`).join("");
-    $("sorotanList").innerHTML = (DATA.sorotan || []).map((s) => `<div class="card"><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></div>`).join("");
+    const renderSorotan = (order) => { $("sorotanList").innerHTML = order.map((i) => DATA.sorotan[i]).filter(Boolean).map((s) => `<div class="card"><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></div>`).join(""); };
     if (!DATA.sorotan?.length) $("sorotan").style.display = "none";
     if (DATA.photo) $("avatar").classList.add("photo");
     $("avatar").innerHTML = DATA.photo ? `<img src="${esc(DATA.photo)}" alt="${esc(DATA.name)}">` : esc(initials(DATA.name));
@@ -440,10 +507,10 @@
       </div>`).join("");
 
     hideIfEmpty("pendidikan", DATA.education);
-    $("skills").innerHTML = Object.entries(DATA.skills).map(([group, items]) => `
+    const renderSkills = (order) => { $("skills").innerHTML = order.filter((g) => DATA.skills[g]).map((group) => `
       <div class="skill-group"><h3>${esc(group)}</h3>
-        <div class="chips">${items.map((s) => `<span class="chip">${esc(s)}</span>`).join("")}</div>
-      </div>`).join("");
+        <div class="chips">${DATA.skills[group].map((s) => `<span class="chip">${esc(s)}</span>`).join("")}</div>
+      </div>`).join(""); };
 
     // Diagram alur: kotak per baris, panah antar kotak, penghubung "zig-zag" antar baris.
     const flow = (rows, uid, label) => {
@@ -499,12 +566,102 @@
 
     // Tema terang/gelap
     const root = document.documentElement;
-    try { const t = localStorage.getItem("theme"); if (t) root.dataset.theme = t; } catch (e) {}
+    root.dataset.theme = "dark"; try { const t = localStorage.getItem("theme"); if (t) root.dataset.theme = t; } catch (e) {}
     $("themeBtn").addEventListener("click", () => {
       const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
       root.dataset.theme = dark ? "light" : "dark";
       try { localStorage.setItem("theme", root.dataset.theme); } catch (e) {}
     });
+
+
+    // Mode Defend / Build: isi sama, sudut pandang berbeda (judul, urutan kartu, urutan keahlian, warna aksen).
+    const MODES = {
+      defend: {
+        label: "Defend",
+        headline: "Keamanan Platform · DevSecOps · Deteksi & Pemulihan",
+        tagline: "Saya menjaga platform tetap aman: pipeline yang diperiksa, akses yang terkunci, dan deteksi yang bekerja sebelum insiden membesar.",
+        sorotan: [0, 1, 3, 2],
+        skills: ["CI/CD & Keamanan", "Observabilitas", "Jaringan", "Platform & GitOps", "Infrastruktur"]
+      },
+      build: {
+        label: "Build",
+        headline: DATA.headline,
+        tagline: DATA.tagline,
+        sorotan: [2, 0, 1, 3],
+        skills: Object.keys(DATA.skills)
+      }
+    };
+    $("modeSwitch").innerHTML = `<small>Lihat sebagai</small><div class="mode" role="group" aria-label="Pilih sudut pandang">${Object.entries(MODES).map(([k, m]) => `<button type="button" data-m="${k}" aria-pressed="false">${esc(m.label)}</button>`).join("")}</div>`;
+    const setMode = (k) => {
+      const m = MODES[k] || MODES.build;
+      root.dataset.mode = MODES[k] ? k : "build";
+      $("headline").textContent = m.headline;
+      $("tagline").textContent = m.tagline;
+      renderSorotan(m.sorotan);
+      renderSkills(m.skills);
+      document.querySelectorAll("#modeSwitch button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.m === root.dataset.mode)));
+      try { localStorage.setItem("mode", root.dataset.mode); } catch (e) {}
+    };
+    document.querySelectorAll("#modeSwitch button").forEach((b) => b.addEventListener("click", () => setMode(b.dataset.m)));
+    let savedMode = "build"; try { savedMode = localStorage.getItem("mode") || "build"; } catch (e) {}
+    setMode(savedMode);
+
+    // Layar pembuka ala terminal; muncul setiap halaman dibuka/dimuat ulang. Latar: hujan kode (canvas, berhenti saat ditutup).
+    // Satu tombol MASUK (aktif setelah 100%): gembok terbuka, maskot hacker mengetik, lalu layar memudar (~2,4 dtk); Esc menutup langsung; prefers-reduced-motion: tanpa hujan dan animasi.
+    (() => {
+      const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const el = document.createElement("div");
+      el.id = "boot"; el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true"); el.setAttribute("aria-label", "Layar pembuka");
+      el.innerHTML = `<canvas id="bootRain" aria-hidden="true"></canvas><div class="boot-box">
+        <div class="boot-stage"><svg class="boot-lock" viewBox="0 0 64 80" aria-hidden="true"><path class="shackle" d="M20 36V24a12 12 0 0 1 24 0v12"/><rect class="body" x="10" y="34" width="44" height="36" rx="6"/><circle class="hole" cx="32" cy="49" r="5"/><rect class="hole" x="30" y="52" width="4" height="9" rx="1.5"/></svg>
+        <svg class="boot-mascot" viewBox="0 0 200 200" aria-hidden="true">
+          <path d="M100 14C54 14 34 52 36 100v18c0 24 24 34 64 34s64-10 64-34v-18c2-48-18-86-64-86z" fill="#f2f4f8"/>
+          <ellipse cx="100" cy="92" rx="55" ry="42" fill="#cdd5e2"/>
+          <path d="M46 104q54 30 108 0v16q-54 26-108 0z" fill="#f7f8fb"/>
+          <g class="eye"><ellipse cx="78" cy="88" rx="12" ry="14" fill="#1b2a4a"/><circle cx="74" cy="83" r="4" fill="#fff"/></g>
+          <g class="eye"><ellipse cx="122" cy="88" rx="12" ry="14" fill="#1b2a4a"/><circle cx="118" cy="83" r="4" fill="#fff"/></g>
+          <rect x="46" y="118" width="108" height="68" rx="7" fill="#e6eaf2"/>
+          <rect x="54" y="125" width="92" height="52" rx="3" fill="#0d1a2b"/>
+          <rect class="ln" style="--d:0" x="60" y="132" width="52" height="4" rx="2" fill="#52d273"/>
+          <rect class="ln" style="--d:1" x="60" y="141" width="76" height="4" rx="2" fill="#52d273"/>
+          <rect class="ln" style="--d:2" x="60" y="150" width="40" height="4" rx="2" fill="#9fe8b0"/>
+          <rect class="ln" style="--d:3" x="60" y="159" width="64" height="4" rx="2" fill="#52d273"/>
+          <rect class="ln" style="--d:4" x="60" y="168" width="30" height="4" rx="2" fill="#9fe8b0"/>
+          <rect x="34" y="186" width="132" height="9" rx="4.5" fill="#cdd5e2"/>
+        </svg></div>
+        <pre id="bootLog" aria-live="polite"></pre><div class="boot-bar"><i id="bootBar"></i></div>
+        <div class="boot-row"><span id="bootPct">0%</span><button type="button" id="bootGo" disabled>MASUK ▸</button></div></div>`;
+      document.body.appendChild(el);
+
+      // Hujan kode
+      const cv = $("bootRain"), ctx = !reduce && cv.getContext && cv.getContext("2d");
+      let raf, last = 0, W, H, drops = [];
+      const FS = 16, CH = "01ABCDEF<>/{}$#";
+      const fit = () => { W = cv.width = innerWidth; H = cv.height = innerHeight; drops = Array.from({ length: Math.ceil(W / FS) }, () => Math.random() * -40); };
+      const rain = (t) => {
+        raf = requestAnimationFrame(rain); if (t - last < 45) return; last = t;
+        ctx.fillStyle = "rgba(10,13,18,.14)"; ctx.fillRect(0, 0, W, H); ctx.fillStyle = "#52d273"; ctx.font = FS + "px ui-monospace, monospace";
+        drops.forEach((d, i) => { ctx.fillText(CH[(Math.random() * CH.length) | 0], i * FS, d * FS); drops[i] = d * FS > H && Math.random() > .975 ? 0 : d + 1; });
+      };
+      if (ctx) { fit(); addEventListener("resize", fit); raf = requestAnimationFrame(rain); }
+
+      const lines = ["> memulai lingkungan aman ...", "> memuat profil ............ ok", "> memverifikasi sertifikasi: CompTIA Security+ ... ok", "> menyiapkan dashboard ..... ok", "> siap."];
+      const bar = $("bootBar"), pct = $("bootPct"), log = $("bootLog"), go = $("bootGo");
+      let n = 0, timer, opening = false;
+      const close = () => { clearInterval(timer); if (ctx) { cancelAnimationFrame(raf); removeEventListener("resize", fit); } el.remove(); document.removeEventListener("keydown", onKey); };
+      const onKey = (e) => { if (e.key === "Escape") close(); };
+      const open = () => {
+        if (opening) return; opening = true; go.disabled = true;
+        if (reduce) return close();
+        el.classList.add("open"); log.textContent = "> akses diberikan.";
+        setTimeout(() => { el.classList.add("hack"); log.textContent = "> membuka portofolio ..."; }, 650);
+        setTimeout(() => el.classList.add("out"), 2000); setTimeout(close, 2400);
+      };
+      const show = (v) => { n = v; bar.style.transform = `scaleX(${v / 100})`; pct.textContent = v + "%"; log.textContent = lines.slice(0, Math.ceil(v / 100 * lines.length)).join("\n"); if (v >= 100) { go.disabled = false; go.focus(); } };
+      go.addEventListener("click", open); document.addEventListener("keydown", onKey);
+      if (reduce) show(100);
+      else timer = setInterval(() => { show(Math.min(100, n + 5)); if (n >= 100) clearInterval(timer); }, 60);
+    })();
 
     // Animasi muncul saat scroll
     if ("IntersectionObserver" in window) {
