@@ -268,16 +268,6 @@
     #sorotanList { grid-template-columns: repeat(2, 1fr); }
     @media (max-width: 680px) { #sorotanList { grid-template-columns: 1fr; } }
 
-    /* Diagram arsitektur (SVG dibuat dari DATA.diagrams, ikut tema terang/gelap) */
-    .diagrams { display: grid; gap: 14px; }
-    .diagrams .card h3 { font-size: 1.02rem; margin-bottom: 12px; }
-    .diagrams .card p { color: var(--muted); font-size: .9rem; margin-top: 12px; }
-    .dg { width: 100%; height: auto; display: block; color: var(--muted); }
-    .dg rect { fill: var(--accent-soft); stroke: var(--border); stroke-width: 1; }
-    .dg rect.hl { stroke: var(--accent); stroke-width: 1.5; }
-    .dg text { fill: var(--text); font-size: 12px; font-family: inherit; text-anchor: middle; }
-    .dg .ln path { fill: none; stroke: currentColor; stroke-width: 1.5; }
-
     /* Cuplikan layar (sudah dipotong; tanpa nama host/IP/akun) */
     .shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 14px; }
     .shot.wide { grid-column: 1 / -1; }
@@ -461,9 +451,6 @@
         "Infrastruktur": ["Ansible", "Linux (Ubuntu)", "Windows Server", "VMware vSphere", "Traefik / HAProxy / MetalLB", "BIND DNS"],
         "Jaringan": ["Cisco", "MikroTik RouterOS", "OSPF / BGP", "MPLS", "VLAN / ACL", "Firewall & NAT", "WAN / LAN"]
       },
-      // Diagram generik (tanpa nama host/IP/namespace). Tiap baris = satu deret kotak berurutan;
-      // awalan "!" menandai tahap keamanan (garis aksen); "\n" memecah label jadi dua baris.
-      diagrams: [],
       // Cuplikan layar: file di folder img/. Hanya potongan grafik tanpa nama host/IP/akun/versi.
       screens: [
         { src: "img/argocd-apps.png", w: 1905, h: 937, wide: true, alt: "Daftar aplikasi ArgoCD: semua Synced dan Healthy", caption: "ArgoCD: aplikasi dikelola lewat GitOps, semuanya Synced dan Healthy (repositori dan sebagian nama disamarkan)." },
@@ -544,37 +531,6 @@
       <div class="skill-group"><h3>${esc(group)}</h3>
         <div class="chips">${DATA.skills[group].map((s) => `<span class="chip">${esc(s)}</span>`).join("")}</div>
       </div>`).join(""); };
-
-    // Diagram alur: kotak per baris, panah antar kotak, penghubung "zig-zag" antar baris.
-    const flow = (rows, uid, label) => {
-      const W = 720, bh = 46, gap = 30, rg = 40, pad = 8;
-      let y = pad, g = "";
-      rows.forEach((row, ri) => {
-        const n = row.length, bw = (W - 2 * pad - (n - 1) * gap) / n;
-        row.forEach((raw, i) => {
-          const hl = raw.startsWith("!"), lines = (hl ? raw.slice(1) : raw).split("\n");
-          const x = pad + i * (bw + gap), cx = x + bw / 2;
-          g += `<rect class="${hl ? "hl" : ""}" x="${x}" y="${y}" width="${bw}" height="${bh}" rx="9"/>`;
-          g += `<text y="${y + bh / 2 + 4 - (lines.length - 1) * 7}">${lines.map((l, k) => `<tspan x="${cx}" dy="${k ? 14 : 0}">${esc(l)}</tspan>`).join("")}</text>`;
-          if (i < n - 1) g += `<g class="ln"><path d="M${x + bw + 3} ${y + bh / 2}H${x + bw + gap - 3}" marker-end="url(#ah${uid})"/></g>`;
-        });
-        if (ri < rows.length - 1) {
-          const m = rows[ri + 1].length, nbw = (W - 2 * pad - (m - 1) * gap) / m;
-          const lastX = pad + (n - 1) * (bw + gap) + bw / 2, firstX = pad + nbw / 2, mid = y + bh + rg / 2;
-          g += `<g class="ln"><path d="M${lastX} ${y + bh + 2}V${mid}H${firstX}V${y + bh + rg - 3}" marker-end="url(#ah${uid})"/></g>`;
-        }
-        y += bh + rg;
-      });
-      const H = y - rg + pad;
-      return `<svg class="dg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(label)}"><defs><marker id="ah${uid}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker></defs>${g}</svg>`;
-    };
-    $("diagrams").innerHTML = (DATA.diagrams || []).map((d, i) => `
-      <div class="card">
-        <h3>${esc(d.title)}</h3>
-        ${flow(d.rows, i, d.title)}
-        ${d.caption ? `<p>${esc(d.caption)}</p>` : ""}
-      </div>`).join("");
-    hideIfEmpty("arsitektur", DATA.diagrams || []);
 
     $("shots").innerHTML = (DATA.screens || []).map((s) => `
       <figure class="shot${s.wide ? " wide" : ""}">
