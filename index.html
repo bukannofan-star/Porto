@@ -223,6 +223,22 @@
     @keyframes plok { to { opacity: 1; } }
     @keyframes plpulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
     @media (prefers-reduced-motion: reduce) { .pl-job::before, .pl-job i::after, .pl-job.hot::after, .pl-job.hot i::before, .pl-note { opacity: 1 !important; animation: none !important; } .pl-link { display: none; } .pl-spin, .pl-back i { animation: none !important; } .pl-back i { transform: none; } }
+    /* Layar Experience: garis waktu yang "menggambar" dirinya, lalu tiap tonggak muncul berurutan (transform/opacity) */
+    .tl { position: relative; margin-top: 14px; padding-left: 22px; }
+    .tl::before { content: ""; position: absolute; left: 5px; top: 6px; bottom: 6px; width: 2px; background: #52d273; transform-origin: top; transform: scaleY(0); }
+    .boot-screen.on .tl::before { animation: tlline 3s ease-out forwards; }
+    @keyframes tlline { to { transform: scaleY(1); } }
+    .tl-item { position: relative; padding-bottom: 16px; opacity: 0; transform: translateY(8px); }
+    .boot-screen.on .tl-item { animation: tlin .45s ease-out forwards; animation-delay: calc(var(--i) * .75s + .4s); }
+    @keyframes tlin { to { opacity: 1; transform: none; } }
+    .tl-dot { position: absolute; left: -22px; top: 3px; width: 12px; height: 12px; border-radius: 50%; background: #0d1520; border: 2px solid #52d273; }
+    .tl-item.now .tl-dot { background: #52d273; }
+    .tl-item.now .tl-dot::after { content: ""; position: absolute; inset: -6px; border-radius: 50%; border: 1px solid #52d273; opacity: 0; }
+    .boot-screen.on .tl-item.now .tl-dot::after { animation: tlpulse 1.6s ease-out 2.6s infinite; }
+    @keyframes tlpulse { 0% { opacity: .9; transform: scale(.6); } 100% { opacity: 0; transform: scale(1.5); } }
+    .tl-y { font: 700 .7rem ui-monospace, Menlo, Consolas, monospace; letter-spacing: .06em; color: #52d273; }
+    .tl-c h4 { margin: 2px 0 2px; }
+    @media (prefers-reduced-motion: reduce) { .boot-screen.on .tl::before { animation: none; transform: none; } .boot-screen.on .tl-item { animation: none; opacity: 1; transform: none; } .tl-item.now .tl-dot::after { display: none; } }
     .screen-actions { display: flex; justify-content: space-between; gap: 10px; margin-top: 12px; }
     .sbtn { font: 700 .78rem ui-monospace, Menlo, Consolas, monospace; letter-spacing: .06em; cursor: pointer; background: transparent; color: #9fe8b0; border: 1px solid #2d4a37; border-radius: 8px; padding: 9px 14px; }
     .sbtn:hover { background: #52d273; color: #06110a; border-color: #52d273; }
@@ -530,6 +546,9 @@
           { n: "akses", jobs: ["2fa", "push main ditutup", "pod security: restricted"] }
         ]
       },
+      // Layar Experience: jalur karier + garis waktu. e = indeks experience, ed = indeks education, c = indeks certifications.
+      jalur: { title: "jalur karier", ic: "→", tone: "good", nd: "2.4s", note: "dari kabel sampai aplikasi", stages: [{ n: "jalur", jobs: ["jaringan", "platform", "devsecops"] }] },
+      timeline: [{ y: "2013", e: 1 }, { y: "2015", ed: 0 }, { y: "2016", e: 0, now: true }, { y: "2026", c: 0 }],
       highlights: [
         { n: "50+", l: "aplikasi dikelola lewat GitOps" },
         { n: "20+", l: "pemeriksaan keamanan otomatis di pipeline" },
@@ -722,7 +741,7 @@
     setMode(savedMode);
 
     // Layar pembuka ala terminal; muncul setiap halaman dibuka/dimuat ulang. Latar: hujan kode (canvas, berhenti saat ditutup).
-    // Satu tombol MASUK (aktif setelah 100%): gembok terbuka, maskot mengetik, lalu gedung operasi muncul: tiap lantai = menu (Home/About/Projects/Experience/Contact); About & Projects membuka layar besar; Esc menutup langsung; prefers-reduced-motion: tanpa hujan dan animasi.
+    // Satu tombol MASUK (aktif setelah 100%): gembok terbuka, maskot mengetik, lalu gedung operasi muncul: tiap lantai = menu (Home/About/Projects/Experience/Contact); About, Projects & Experience membuka layar besar; Esc menutup langsung; prefers-reduced-motion: tanpa hujan dan animasi.
     (() => {
       const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
       const el = document.createElement("div");
@@ -747,6 +766,15 @@
         <div class="screen-body">${DATA.sorotan.map(slideHTML).join("")}</div>
         <div class="screen-nav"><button type="button" class="sbtn" id="projPrev" aria-label="Proyek sebelumnya">‹</button><span id="projCount" aria-live="polite">1/${DATA.sorotan.length}</span><button type="button" class="sbtn" id="projNext" aria-label="Proyek berikutnya">›</button></div>
       </div><div class="screen-actions"><button type="button" class="sbtn" id="projBack">◂ KEMBALI</button></div></div>`;
+      const tlItem = (m, i) => {
+        const e = m.e !== undefined ? DATA.experience[m.e] : null, ed = m.ed !== undefined ? DATA.education[m.ed] : null, c = m.c !== undefined ? DATA.certifications[m.c] : null;
+        const t = e ? `${e.title} · ${e.company}` : ed ? `${ed.degree} · ${ed.school}` : `${c.name} · ${c.issuer}`, per = e ? e.period : ed ? ed.period : c.date;
+        return `<div class="tl-item${m.now ? " now" : ""}" style="--i:${i}"><i class="tl-dot"></i><div class="tl-y">${esc(m.y)}${m.now ? " · SEKARANG" : ""}</div><div class="tl-c"><h4>${esc(t)}</h4><small>${esc(per)}</small>${e?.points?.length ? `<ul>${e.points.map((p) => `<li>${point(p)}</li>`).join("")}</ul>` : ""}</div></div>`;
+      };
+      const EXP = `<div class="boot-screen" id="bootExp"><div class="screen-frame">
+        <div class="screen-tabs"><span class="screen-title">EXPERIENCE · JALUR KARIER</span></div>
+        <div class="screen-body">${plHTML(DATA.jalur)}<div class="tl">${DATA.timeline.map(tlItem).join("")}</div></div>
+      </div><div class="screen-actions"><button type="button" class="sbtn" id="expBack">◂ KEMBALI</button></div></div>`;
       el.innerHTML = `<canvas id="bootRain" aria-hidden="true"></canvas><div class="boot-box">
         <div class="boot-stage"><svg class="boot-lock" viewBox="0 0 64 80" aria-hidden="true"><path class="shackle" d="M20 36V24a12 12 0 0 1 24 0v12"/><rect class="body" x="10" y="34" width="44" height="36" rx="6"/><circle class="hole" cx="32" cy="49" r="5"/><rect class="hole" x="30" y="52" width="4" height="9" rx="1.5"/></svg>
         <svg class="boot-mascot" viewBox="0 0 200 200" aria-hidden="true">
@@ -765,7 +793,7 @@
           <rect x="34" y="186" width="132" height="9" rx="4.5" fill="#cdd5e2"/>
         </svg></div>
         <pre id="bootLog" aria-live="polite"></pre><div class="boot-bar"><i id="bootBar"></i></div>
-        <div class="boot-row"><span id="bootPct">0%</span><button type="button" id="bootGo" disabled>MASUK ▸</button></div></div>${CITY}${SCREEN}${PROJ}`;
+        <div class="boot-row"><span id="bootPct">0%</span><button type="button" id="bootGo" disabled>MASUK ▸</button></div></div>${CITY}${SCREEN}${PROJ}${EXP}`;
       document.body.appendChild(el);
 
       // Hujan kode
@@ -800,23 +828,23 @@
         b.addEventListener("click", () => selectTab(i));
         b.addEventListener("keydown", (e) => { if (e.key === "ArrowRight" || e.key === "ArrowLeft") { const n = (i + (e.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length; selectTab(n); tabs[n].focus(); } });
       });
-      const panel = (k) => $(k === "proj" ? "bootProjects" : "bootScreen");
+      const panel = (k) => $(k === "proj" ? "bootProjects" : k === "exp" ? "bootExp" : "bootScreen");
       const openScreen = (k, origin) => {
         el.style.setProperty("--zo", origin); el.classList.add("zoom");
         setTimeout(() => {
           screenOn = k; el.classList.add("screen"); panel(k).classList.add("on");
-          el.setAttribute("aria-label", k === "proj" ? "Layar Projects" : "Layar About");
+          el.setAttribute("aria-label", k === "proj" ? "Layar Projects" : k === "exp" ? "Layar Experience" : "Layar About");
           if (k === "proj") showSlide(0); else { selectTab(0); tabs[0]?.focus(); }
         }, reduce ? 0 : 450);
       };
-      const closeScreen = () => { const k = screenOn; screenOn = null; if (k) panel(k).classList.remove("on"); el.classList.remove("screen", "zoom"); el.setAttribute("aria-label", "Pilih lantai"); floors()[k === "proj" ? 2 : 1]?.focus(); };
-      $("bootBack").addEventListener("click", closeScreen); $("projBack").addEventListener("click", closeScreen);
+      const closeScreen = () => { const k = screenOn; screenOn = null; if (k) panel(k).classList.remove("on"); el.classList.remove("screen", "zoom"); el.setAttribute("aria-label", "Pilih lantai"); floors()[{ about: 1, proj: 2, exp: 3 }[k]]?.focus(); };
+      $("bootBack").addEventListener("click", closeScreen); $("projBack").addEventListener("click", closeScreen); $("expBack").addEventListener("click", closeScreen);
       const slides = Array.from(document.querySelectorAll("#bootProjects .slide")); let si = 0, tx = 0;
       const showSlide = (i) => { si = (i + slides.length) % slides.length; slides.forEach((x, j) => { x.hidden = j !== si; }); $("projCount").textContent = `${si + 1}/${slides.length}`; };
       $("projPrev").addEventListener("click", () => showSlide(si - 1)); $("projNext").addEventListener("click", () => showSlide(si + 1));
       $("bootProjects").addEventListener("touchstart", (e) => { tx = e.changedTouches[0].clientX; }, { passive: true });
       $("bootProjects").addEventListener("touchend", (e) => { const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 40) showSlide(si + (dx < 0 ? 1 : -1)); }, { passive: true });
-      const pick = (t) => t === "About" ? openScreen("about", "32% 66%") : t === "Projects" ? openScreen("proj", "32% 53%") : go2(MENU[t] || "#top");
+      const pick = (t) => t === "About" ? openScreen("about", "32% 66%") : t === "Projects" ? openScreen("proj", "32% 53%") : t === "Experience" ? openScreen("exp", "32% 40%") : go2(MENU[t] || "#top");
       const go2 = (target) => {
         el.classList.add("out");
         if (target === "#top") window.scrollTo?.(0, 0); else document.querySelector(target)?.scrollIntoView();
