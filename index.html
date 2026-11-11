@@ -103,14 +103,8 @@
       display: grid; place-items: center; font-size: 3rem; font-weight: 800;
       border: 4px solid var(--surface); box-shadow: var(--shadow); overflow: hidden;
     }
-    .avatar.photo { background: #dfe3e8; place-items: end center; }  /* latar senada foto; foto bertumpu di tengah-bawah */
-    /* Potret tegak: tinggi 124% lingkaran, dasar foto rata dengan dasar lingkaran, kepala tetap utuh.
-       Tepi kiri-kanan memudar ke latar agar tidak terlihat garis sambungan. */
-    .avatar.photo img {
-      width: auto; max-width: none; height: calc(var(--d) * 1.24); object-fit: contain;
-      -webkit-mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
-      mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
-    }
+    .avatar.photo { background: #d4d6da; }
+    .avatar.photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 18%; }
     .hero h1 { font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1.15; letter-spacing: -.03em; }
     .headline { font-size: 1.15rem; color: var(--muted); margin: 8px 0 6px; }
     .location { color: var(--muted); font-size: .95rem; }
@@ -315,10 +309,10 @@
       about: "Saya memulai karier sebagai Network Engineer (Cisco, MikroTik, MPLS) di Bank Mandiri, lalu berkembang ke sisi platform. Sekarang saya System Engineer / DevSecOps yang mengelola klaster Kubernetes produksi dengan GitOps.\nFokus saya: pipeline CI/CD dengan pemeriksaan keamanan (image ditandatangani dan diverifikasi sebelum deploy), keamanan sebagai kode, dan observabilitas yang membuat masalah terlihat sebelum pengguna merasakannya.\nLatar jaringan membuat saya terbiasa menelusuri masalah dari kabel sampai aplikasi; sertifikasi CompTIA Security+ melengkapinya di sisi keamanan.",
       // Sorotan: hasil kerja utama (tanpa angka internal). Tambahkan angka dampak bila sudah ada data yang pasti.
       sorotan: [
-        { title: "Rilis yang terjamin keasliannya", text: "Setiap image ditandatangani (Cosign) dan diperiksa sebelum dijalankan, sehingga hanya hasil build resmi yang bisa naik ke produksi. Kyverno menolak konfigurasi yang berisiko." },
-        { title: "Deteksi dan observabilitas", text: "Metrik, log, trace, dan SIEM (Wazuh) terpadu: alert untuk klaster, server, dan jaringan, plus aturan deteksi serangan web (SQL injection, XSS) dari log gateway." },
-        { title: "GitOps tanpa perubahan manual", text: "Aplikasi dan konfigurasi klaster dikelola dari Git (ArgoCD), rahasia terenkripsi di repo, dan promosi dev → staging → prod yang konsisten." },
-        { title: "Ketahanan dan akses terkunci", text: "Pemulihan backup diuji; akses diperketat dengan 2FA, push langsung ke branch utama ditutup, dan Pod Security restricted di produksi." }
+        { title: "Rilis yang terjamin keasliannya", text: "Setiap image ditandatangani dan diperiksa sebelum dijalankan; hanya hasil build resmi yang bisa naik ke produksi." },
+        { title: "Deteksi dan observabilitas", text: "Metrik, log, trace, dan SIEM terpadu: alert untuk klaster, server, jaringan, dan serangan web." },
+        { title: "GitOps tanpa perubahan manual", text: "Aplikasi dan konfigurasi klaster dikelola dari Git (ArgoCD), dengan promosi dev → staging → prod yang konsisten." },
+        { title: "Ketahanan dan akses terkunci", text: "Pemulihan backup diuji, akses diperketat dengan 2FA, dan Pod Security restricted di produksi." }
       ],
       // Angka sengaja dibulatkan; tidak perlu menampilkan hitungan persis lingkungan produksi.
       highlights: [
@@ -370,22 +364,10 @@
       },
       // Diagram generik (tanpa nama host/IP/namespace). Tiap baris = satu deret kotak berurutan;
       // awalan "!" menandai tahap keamanan (garis aksen); "\n" memecah label jadi dua baris.
-      diagrams: [
-        {
-          title: "CI/CD dengan pemeriksaan keamanan otomatis",
-          caption: "Setiap commit melewati pemindaian dan quality gate; image ditandatangani dan diverifikasi sebelum deploy.",
-          rows: [
-            ["Commit", "!Secret scan\nGitleaks", "!SAST\nSemgrep", "!Quality gate\nSonarQube"],
-            ["Build image", "!Scan image\nTrivy", "!Tanda tangan\nCosign + SBOM", "!Verifikasi\ntanda tangan"],
-            ["Deploy\ndev/staging/prod", "!DAST\nZAP", "Pelaporan\nDefectDojo"]
-          ]
-        }
-      ],
+      diagrams: [],
       // Cuplikan layar: file di folder img/. Hanya potongan grafik tanpa nama host/IP/akun/versi.
       screens: [
         { src: "img/argocd-apps.png", w: 1905, h: 937, wide: true, alt: "Daftar aplikasi ArgoCD: semua Synced dan Healthy", caption: "ArgoCD: aplikasi dikelola lewat GitOps, semuanya Synced dan Healthy (repositori dan sebagian nama disamarkan)." },
-        { src: "img/defectdojo-severity.png", w: 818, h: 390, alt: "Grafik donat tingkat keparahan temuan di DefectDojo", caption: "DefectDojo: distribusi tingkat keparahan temuan dari semua pemindaian." },
-        { src: "img/wazuh-alerts.png", w: 943, h: 354, alt: "Grafik tren alert per grup aturan di Wazuh", caption: "Wazuh (SIEM): tren alert per grup aturan." },
         { src: "img/gitlab-pipeline.png", w: 829, h: 269, alt: "Tahap verifikasi, deploy, dan pelaporan pada pipeline GitLab CI yang lulus", caption: "GitLab CI: tahap verifikasi tanda tangan image, deploy, dan pelaporan keamanan (semua lulus)." }
       ],
       // Nomor kandidat CompTIA (COMP...) sengaja TIDAK dicantumkan; kode verifikasi di bawah memang untuk dicek publik.
