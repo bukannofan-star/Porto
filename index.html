@@ -124,6 +124,38 @@
     .boot-bar i { display: block; height: 100%; width: 100%; background: #52d273; transform: scaleX(0); transform-origin: left; transition: transform .06s linear; }
     .boot-row { display: flex; align-items: center; gap: 10px; }
     .boot-row span { margin-right: auto; }
+    /* Gedung operasi isometrik: tiap lantai = satu menu (SVG dibuat statis; hanya transform/opacity untuk gerak utama) */
+    #boot.city .boot-box { display: none; }
+    .boot-city { display: none; position: relative; width: min(440px, 100%); text-align: center; }
+    #boot.city .boot-city { display: block; }
+    .city-title { font-size: 1.2rem; font-weight: 700; color: #52d273; }
+    .city-sub { font-size: .78rem; opacity: .7; margin-bottom: 4px; }
+    .city-hint { font-size: .72rem; opacity: .6; margin-top: 6px; }
+    .city-svg { display: block; width: 100%; height: auto; overflow: visible; }
+    .city-svg .slab { fill: #141c26; stroke: rgba(82, 210, 115, .25); } .city-svg .slabL { fill: #0f151d; } .city-svg .slabR { fill: #0c1218; }
+    .floor { cursor: pointer; outline: none; opacity: 0; transform: translateY(18px); }
+    #boot.city .floor { animation: floorin .5s ease-out forwards; animation-delay: calc(var(--i) * .14s); }
+    @keyframes floorin { to { opacity: 1; transform: none; } }
+    .floor polygon { transition: fill .2s, stroke .2s; }
+    .fL, .fR, .fT { stroke: rgba(82, 210, 115, .4); stroke-width: 1; }
+    .fL { fill: #1b2a3a; } .fR { fill: #233a50; } .fT { fill: #2e4a66; }
+    .floor:hover .fL, .floor:focus-visible .fL { fill: #1e4a3a; stroke: #52d273; }
+    .floor:hover .fR, .floor:focus-visible .fR { fill: #25604a; stroke: #52d273; }
+    .floor:hover .fT, .floor:focus-visible .fT { fill: #2f7a5c; stroke: #52d273; }
+    .win { fill: #ffd98a; opacity: .85; } .win.f { animation: flick 3.2s steps(1) infinite; animation-delay: calc(var(--d) * -.7s); }
+    @keyframes flick { 0%, 70%, 100% { opacity: .85; } 80% { opacity: .25; } }
+    .scr { fill: #5cc8ff; opacity: .8; } .door, .rack { fill: #0b121a; }
+    .led { fill: #52d273; animation: ledblink 1.6s steps(1) infinite; animation-delay: calc(var(--d) * -.3s); }
+    @keyframes ledblink { 0%, 60%, 100% { opacity: 1; } 70% { opacity: .15; } }
+    .pole { stroke: #9fe8b0; stroke-width: 1.5; } .dish { fill: none; stroke: #9fe8b0; stroke-width: 2; stroke-linecap: round; }
+    .beacon { fill: #ff4d6d; animation: ledblink 1.2s steps(1) infinite; }
+    .lead { stroke: rgba(159, 232, 176, .35); stroke-dasharray: 2 3; }
+    .lbl { fill: #9fe8b0; font: 700 11px ui-monospace, Menlo, Consolas, monospace; dominant-baseline: middle; letter-spacing: .04em; }
+    .floor:hover .lbl, .floor:focus-visible .lbl { fill: #fff; } .floor:hover .lead, .floor:focus-visible .lead { stroke: #52d273; }
+    .riser { stroke: #5cc8ff; stroke-opacity: .45; stroke-width: 1.5; pointer-events: none; }
+    .pkt { fill: #5cc8ff; offset-rotate: 0deg; animation: pkt 2.2s linear infinite; animation-delay: var(--p); pointer-events: none; } .pkt.g { fill: #52d273; animation-duration: 4.8s; }
+    @keyframes pkt { from { offset-distance: 0%; } to { offset-distance: 100%; } }
+    @media (prefers-reduced-motion: reduce) { .floor { opacity: 1; transform: none; animation: none !important; } .win.f, .led, .beacon, .pkt { animation: none; } }
     #bootGo { font-family: inherit; cursor: pointer; background: #52d273; color: #06110a; border: 1px solid #52d273; border-radius: 10px; padding: 10px 22px; font-weight: 700; letter-spacing: .06em; }
     #bootGo:disabled { opacity: .35; cursor: default; }
     #bootGo:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
@@ -282,11 +314,11 @@
     <div class="container">
       <a href="#top" class="brand" id="brand"></a>
       <ul class="nav-links">
-        <li class="link"><a href="#sorotan">Hasil Kerja</a></li>
-        <li class="link"><a href="#pengalaman">Pengalaman</a></li>
-        <li class="link"><a href="#keahlian">Keahlian</a></li>
-        <li class="link"><a href="#cuplikan">Cuplikan</a></li>
-        <li class="link"><a href="#kontak">Kontak</a></li>
+        <li class="link"><a href="#top">Home</a></li>
+        <li class="link"><a href="#tentang">About</a></li>
+        <li class="link"><a href="#sorotan">Projects</a></li>
+        <li class="link"><a href="#pengalaman">Experience</a></li>
+        <li class="link"><a href="#kontak">Contact</a></li>
         <li><button class="theme-btn" id="themeBtn" aria-label="Ganti tema">◐</button></li>
       </ul>
     </div>
@@ -312,14 +344,9 @@
 
     <div class="highlights" id="highlights"></div>
 
-    <section id="sorotan" class="reveal">
-      <h2>Hasil Kerja Utama</h2>
-      <div class="grid" id="sorotanList"></div>
-    </section>
-
-    <section id="pengalaman" class="reveal">
-      <h2>Pengalaman</h2>
-      <div class="timeline" id="experience"></div>
+    <section id="tentang" class="about reveal">
+      <h2>About</h2>
+      <div class="card"><p id="about"></p></div>
     </section>
 
     <section id="pendidikan" class="reveal">
@@ -327,14 +354,14 @@
       <div class="timeline" id="education"></div>
     </section>
 
-    <section id="keahlian" class="reveal">
-      <h2>Keahlian</h2>
-      <div class="card"><div class="chips" id="skills"></div></div>
+    <section id="sertifikasi" class="reveal">
+      <h2>Lisensi &amp; Sertifikasi</h2>
+      <div class="grid" id="certs"></div>
     </section>
 
-    <section id="arsitektur" class="reveal">
-      <h2>Alur Rilis Aman</h2>
-      <div class="diagrams" id="diagrams"></div>
+    <section id="sorotan" class="reveal">
+      <h2>Projects · Hasil Kerja Utama</h2>
+      <div class="grid" id="sorotanList"></div>
     </section>
 
     <section id="cuplikan" class="reveal">
@@ -343,13 +370,18 @@
       <p class="shots-note">Identitas sistem disamarkan. Klik gambar untuk memperbesar.</p>
     </section>
 
-    <section id="sertifikasi" class="reveal">
-      <h2>Lisensi &amp; Sertifikasi</h2>
-      <div class="grid" id="certs"></div>
+    <section id="pengalaman" class="reveal">
+      <h2>Experience · Pengalaman</h2>
+      <div class="timeline" id="experience"></div>
+    </section>
+
+    <section id="keahlian" class="reveal">
+      <h2>Keahlian</h2>
+      <div class="card"><div class="chips" id="skills"></div></div>
     </section>
 
     <section id="kontak" class="contact reveal">
-      <h2>Kontak</h2>
+      <h2>Contact</h2>
       <div class="card">
         <p>Butuh engineer yang bisa membuat rilis cepat <em>dan</em> aman? Mari bicara.</p>
         <div class="actions" id="contactActions"></div>
@@ -460,6 +492,7 @@
     $("brand").textContent = DATA.name;
     $("name").textContent = DATA.name;
     $("headline").textContent = DATA.headline;
+    $("about").textContent = DATA.about;
     $("location").textContent = DATA.location ? `📍 ${DATA.location}` : "";
     $("tagline").textContent = DATA.tagline || "";
     $("badges").innerHTML = (DATA.badges || []).map((b) => `<span class="chip">${esc(b)}</span>`).join("");
@@ -607,11 +640,13 @@
     setMode(savedMode);
 
     // Layar pembuka ala terminal; muncul setiap halaman dibuka/dimuat ulang. Latar: hujan kode (canvas, berhenti saat ditutup).
-    // Satu tombol MASUK (aktif setelah 100%): gembok terbuka, maskot hacker mengetik, lalu layar memudar (~2,4 dtk); Esc menutup langsung; prefers-reduced-motion: tanpa hujan dan animasi.
+    // Satu tombol MASUK (aktif setelah 100%): gembok terbuka, maskot mengetik, lalu gedung operasi muncul: tiap lantai = menu (Home/About/Projects/Experience/Contact); Esc menutup langsung; prefers-reduced-motion: tanpa hujan dan animasi.
     (() => {
       const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
       const el = document.createElement("div");
       el.id = "boot"; el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true"); el.setAttribute("aria-label", "Layar pembuka");
+      const MENU = { Home: "#top", About: "#tentang", Projects: "#sorotan", Experience: "#pengalaman", Contact: "#kontak" };
+      const CITY = `<div class="boot-city" id="bootCity"><div class="city-title">${esc(DATA.name)}</div><div class="city-sub">Pilih lantai untuk masuk</div><svg class="city-svg" viewBox="0 0 300 300" role="group" aria-label="Gedung operasi: pilih lantai untuk menuju bagian halaman"><polygon class="slab" points="8,240 96,196 184,240 96,284"/><polygon class="slabL" points="8,240 96,284 96,292 8,248"/><polygon class="slabR" points="96,284 184,240 184,248 96,292"/><g class="floor" role="button" tabindex="0" data-t="Home" aria-label="Home: ringkasan profil" style="--i:0"><polygon class="fL" points="32,238 96,270 96,232 32,200"/><polygon class="fR" points="96,270 160,238 160,200 96,232"/><polygon class="door" points="67.84,255.92 88.32,266.16 88.32,239.56 67.84,229.32"/><polygon class="led" style="--d:0" points="67.84,227.8 88.32,238.04 88.32,235.76 67.84,225.52"/><polygon class="win f" style="--d:1" points="38.4,227.9 51.2,234.3 51.2,221 38.4,214.6"/><polygon class="win" style="--d:0" points="103.68,252.86 115.2,247.1 115.2,233.8 103.68,239.56"/><polygon class="win f" style="--d:1" points="121.6,243.9 133.12,238.14 133.12,224.84 121.6,230.6"/><polygon class="win" style="--d:2" points="139.52,234.94 151.04,229.18 151.04,215.88 139.52,221.64"/><line class="lead" x1="162" y1="235" x2="190" y2="235"/><text class="lbl" x="196" y="235">01 HOME</text></g><g class="floor" role="button" tabindex="0" data-t="About" aria-label="About: latar belakang dan sertifikasi" style="--i:1"><polygon class="fL" points="32,200 96,232 96,194 32,162"/><polygon class="fR" points="96,232 160,200 160,162 96,194"/><polygon class="win" style="--d:0" points="38.4,189.9 51.2,196.3 51.2,183 38.4,176.6"/><polygon class="win f" style="--d:1" points="57.6,199.5 70.4,205.9 70.4,192.6 57.6,186.2"/><polygon class="win" style="--d:2" points="76.8,209.1 89.6,215.5 89.6,202.2 76.8,195.8"/><polygon class="win f" style="--d:1" points="103.68,214.86 115.2,209.1 115.2,195.8 103.68,201.56"/><polygon class="win" style="--d:2" points="121.6,205.9 133.12,200.14 133.12,186.84 121.6,192.6"/><polygon class="win f" style="--d:3" points="139.52,196.94 151.04,191.18 151.04,177.88 139.52,183.64"/><line class="lead" x1="162" y1="197" x2="190" y2="197"/><text class="lbl" x="196" y="197">02 ABOUT</text></g><g class="floor" role="button" tabindex="0" data-t="Projects" aria-label="Projects: hasil kerja utama" style="--i:2"><polygon class="fL" points="32,162 96,194 96,156 32,124"/><polygon class="fR" points="96,194 160,162 160,124 96,156"/><polygon class="scr" points="39.68,154.44 60.8,165 60.8,149.8 39.68,139.24"/><polygon class="scr" points="67.2,168.2 88.32,178.76 88.32,163.56 67.2,153"/><polygon class="win" style="--d:0" points="103.68,176.86 115.2,171.1 115.2,157.8 103.68,163.56"/><polygon class="win f" style="--d:1" points="121.6,167.9 133.12,162.14 133.12,148.84 121.6,154.6"/><polygon class="win" style="--d:2" points="139.52,158.94 151.04,153.18 151.04,139.88 139.52,145.64"/><line class="lead" x1="162" y1="159" x2="190" y2="159"/><text class="lbl" x="196" y="159">03 PROJECTS</text></g><g class="floor" role="button" tabindex="0" data-t="Experience" aria-label="Experience: karier dan keahlian" style="--i:3"><polygon class="fL" points="32,124 96,156 96,118 32,86"/><polygon class="fR" points="96,156 160,124 160,86 96,118"/><polygon class="win" style="--d:0" points="38.4,113.9 51.2,120.3 51.2,107 38.4,100.6"/><polygon class="win f" style="--d:1" points="57.6,123.5 70.4,129.9 70.4,116.6 57.6,110.2"/><polygon class="win" style="--d:2" points="76.8,133.1 89.6,139.5 89.6,126.2 76.8,119.8"/><polygon class="rack" points="102.4,149 111.36,144.52 111.36,114.12 102.4,118.6"/><polygon class="led" style="--d:0" points="104.32,142.34 108.8,140.1 108.8,137.44 104.32,139.68"/><polygon class="led" style="--d:1" points="104.32,134.74 108.8,132.5 108.8,129.84 104.32,132.08"/><polygon class="led" style="--d:2" points="104.32,127.14 108.8,124.9 108.8,122.24 104.32,124.48"/><polygon class="rack" points="115.2,142.6 124.16,138.12 124.16,107.72 115.2,112.2"/><polygon class="led" style="--d:3" points="117.12,135.94 121.6,133.7 121.6,131.04 117.12,133.28"/><polygon class="led" style="--d:4" points="117.12,128.34 121.6,126.1 121.6,123.44 117.12,125.68"/><polygon class="led" style="--d:5" points="117.12,120.74 121.6,118.5 121.6,115.84 117.12,118.08"/><polygon class="rack" points="128,136.2 136.96,131.72 136.96,101.32 128,105.8"/><polygon class="led" style="--d:6" points="129.92,129.54 134.4,127.3 134.4,124.64 129.92,126.88"/><polygon class="led" style="--d:7" points="129.92,121.94 134.4,119.7 134.4,117.04 129.92,119.28"/><polygon class="led" style="--d:8" points="129.92,114.34 134.4,112.1 134.4,109.44 129.92,111.68"/><polygon class="rack" points="140.8,129.8 149.76,125.32 149.76,94.92 140.8,99.4"/><polygon class="led" style="--d:9" points="142.72,123.14 147.2,120.9 147.2,118.24 142.72,120.48"/><polygon class="led" style="--d:10" points="142.72,115.54 147.2,113.3 147.2,110.64 142.72,112.88"/><polygon class="led" style="--d:11" points="142.72,107.94 147.2,105.7 147.2,103.04 142.72,105.28"/><polygon class="fT" points="32,86 96,118 160,86 96,54"/><line class="lead" x1="162" y1="121" x2="190" y2="121"/><text class="lbl" x="196" y="121">04 EXPERIENCE</text></g><g class="floor" role="button" tabindex="0" data-t="Contact" aria-label="Contact: hubungi saya" style="--i:4"><polygon class="fL" points="62,86 96,103 96,69 62,52"/><polygon class="fR" points="96,103 130,86 130,52 96,69"/><polygon class="fT" points="62,52 96,69 130,52 96,35"/><polygon class="win f" style="--d:1" points="68.8,77.5 89.2,87.7 89.2,74.1 68.8,63.9"/><polygon class="win" style="--d:2" points="102.8,87.7 123.2,77.5 123.2,63.9 102.8,74.1"/><line class="pole" x1="96" y1="52" x2="96" y2="30"/><path class="dish" d="M83 25Q96 42 109 25"/><circle class="beacon" cx="96" cy="23" r="2.6"/><line class="lead" x1="132" y1="77.5" x2="190" y2="77.5"/><text class="lbl" x="196" y="77.5">05 CONTACT</text></g><line class="riser" x1="96" y1="270" x2="96" y2="118"/><circle class="pkt" style="--p:0s;offset-path:path('M96 270V118');" r="2.2"/><circle class="pkt" style="--p:-1.1s;offset-path:path('M96 270V118');" r="2.2"/><circle class="pkt g" style="--p:0s;offset-path:path('M8 240L96 196L184 240L96 284Z');" r="2.2"/><circle class="pkt g" style="--p:-2.4s;offset-path:path('M8 240L96 196L184 240L96 284Z');" r="2.2"/></svg><p class="city-hint">↑ ↓ pilih lantai · Enter masuk · Esc langsung ke Home</p></div>`;
       el.innerHTML = `<canvas id="bootRain" aria-hidden="true"></canvas><div class="boot-box">
         <div class="boot-stage"><svg class="boot-lock" viewBox="0 0 64 80" aria-hidden="true"><path class="shackle" d="M20 36V24a12 12 0 0 1 24 0v12"/><rect class="body" x="10" y="34" width="44" height="36" rx="6"/><circle class="hole" cx="32" cy="49" r="5"/><rect class="hole" x="30" y="52" width="4" height="9" rx="1.5"/></svg>
         <svg class="boot-mascot" viewBox="0 0 200 200" aria-hidden="true">
@@ -630,7 +665,7 @@
           <rect x="34" y="186" width="132" height="9" rx="4.5" fill="#cdd5e2"/>
         </svg></div>
         <pre id="bootLog" aria-live="polite"></pre><div class="boot-bar"><i id="bootBar"></i></div>
-        <div class="boot-row"><span id="bootPct">0%</span><button type="button" id="bootGo" disabled>MASUK ▸</button></div></div>`;
+        <div class="boot-row"><span id="bootPct">0%</span><button type="button" id="bootGo" disabled>MASUK ▸</button></div></div>${CITY}`;
       document.body.appendChild(el);
 
       // Hujan kode
@@ -649,13 +684,31 @@
       const bar = $("bootBar"), pct = $("bootPct"), log = $("bootLog"), go = $("bootGo");
       let n = 0, timer, opening = false;
       const close = () => { clearInterval(timer); if (ctx) { cancelAnimationFrame(raf); removeEventListener("resize", fit); } el.remove(); document.removeEventListener("keydown", onKey); };
-      const onKey = (e) => { if (e.key === "Escape") close(); };
+      const floors = () => Array.from(document.querySelectorAll("#bootCity .floor"));
+      let cityOn = false;
+      const onKey = (e) => {
+        if (e.key === "Escape") return close();
+        if (!cityOn || (e.key !== "ArrowUp" && e.key !== "ArrowDown")) return;
+        const f = floors(), i = f.indexOf(document.activeElement);   // urutan DOM: Home (dasar) ... Contact (atap)
+        e.preventDefault(); f[(i + (e.key === "ArrowUp" ? 1 : -1) + f.length) % f.length]?.focus();
+      };
+      const toCity = () => { cityOn = true; el.classList.add("city"); el.setAttribute("aria-label", "Pilih lantai"); floors()[0]?.focus(); };
+      const pick = (t) => {
+        const target = MENU[t] || "#top";
+        el.classList.add("out");
+        if (target === "#top") window.scrollTo?.(0, 0); else document.querySelector(target)?.scrollIntoView();
+        setTimeout(close, 350);
+      };
+      floors().forEach((f) => {
+        f.addEventListener("click", () => pick(f.dataset.t));
+        f.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(f.dataset.t); } });
+      });
       const open = () => {
         if (opening) return; opening = true; go.disabled = true;
-        if (reduce) return close();
+        if (reduce) return toCity();
         el.classList.add("open"); log.textContent = "> akses diberikan.";
         setTimeout(() => { el.classList.add("hack"); log.textContent = "> membuka portofolio ..."; }, 650);
-        setTimeout(() => el.classList.add("out"), 2000); setTimeout(close, 2400);
+        setTimeout(toCity, 2000);
       };
       const show = (v) => { n = v; bar.style.transform = `scaleX(${v / 100})`; pct.textContent = v + "%"; log.textContent = lines.slice(0, Math.ceil(v / 100 * lines.length)).join("\n"); if (v >= 100) { go.disabled = false; go.focus(); } };
       go.addEventListener("click", open); document.addEventListener("keydown", onKey);
