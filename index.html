@@ -239,6 +239,27 @@
     .tl-y { font: 700 .7rem ui-monospace, Menlo, Consolas, monospace; letter-spacing: .06em; color: #52d273; }
     .tl-c h4 { margin: 2px 0 2px; }
     @media (prefers-reduced-motion: reduce) { .boot-screen.on .tl::before { animation: none; transform: none; } .boot-screen.on .tl-item { animation: none; opacity: 1; transform: none; } .tl-item.now .tl-dot::after { display: none; } }
+    /* Layar Contact: sinyal memancar dari antena di atap, lalu kanal kontak muncul satu per satu (transform/opacity) */
+    .sig { position: relative; width: 96px; height: 96px; margin: 2px auto 8px; }
+    .sig b { position: absolute; inset: 42px; border-radius: 50%; background: #52d273; }
+    .sig i { position: absolute; inset: 0; border: 1px solid #52d273; border-radius: 50%; opacity: 0; transform: scale(.2); }
+    .boot-screen.on .sig i { animation: sigring 2.4s ease-out infinite; animation-delay: calc(var(--k) * .8s); }
+    @keyframes sigring { 0% { opacity: .9; transform: scale(.2); } 100% { opacity: 0; transform: scale(1); } }
+    .cx-status { position: relative; height: 1.5em; text-align: center; font: 700 .78rem ui-monospace, Menlo, Consolas, monospace; color: #52d273; }
+    .cx-status span { position: absolute; left: 0; right: 0; }
+    .boot-screen.on .cx-a { animation: cxout .3s 1.6s forwards; }
+    .cx-b { opacity: 0; } .boot-screen.on .cx-b { animation: plok .3s 1.8s forwards; }
+    @keyframes cxout { to { opacity: 0; } }
+    .cx-line { text-align: center; color: #cfeedd; margin: 6px 0 12px; font-size: .86rem; }
+    .ch-list { display: grid; gap: 8px; }
+    .ch-row { display: flex; gap: 8px; align-items: stretch; opacity: 0; transform: translateY(8px); }
+    .boot-screen.on .ch-row { animation: tlin .45s ease-out forwards; animation-delay: calc(2s + var(--i) * .25s); }
+    .ch { flex: 1; display: flex; align-items: center; gap: 12px; padding: 11px 14px; border: 1px solid #2d4a37; border-radius: 10px; color: #cfeedd; text-decoration: none; }
+    .ch:hover, .ch:focus-visible { background: #52d273; color: #06110a; border-color: #52d273; outline: none; text-decoration: none; }
+    .ch i { font-style: normal; width: 22px; text-align: center; font-weight: 700; }
+    .ch b { font: 700 .78rem ui-monospace, Menlo, Consolas, monospace; letter-spacing: .06em; }
+    .ch span { margin-left: auto; font-size: .74rem; opacity: .85; overflow-wrap: anywhere; text-align: right; }
+    @media (prefers-reduced-motion: reduce) { .sig i { animation: none !important; } .cx-a { display: none; } .boot-screen.on .cx-b, .boot-screen.on .ch-row { animation: none; opacity: 1; transform: none; } }
     .screen-actions { display: flex; justify-content: space-between; gap: 10px; margin-top: 12px; }
     .sbtn { font: 700 .78rem ui-monospace, Menlo, Consolas, monospace; letter-spacing: .06em; cursor: pointer; background: transparent; color: #9fe8b0; border: 1px solid #2d4a37; border-radius: 8px; padding: 9px 14px; }
     .sbtn:hover { background: #52d273; color: #06110a; border-color: #52d273; }
@@ -741,7 +762,7 @@
     setMode(savedMode);
 
     // Layar pembuka ala terminal; muncul setiap halaman dibuka/dimuat ulang. Latar: hujan kode (canvas, berhenti saat ditutup).
-    // Satu tombol MASUK (aktif setelah 100%): gembok terbuka, maskot mengetik, lalu gedung operasi muncul: tiap lantai = menu (Home/About/Projects/Experience/Contact); About, Projects & Experience membuka layar besar; Esc menutup langsung; prefers-reduced-motion: tanpa hujan dan animasi.
+    // Satu tombol MASUK (aktif setelah 100%): gembok terbuka, maskot mengetik, lalu gedung operasi muncul: tiap lantai = menu (Home/About/Projects/Experience/Contact); About, Projects, Experience & Contact membuka layar besar (hanya Home yang membuka halaman); Esc menutup langsung; prefers-reduced-motion: tanpa hujan dan animasi.
     (() => {
       const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
       const el = document.createElement("div");
@@ -775,6 +796,20 @@
         <div class="screen-tabs"><span class="screen-title">EXPERIENCE · JALUR KARIER</span></div>
         <div class="screen-body">${plHTML(DATA.jalur)}<div class="tl">${DATA.timeline.map(tlItem).join("")}</div></div>
       </div><div class="screen-actions"><button type="button" class="sbtn" id="expBack">◂ KEMBALI</button></div></div>`;
+      const L = DATA.links || {};
+      const chans = [
+        L.email && { ic: "✉", n: "Email", v: L.email, href: `mailto:${L.email}`, copy: true },
+        L.linkedin && { ic: "in", n: "LinkedIn", v: L.linkedin.replace(/\/$/, "").split("/").pop(), href: L.linkedin, ext: true },
+        L.github && { ic: "⌥", n: "GitHub", v: L.github.replace(/\/$/, "").split("/").pop(), href: L.github, ext: true },
+        L.cv && { ic: "⬇", n: "Unduh CV", v: "PDF · 1 halaman", href: L.cv, dl: true }
+      ].filter(Boolean);
+      const CX = `<div class="boot-screen" id="bootContact"><div class="screen-frame">
+        <div class="screen-tabs"><span class="screen-title">CONTACT · HUBUNGI SAYA</span></div>
+        <div class="screen-body"><div class="sig" aria-hidden="true"><i style="--k:0"></i><i style="--k:1"></i><i style="--k:2"></i><b></b></div>
+          <div class="cx-status" aria-live="polite"><span class="cx-a">> memancarkan sinyal ...</span><span class="cx-b">✓ terhubung. pilih kanal:</span></div>
+          <p class="cx-line">Butuh engineer yang bisa membuat rilis cepat <em>dan</em> aman? Mari bicara.</p>
+          <div class="ch-list">${chans.map((c, i) => `<div class="ch-row" style="--i:${i}"><a class="ch" href="${esc(c.href)}"${c.ext ? ' target="_blank" rel="noopener"' : ""}${c.dl ? " download" : ""}><i>${c.ic}</i><b>${c.n.toUpperCase()}</b><span>${esc(c.v)}</span></a>${c.copy ? `<button type="button" class="sbtn" id="cxCopy">SALIN</button>` : ""}</div>`).join("")}</div></div>
+      </div><div class="screen-actions"><button type="button" class="sbtn" id="cxBack">◂ KEMBALI</button></div></div>`;
       el.innerHTML = `<canvas id="bootRain" aria-hidden="true"></canvas><div class="boot-box">
         <div class="boot-stage"><svg class="boot-lock" viewBox="0 0 64 80" aria-hidden="true"><path class="shackle" d="M20 36V24a12 12 0 0 1 24 0v12"/><rect class="body" x="10" y="34" width="44" height="36" rx="6"/><circle class="hole" cx="32" cy="49" r="5"/><rect class="hole" x="30" y="52" width="4" height="9" rx="1.5"/></svg>
         <svg class="boot-mascot" viewBox="0 0 200 200" aria-hidden="true">
@@ -793,7 +828,7 @@
           <rect x="34" y="186" width="132" height="9" rx="4.5" fill="#cdd5e2"/>
         </svg></div>
         <pre id="bootLog" aria-live="polite"></pre><div class="boot-bar"><i id="bootBar"></i></div>
-        <div class="boot-row"><span id="bootPct">0%</span><button type="button" id="bootGo" disabled>MASUK ▸</button></div></div>${CITY}${SCREEN}${PROJ}${EXP}`;
+        <div class="boot-row"><span id="bootPct">0%</span><button type="button" id="bootGo" disabled>MASUK ▸</button></div></div>${CITY}${SCREEN}${PROJ}${EXP}${CX}`;
       document.body.appendChild(el);
 
       // Hujan kode
@@ -828,23 +863,28 @@
         b.addEventListener("click", () => selectTab(i));
         b.addEventListener("keydown", (e) => { if (e.key === "ArrowRight" || e.key === "ArrowLeft") { const n = (i + (e.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length; selectTab(n); tabs[n].focus(); } });
       });
-      const panel = (k) => $(k === "proj" ? "bootProjects" : k === "exp" ? "bootExp" : "bootScreen");
+      const panel = (k) => $(k === "proj" ? "bootProjects" : k === "exp" ? "bootExp" : k === "contact" ? "bootContact" : "bootScreen");
       const openScreen = (k, origin) => {
         el.style.setProperty("--zo", origin); el.classList.add("zoom");
         setTimeout(() => {
           screenOn = k; el.classList.add("screen"); panel(k).classList.add("on");
-          el.setAttribute("aria-label", k === "proj" ? "Layar Projects" : k === "exp" ? "Layar Experience" : "Layar About");
+          el.setAttribute("aria-label", k === "proj" ? "Layar Projects" : k === "exp" ? "Layar Experience" : k === "contact" ? "Layar Contact" : "Layar About");
           if (k === "proj") showSlide(0); else { selectTab(0); tabs[0]?.focus(); }
         }, reduce ? 0 : 450);
       };
-      const closeScreen = () => { const k = screenOn; screenOn = null; if (k) panel(k).classList.remove("on"); el.classList.remove("screen", "zoom"); el.setAttribute("aria-label", "Pilih lantai"); floors()[{ about: 1, proj: 2, exp: 3 }[k]]?.focus(); };
-      $("bootBack").addEventListener("click", closeScreen); $("projBack").addEventListener("click", closeScreen); $("expBack").addEventListener("click", closeScreen);
+      const closeScreen = () => { const k = screenOn; screenOn = null; if (k) panel(k).classList.remove("on"); el.classList.remove("screen", "zoom"); el.setAttribute("aria-label", "Pilih lantai"); floors()[{ about: 1, proj: 2, exp: 3, contact: 4 }[k]]?.focus(); };
+      $("bootBack").addEventListener("click", closeScreen); $("projBack").addEventListener("click", closeScreen); $("expBack").addEventListener("click", closeScreen); $("cxBack").addEventListener("click", closeScreen);
+      $("cxCopy")?.addEventListener("click", async (e) => {
+        const b = e.currentTarget, t = b.textContent;
+        try { await navigator.clipboard.writeText(L.email); b.textContent = "TERSALIN ✓"; } catch (err) { b.textContent = "GAGAL"; }
+        setTimeout(() => { b.textContent = t; }, 1600);
+      });
       const slides = Array.from(document.querySelectorAll("#bootProjects .slide")); let si = 0, tx = 0;
       const showSlide = (i) => { si = (i + slides.length) % slides.length; slides.forEach((x, j) => { x.hidden = j !== si; }); $("projCount").textContent = `${si + 1}/${slides.length}`; };
       $("projPrev").addEventListener("click", () => showSlide(si - 1)); $("projNext").addEventListener("click", () => showSlide(si + 1));
       $("bootProjects").addEventListener("touchstart", (e) => { tx = e.changedTouches[0].clientX; }, { passive: true });
       $("bootProjects").addEventListener("touchend", (e) => { const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 40) showSlide(si + (dx < 0 ? 1 : -1)); }, { passive: true });
-      const pick = (t) => t === "About" ? openScreen("about", "32% 66%") : t === "Projects" ? openScreen("proj", "32% 53%") : t === "Experience" ? openScreen("exp", "32% 40%") : go2(MENU[t] || "#top");
+      const pick = (t) => t === "About" ? openScreen("about", "32% 66%") : t === "Projects" ? openScreen("proj", "32% 53%") : t === "Experience" ? openScreen("exp", "32% 40%") : t === "Contact" ? openScreen("contact", "32% 26%") : go2(MENU[t] || "#top");
       const go2 = (target) => {
         el.classList.add("out");
         if (target === "#top") window.scrollTo?.(0, 0); else document.querySelector(target)?.scrollIntoView();
