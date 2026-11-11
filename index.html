@@ -159,9 +159,9 @@
     /* Layar besar (klik lantai About): kamera "mendekat" ke layar berisi tab About / Skills / Experience */
     .boot-screen { display: none; position: relative; width: min(640px, 100%); }
     #boot.screen .boot-city { display: none; }
-    #boot.screen .boot-screen { display: block; animation: scrin .45s ease-out; }
+    .boot-screen.on { display: block; animation: scrin .45s ease-out; }
     @keyframes scrin { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: none; } }
-    #boot.zoom .city-svg { transform: scale(1.9); transform-origin: 32% 66%; opacity: 0; transition: transform .5s ease-in, opacity .45s ease-in; }
+    #boot.zoom .city-svg { transform: scale(1.9); transform-origin: var(--zo, 32% 66%); opacity: 0; transition: transform .5s ease-in, opacity .45s ease-in; }
     .screen-frame { background: #0d1520; border: 6px solid #202a38; border-radius: 14px; box-shadow: 0 0 0 1px #2d4a37, 0 0 40px rgba(82, 210, 115, .18); overflow: hidden; }
     .screen-tabs { display: flex; border-bottom: 1px solid #2d4a37; }
     .screen-tabs button { flex: 1; padding: 11px 6px; font: 700 .76rem ui-monospace, Menlo, Consolas, monospace; letter-spacing: .08em; color: #9fe8b0; background: transparent; border: 0; cursor: pointer; }
@@ -177,10 +177,15 @@
     .screen-body strong { color: #fff; font-weight: 600; }
     .sc-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
     .sc-chip { border: 1px solid #2d4a37; border-radius: 999px; padding: 2px 10px; font-size: .74rem; }
+    .screen-title { padding: 11px 14px; font: 700 .76rem ui-monospace, Menlo, Consolas, monospace; letter-spacing: .08em; color: #52d273; }
+    .slide { animation: scrin .3s ease-out; }
+    .slide[hidden] { display: none; }
+    .slide img { display: block; width: 100%; max-height: 190px; object-fit: contain; margin-top: 12px; border-radius: 6px; background: #0a0d12; }
+    .screen-nav { display: flex; align-items: center; justify-content: center; gap: 16px; padding: 8px; border-top: 1px solid #2d4a37; color: #9fe8b0; font: 700 .78rem ui-monospace, Menlo, Consolas, monospace; }
     .screen-actions { display: flex; justify-content: space-between; gap: 10px; margin-top: 12px; }
     .sbtn { font: 700 .78rem ui-monospace, Menlo, Consolas, monospace; letter-spacing: .06em; cursor: pointer; background: transparent; color: #9fe8b0; border: 1px solid #2d4a37; border-radius: 8px; padding: 9px 14px; }
     .sbtn:hover { background: #52d273; color: #06110a; border-color: #52d273; }
-    @media (prefers-reduced-motion: reduce) { #boot.zoom .city-svg { transition: none; } #boot.screen .boot-screen { animation: none; } }
+    @media (prefers-reduced-motion: reduce) { #boot.zoom .city-svg { transition: none; } .boot-screen.on { animation: none; } }
     #bootGo { font-family: inherit; cursor: pointer; background: #52d273; color: #06110a; border: 1px solid #52d273; border-radius: 10px; padding: 10px 22px; font-weight: 700; letter-spacing: .06em; }
     #bootGo:disabled { opacity: .35; cursor: default; }
     #bootGo:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
@@ -423,10 +428,10 @@
       about: "Saya Platform & DevSecOps Engineer dengan latar jaringan sejak 2013. Saya mengelola platform on-premise dari ujung ke ujung: klaster Kubernetes (kubespray, ArgoCD, Helm), virtualisasi VMware, jaringan, penyimpanan dan backup (Longhorn, MinIO, Veeam), sampai keamanan (GitLab CI, SonarQube, Trivy, Cosign, Wazuh) dan pemantauannya (Prometheus, Grafana, Loki).\nBagi saya semuanya satu rantai: rilis yang cepat baru berarti kalau aman dan terpantau. Latar jaringan membuat saya terbiasa menelusuri masalah dari kabel sampai aplikasi, dan sertifikasi CompTIA Security+ melengkapinya di sisi keamanan.",
       // Sorotan: hasil kerja utama (tanpa angka internal). Tambahkan angka dampak bila sudah ada data yang pasti.
       sorotan: [
-        { title: "Rilis yang terjamin keasliannya", text: "Setiap image ditandatangani dan diperiksa sebelum dijalankan; hanya hasil build resmi yang bisa naik ke produksi." },
-        { title: "Deteksi dan observabilitas", text: "Metrik, log, trace, dan SIEM terpadu: alert untuk klaster, server, jaringan, dan serangan web." },
-        { title: "GitOps tanpa perubahan manual", text: "Aplikasi dan konfigurasi klaster dikelola dari Git (ArgoCD), dengan promosi dev → staging → prod yang konsisten." },
-        { title: "Ketahanan dan akses terkunci", text: "Pemulihan backup diuji, akses diperketat dengan 2FA, dan Pod Security restricted di produksi." }
+        { title: "Rilis yang terjamin keasliannya", text: "Setiap image ditandatangani dan diperiksa sebelum dijalankan; hanya hasil build resmi yang bisa naik ke produksi.", img: "img/gitlab-pipeline.png", alt: "Tahap verifikasi tanda tangan image, deploy, dan pelaporan pada pipeline GitLab CI yang lulus", tags: ["Cosign", "SBOM", "Kyverno", "Harbor"] },
+        { title: "Deteksi dan observabilitas", text: "Metrik, log, trace, dan SIEM terpadu: alert untuk klaster, server, jaringan, dan serangan web.", tags: ["Wazuh", "Prometheus", "Grafana", "Loki"] },
+        { title: "GitOps tanpa perubahan manual", text: "Aplikasi dan konfigurasi klaster dikelola dari Git (ArgoCD), dengan promosi dev → staging → prod yang konsisten.", img: "img/argocd-apps.png", alt: "Daftar aplikasi ArgoCD: semua Synced dan Healthy", tags: ["ArgoCD", "Helm", "Kustomize", "Sealed Secrets"] },
+        { title: "Ketahanan dan akses terkunci", text: "Pemulihan backup diuji, akses diperketat dengan 2FA, dan Pod Security restricted di produksi.", tags: ["Longhorn", "Veeam", "MinIO", "2FA"] }
       ],
       // Angka sengaja dibulatkan; tidak perlu menampilkan hitungan persis lingkungan produksi.
       highlights: [
@@ -621,7 +626,7 @@
     setMode(savedMode);
 
     // Layar pembuka ala terminal; muncul setiap halaman dibuka/dimuat ulang. Latar: hujan kode (canvas, berhenti saat ditutup).
-    // Satu tombol MASUK (aktif setelah 100%): gembok terbuka, maskot mengetik, lalu gedung operasi muncul: tiap lantai = menu (Home/About/Projects/Experience/Contact); Esc menutup langsung; prefers-reduced-motion: tanpa hujan dan animasi.
+    // Satu tombol MASUK (aktif setelah 100%): gembok terbuka, maskot mengetik, lalu gedung operasi muncul: tiap lantai = menu (Home/About/Projects/Experience/Contact); About & Projects membuka layar besar; Esc menutup langsung; prefers-reduced-motion: tanpa hujan dan animasi.
     (() => {
       const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
       const el = document.createElement("div");
@@ -634,7 +639,13 @@
         <div class="screen-body" role="tabpanel">${DATA.about.split("\n").map((t) => `<p>${esc(t)}</p>`).join("")}${chips(DATA.badges || [])}</div>
         <div class="screen-body" role="tabpanel" hidden>${Object.entries(DATA.skills).map(([g, items]) => `<h4>${esc(g)}</h4>${chips(items)}`).join("")}</div>
         <div class="screen-body" role="tabpanel" hidden>${DATA.experience.map((e) => `<h4>${esc(e.title)} · ${esc(e.company)}</h4><small>${esc(e.period)}</small><ul>${(e.points || []).map((p) => `<li>${point(p)}</li>`).join("")}</ul>`).join("")}${(DATA.education || []).map((e) => `<h4>Pendidikan</h4><p>${esc(e.school)} · ${esc(e.degree)} · ${esc(e.period)}</p>`).join("")}</div>
-      </div><div class="screen-actions"><button type="button" class="sbtn" id="bootBack">◂ KEMBALI</button><button type="button" class="sbtn" id="bootFull">BUKA HALAMAN ▸</button></div></div>`;
+      </div><div class="screen-actions"><button type="button" class="sbtn" id="bootBack">◂ KEMBALI</button></div></div>`;
+      const slideHTML = (x) => `<div class="slide" hidden><h4>${esc(x.title)}</h4><p>${esc(x.text)}</p>${x.tags ? chips(x.tags) : ""}${x.img ? `<a href="${esc(x.img)}" target="_blank" rel="noopener"><img src="${esc(x.img)}" alt="${esc(x.alt || x.title)}" loading="lazy"></a>` : ""}</div>`;
+      const PROJ = `<div class="boot-screen" id="bootProjects"><div class="screen-frame">
+        <div class="screen-tabs"><span class="screen-title">PROJECTS · HASIL KERJA UTAMA</span></div>
+        <div class="screen-body">${DATA.sorotan.map(slideHTML).join("")}</div>
+        <div class="screen-nav"><button type="button" class="sbtn" id="projPrev" aria-label="Proyek sebelumnya">‹</button><span id="projCount" aria-live="polite">1/${DATA.sorotan.length}</span><button type="button" class="sbtn" id="projNext" aria-label="Proyek berikutnya">›</button></div>
+      </div><div class="screen-actions"><button type="button" class="sbtn" id="projBack">◂ KEMBALI</button></div></div>`;
       el.innerHTML = `<canvas id="bootRain" aria-hidden="true"></canvas><div class="boot-box">
         <div class="boot-stage"><svg class="boot-lock" viewBox="0 0 64 80" aria-hidden="true"><path class="shackle" d="M20 36V24a12 12 0 0 1 24 0v12"/><rect class="body" x="10" y="34" width="44" height="36" rx="6"/><circle class="hole" cx="32" cy="49" r="5"/><rect class="hole" x="30" y="52" width="4" height="9" rx="1.5"/></svg>
         <svg class="boot-mascot" viewBox="0 0 200 200" aria-hidden="true">
@@ -653,7 +664,7 @@
           <rect x="34" y="186" width="132" height="9" rx="4.5" fill="#cdd5e2"/>
         </svg></div>
         <pre id="bootLog" aria-live="polite"></pre><div class="boot-bar"><i id="bootBar"></i></div>
-        <div class="boot-row"><span id="bootPct">0%</span><button type="button" id="bootGo" disabled>MASUK ▸</button></div></div>${CITY}${SCREEN}`;
+        <div class="boot-row"><span id="bootPct">0%</span><button type="button" id="bootGo" disabled>MASUK ▸</button></div></div>${CITY}${SCREEN}${PROJ}`;
       document.body.appendChild(el);
 
       // Hujan kode
@@ -673,9 +684,10 @@
       let n = 0, timer, opening = false;
       const close = () => { clearInterval(timer); if (ctx) { cancelAnimationFrame(raf); removeEventListener("resize", fit); } el.remove(); document.removeEventListener("keydown", onKey); };
       const floors = () => Array.from(document.querySelectorAll("#bootCity .floor"));
-      let cityOn = false, screenOn = false;
+      let cityOn = false, screenOn = null;   // screenOn: null | "about" | "proj"
       const onKey = (e) => {
         if (e.key === "Escape") return screenOn ? closeScreen() : close();
+        if (screenOn === "proj" && (e.key === "ArrowLeft" || e.key === "ArrowRight")) return showSlide(si + (e.key === "ArrowRight" ? 1 : -1));
         if (!cityOn || screenOn || (e.key !== "ArrowUp" && e.key !== "ArrowDown")) return;
         const f = floors(), i = f.indexOf(document.activeElement);   // urutan DOM: Home (dasar) ... Contact (atap)
         e.preventDefault(); f[(i + (e.key === "ArrowUp" ? 1 : -1) + f.length) % f.length]?.focus();
@@ -687,14 +699,23 @@
         b.addEventListener("click", () => selectTab(i));
         b.addEventListener("keydown", (e) => { if (e.key === "ArrowRight" || e.key === "ArrowLeft") { const n = (i + (e.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length; selectTab(n); tabs[n].focus(); } });
       });
-      const openScreen = () => {
-        el.classList.add("zoom");
-        setTimeout(() => { screenOn = true; el.classList.add("screen"); el.setAttribute("aria-label", "Layar About"); selectTab(0); tabs[0]?.focus(); }, reduce ? 0 : 450);
+      const panel = (k) => $(k === "proj" ? "bootProjects" : "bootScreen");
+      const openScreen = (k, origin) => {
+        el.style.setProperty("--zo", origin); el.classList.add("zoom");
+        setTimeout(() => {
+          screenOn = k; el.classList.add("screen"); panel(k).classList.add("on");
+          el.setAttribute("aria-label", k === "proj" ? "Layar Projects" : "Layar About");
+          if (k === "proj") showSlide(0); else { selectTab(0); tabs[0]?.focus(); }
+        }, reduce ? 0 : 450);
       };
-      const closeScreen = () => { screenOn = false; el.classList.remove("screen", "zoom"); el.setAttribute("aria-label", "Pilih lantai"); floors()[1]?.focus(); };
-      $("bootBack").addEventListener("click", closeScreen);
-      $("bootFull").addEventListener("click", () => go2("#tentang"));
-      const pick = (t) => t === "About" ? openScreen() : go2(MENU[t] || "#top");
+      const closeScreen = () => { const k = screenOn; screenOn = null; if (k) panel(k).classList.remove("on"); el.classList.remove("screen", "zoom"); el.setAttribute("aria-label", "Pilih lantai"); floors()[k === "proj" ? 2 : 1]?.focus(); };
+      $("bootBack").addEventListener("click", closeScreen); $("projBack").addEventListener("click", closeScreen);
+      const slides = Array.from(document.querySelectorAll("#bootProjects .slide")); let si = 0, tx = 0;
+      const showSlide = (i) => { si = (i + slides.length) % slides.length; slides.forEach((x, j) => { x.hidden = j !== si; }); $("projCount").textContent = `${si + 1}/${slides.length}`; };
+      $("projPrev").addEventListener("click", () => showSlide(si - 1)); $("projNext").addEventListener("click", () => showSlide(si + 1));
+      $("bootProjects").addEventListener("touchstart", (e) => { tx = e.changedTouches[0].clientX; }, { passive: true });
+      $("bootProjects").addEventListener("touchend", (e) => { const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 40) showSlide(si + (dx < 0 ? 1 : -1)); }, { passive: true });
+      const pick = (t) => t === "About" ? openScreen("about", "32% 66%") : t === "Projects" ? openScreen("proj", "32% 53%") : go2(MENU[t] || "#top");
       const go2 = (target) => {
         el.classList.add("out");
         if (target === "#top") window.scrollTo?.(0, 0); else document.querySelector(target)?.scrollIntoView();
