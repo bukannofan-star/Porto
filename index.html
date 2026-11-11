@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Nofantyo Mahendra — Portofolio</title>
-  <meta name="description" content="Nofantyo Mahendra: System Engineer & DevSecOps (CompTIA Security+). Platform Kubernetes, pipeline CI/CD dengan pemeriksaan keamanan, dan observabilitas — dari jaringan sampai aplikasi.">
+  <meta name="description" content="Nofantyo Mahendra: Platform & DevSecOps Engineer (CompTIA Security+). Platform Kubernetes on-premise, pipeline CI/CD dengan pemeriksaan keamanan, dan observabilitas — dari jaringan sampai aplikasi.">
   <meta name="theme-color" content="#2557d6">
   <link rel="canonical" href="https://porto-bay-six.vercel.app/">
   <meta property="og:type" content="website">
@@ -14,9 +14,9 @@
   <meta property="og:image:alt" content="Foto Nofantyo Mahendra">
   <meta name="twitter:card" content="summary">
   <meta property="og:title" content="Nofantyo Mahendra — Portofolio">
-  <meta property="og:description" content="System Engineer & DevSecOps (CompTIA Security+): Kubernetes, pipeline CI/CD dengan pemeriksaan keamanan, observabilitas.">
+  <meta property="og:description" content="Platform & DevSecOps Engineer (CompTIA Security+): Kubernetes on-premise, pipeline CI/CD dengan pemeriksaan keamanan, observabilitas.">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Nofantyo Mahendra", "url": "https://porto-bay-six.vercel.app/", "image": "https://porto-bay-six.vercel.app/img/foto.jpg", "jobTitle": "System Engineer / DevSecOps", "worksFor": {"@type": "Organization", "name": "PNM Venture Capital"}, "alumniOf": {"@type": "CollegeOrUniversity", "name": "Universitas Nusa Mandiri"}, "address": {"@type": "PostalAddress", "addressLocality": "Jakarta", "addressCountry": "ID"}, "sameAs": ["https://www.linkedin.com/in/nofantyo/"], "knowsAbout": ["Kubernetes", "GitOps", "DevSecOps", "CI/CD", "Observabilitas", "Keamanan jaringan"]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Nofantyo Mahendra", "url": "https://porto-bay-six.vercel.app/", "image": "https://porto-bay-six.vercel.app/img/foto.jpg", "jobTitle": "Platform & DevSecOps Engineer", "worksFor": {"@type": "Organization", "name": "PNM Venture Capital"}, "alumniOf": {"@type": "CollegeOrUniversity", "name": "Universitas Nusa Mandiri"}, "address": {"@type": "PostalAddress", "addressLocality": "Jakarta", "addressCountry": "ID"}, "sameAs": ["https://www.linkedin.com/in/nofantyo/"], "knowsAbout": ["Kubernetes", "GitOps", "DevSecOps", "CI/CD", "Observabilitas", "Keamanan jaringan"]}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -156,6 +156,31 @@
     .pkt { fill: #5cc8ff; offset-rotate: 0deg; animation: pkt 2.2s linear infinite; animation-delay: var(--p); pointer-events: none; } .pkt.g { fill: #52d273; animation-duration: 4.8s; }
     @keyframes pkt { from { offset-distance: 0%; } to { offset-distance: 100%; } }
     @media (prefers-reduced-motion: reduce) { .floor { opacity: 1; transform: none; animation: none !important; } .win.f, .led, .beacon, .pkt { animation: none; } }
+    /* Layar besar (klik lantai About): kamera "mendekat" ke layar berisi tab About / Skills / Experience */
+    .boot-screen { display: none; position: relative; width: min(640px, 100%); }
+    #boot.screen .boot-city { display: none; }
+    #boot.screen .boot-screen { display: block; animation: scrin .45s ease-out; }
+    @keyframes scrin { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: none; } }
+    #boot.zoom .city-svg { transform: scale(1.9); transform-origin: 32% 66%; opacity: 0; transition: transform .5s ease-in, opacity .45s ease-in; }
+    .screen-frame { background: #0d1520; border: 6px solid #202a38; border-radius: 14px; box-shadow: 0 0 0 1px #2d4a37, 0 0 40px rgba(82, 210, 115, .18); overflow: hidden; }
+    .screen-tabs { display: flex; border-bottom: 1px solid #2d4a37; }
+    .screen-tabs button { flex: 1; padding: 11px 6px; font: 700 .76rem ui-monospace, Menlo, Consolas, monospace; letter-spacing: .08em; color: #9fe8b0; background: transparent; border: 0; cursor: pointer; }
+    .screen-tabs button[aria-selected="true"] { background: #52d273; color: #06110a; }
+    .screen-tabs button:focus-visible, .sbtn:focus-visible { outline: 2px solid #fff; outline-offset: -2px; }
+    .screen-body { padding: 16px 18px; max-height: min(52vh, 360px); overflow: auto; text-align: left; font-size: .85rem; line-height: 1.65; color: #cfeedd; }
+    .screen-body[hidden] { display: none; }
+    .screen-body p + p { margin-top: 8px; }
+    .screen-body h4 { color: #52d273; font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; margin: 12px 0 4px; }
+    .screen-body h4:first-child { margin-top: 0; }
+    .screen-body small { color: #7fbf97; display: block; margin-bottom: 4px; }
+    .screen-body ul { padding-left: 18px; display: grid; gap: 5px; }
+    .screen-body strong { color: #fff; font-weight: 600; }
+    .sc-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+    .sc-chip { border: 1px solid #2d4a37; border-radius: 999px; padding: 2px 10px; font-size: .74rem; }
+    .screen-actions { display: flex; justify-content: space-between; gap: 10px; margin-top: 12px; }
+    .sbtn { font: 700 .78rem ui-monospace, Menlo, Consolas, monospace; letter-spacing: .06em; cursor: pointer; background: transparent; color: #9fe8b0; border: 1px solid #2d4a37; border-radius: 8px; padding: 9px 14px; }
+    .sbtn:hover { background: #52d273; color: #06110a; border-color: #52d273; }
+    @media (prefers-reduced-motion: reduce) { #boot.zoom .city-svg { transition: none; } #boot.screen .boot-screen { animation: none; } }
     #bootGo { font-family: inherit; cursor: pointer; background: #52d273; color: #06110a; border: 1px solid #52d273; border-radius: 10px; padding: 10px 22px; font-weight: 700; letter-spacing: .06em; }
     #bootGo:disabled { opacity: .35; cursor: default; }
     #bootGo:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
@@ -319,7 +344,7 @@
       <div class="avatar" id="avatar"></div>
       <div>
         <h1 id="name">Nofantyo Mahendra</h1>
-        <div class="headline" id="headline">System Engineer · DevSecOps · Platform Kubernetes &amp; Infrastruktur</div>
+        <div class="headline" id="headline">Platform &amp; DevSecOps Engineer · Kubernetes On-Premise · Keamanan · Infrastruktur</div>
         <p class="tagline" id="tagline">Saya membangun platform yang membuat rilis cepat, aman, dan terpantau — dari jaringan sampai aplikasi.</p>
         <div class="location" id="location"></div>
         <div class="badges" id="badges"></div>
@@ -391,11 +416,11 @@
     const DATA = {
       name: "Nofantyo Mahendra",
       photo: "img/foto.jpg",
-      headline: "System Engineer · DevSecOps · Platform Kubernetes & Infrastruktur",
+      headline: "Platform & DevSecOps Engineer · Kubernetes On-Premise · Keamanan · Infrastruktur",
       location: "Jakarta",
       tagline: "Saya membangun platform yang membuat rilis cepat, aman, dan terpantau — dari jaringan sampai aplikasi.",
-      badges: ["CompTIA Security+ (SY0-701)", "Infrastruktur sejak 2013", "Jaringan → Platform → DevSecOps"],
-      about: "Saya memulai karier sebagai Network Engineer (Cisco, MikroTik, MPLS) di Bank Mandiri, lalu berkembang ke sisi platform. Sekarang saya System Engineer / DevSecOps yang mengelola klaster Kubernetes produksi dengan GitOps.\nFokus saya: pipeline CI/CD dengan pemeriksaan keamanan (image ditandatangani dan diverifikasi sebelum deploy), keamanan sebagai kode, dan observabilitas yang membuat masalah terlihat sebelum pengguna merasakannya.\nLatar jaringan membuat saya terbiasa menelusuri masalah dari kabel sampai aplikasi; sertifikasi CompTIA Security+ melengkapinya di sisi keamanan.",
+      badges: ["CompTIA Security+ (SY0-701)", "Platform on-premise", "Jaringan → Platform → DevSecOps"],
+      about: "Saya Platform & DevSecOps Engineer dengan latar jaringan sejak 2013. Saya mengelola platform on-premise dari ujung ke ujung: klaster Kubernetes (kubespray, ArgoCD, Helm), virtualisasi VMware, jaringan, penyimpanan dan backup (Longhorn, MinIO, Veeam), sampai keamanan (GitLab CI, SonarQube, Trivy, Cosign, Wazuh) dan pemantauannya (Prometheus, Grafana, Loki).\nBagi saya semuanya satu rantai: rilis yang cepat baru berarti kalau aman dan terpantau. Latar jaringan membuat saya terbiasa menelusuri masalah dari kabel sampai aplikasi, dan sertifikasi CompTIA Security+ melengkapinya di sisi keamanan.",
       // Sorotan: hasil kerja utama (tanpa angka internal). Tambahkan angka dampak bila sudah ada data yang pasti.
       sorotan: [
         { title: "Rilis yang terjamin keasliannya", text: "Setiap image ditandatangani dan diperiksa sebelum dijalankan; hanya hasil build resmi yang bisa naik ke produksi." },
@@ -423,7 +448,7 @@
           location: "Indonesia",
           // Format poin: "Judul: isi" — teks sebelum ": " ditebalkan.
           points: [
-            "Platform GitOps: Mengelola klaster Kubernetes produksi dengan ArgoCD, Helm, dan Kustomize untuk 50+ aplikasi, dengan rahasia terenkripsi (Sealed Secrets), penyimpanan Longhorn, dan promosi dev → staging → prod.",
+            "Platform GitOps: Mengelola klaster Kubernetes produksi on-premise dengan ArgoCD, Helm, dan Kustomize untuk 50+ aplikasi, dengan rahasia terenkripsi (Sealed Secrets), penyimpanan Longhorn, dan promosi dev → staging → prod.",
             "CI/CD dengan pemeriksaan keamanan: Satu template GitLab CI bersama (20+ job) memeriksa kebocoran rahasia (Gitleaks), kode (Semgrep, SonarQube), image (Trivy), dan aplikasi yang berjalan (ZAP), lalu mengumpulkan hasilnya di DefectDojo. Image ditandatangani (Cosign, SBOM) dan diverifikasi sebelum deploy.",
             "Operasi dan tata kelola: Mengoperasikan Harbor, SonarQube, GitLab Runner, Wazuh (SIEM), Backstage, dan GLPI; menyusun threat model, playbook insiden, runbook, dan menguji pemulihan backup etcd dan volume."
           ]
@@ -445,10 +470,10 @@
         { school: "Universitas Nusa Mandiri", degree: "S1 Informatika", period: "Lulus 2015", note: "" }
       ],                               // format: [{ school, degree, period, note }]
       skills: {
-        "Platform & GitOps": ["Kubernetes", "ArgoCD", "Helm", "Kustomize", "Sealed Secrets", "Kyverno", "Longhorn", "cert-manager"],
+        "Platform & GitOps": ["Kubernetes", "kubespray", "ArgoCD", "Helm", "Kustomize", "Sealed Secrets", "Kyverno", "Longhorn", "cert-manager"],
         "CI/CD & Keamanan": ["GitLab CI/CD", "SonarQube", "Trivy", "Semgrep", "Cosign / SBOM", "DefectDojo", "Harbor", "Wazuh (SIEM)"],
         "Observabilitas": ["Prometheus", "Grafana", "Loki", "Tempo", "OpenTelemetry (Alloy)", "Alertmanager", "SNMP"],
-        "Infrastruktur": ["Ansible", "Linux (Ubuntu)", "Windows Server", "VMware vSphere", "Traefik / HAProxy / MetalLB", "BIND DNS"],
+        "Infrastruktur": ["Ansible", "Linux (Ubuntu)", "Windows Server", "VMware vSphere", "Veeam", "MinIO", "Traefik / HAProxy / MetalLB", "BIND DNS"],
         "Jaringan": ["Cisco", "MikroTik RouterOS", "OSPF / BGP", "MPLS", "VLAN / ACL", "Firewall & NAT", "WAN / LAN"]
       },
       // Cuplikan layar: file di folder img/. Hanya potongan grafik tanpa nama host/IP/akun/versi.
@@ -603,6 +628,13 @@
       el.id = "boot"; el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true"); el.setAttribute("aria-label", "Layar pembuka");
       const MENU = { Home: "#top", About: "#tentang", Projects: "#sorotan", Experience: "#pengalaman", Contact: "#kontak" };
       const CITY = `<div class="boot-city" id="bootCity"><div class="city-title">${esc(DATA.name)}</div><div class="city-sub">Pilih lantai untuk masuk</div><svg class="city-svg" viewBox="0 0 300 300" role="group" aria-label="Gedung operasi: pilih lantai untuk menuju bagian halaman"><polygon class="slab" points="8,240 96,196 184,240 96,284"/><polygon class="slabL" points="8,240 96,284 96,292 8,248"/><polygon class="slabR" points="96,284 184,240 184,248 96,292"/><g class="floor" role="button" tabindex="0" data-t="Home" aria-label="Home: ringkasan profil" style="--i:0"><polygon class="fL" points="32,238 96,270 96,232 32,200"/><polygon class="fR" points="96,270 160,238 160,200 96,232"/><polygon class="door" points="67.84,255.92 88.32,266.16 88.32,239.56 67.84,229.32"/><polygon class="led" style="--d:0" points="67.84,227.8 88.32,238.04 88.32,235.76 67.84,225.52"/><polygon class="win f" style="--d:1" points="38.4,227.9 51.2,234.3 51.2,221 38.4,214.6"/><polygon class="win" style="--d:0" points="103.68,252.86 115.2,247.1 115.2,233.8 103.68,239.56"/><polygon class="win f" style="--d:1" points="121.6,243.9 133.12,238.14 133.12,224.84 121.6,230.6"/><polygon class="win" style="--d:2" points="139.52,234.94 151.04,229.18 151.04,215.88 139.52,221.64"/><line class="lead" x1="162" y1="235" x2="190" y2="235"/><text class="lbl" x="196" y="235">01 HOME</text></g><g class="floor" role="button" tabindex="0" data-t="About" aria-label="About: latar belakang dan sertifikasi" style="--i:1"><polygon class="fL" points="32,200 96,232 96,194 32,162"/><polygon class="fR" points="96,232 160,200 160,162 96,194"/><polygon class="win" style="--d:0" points="38.4,189.9 51.2,196.3 51.2,183 38.4,176.6"/><polygon class="win f" style="--d:1" points="57.6,199.5 70.4,205.9 70.4,192.6 57.6,186.2"/><polygon class="win" style="--d:2" points="76.8,209.1 89.6,215.5 89.6,202.2 76.8,195.8"/><polygon class="win f" style="--d:1" points="103.68,214.86 115.2,209.1 115.2,195.8 103.68,201.56"/><polygon class="win" style="--d:2" points="121.6,205.9 133.12,200.14 133.12,186.84 121.6,192.6"/><polygon class="win f" style="--d:3" points="139.52,196.94 151.04,191.18 151.04,177.88 139.52,183.64"/><line class="lead" x1="162" y1="197" x2="190" y2="197"/><text class="lbl" x="196" y="197">02 ABOUT</text></g><g class="floor" role="button" tabindex="0" data-t="Projects" aria-label="Projects: hasil kerja utama" style="--i:2"><polygon class="fL" points="32,162 96,194 96,156 32,124"/><polygon class="fR" points="96,194 160,162 160,124 96,156"/><polygon class="scr" points="39.68,154.44 60.8,165 60.8,149.8 39.68,139.24"/><polygon class="scr" points="67.2,168.2 88.32,178.76 88.32,163.56 67.2,153"/><polygon class="win" style="--d:0" points="103.68,176.86 115.2,171.1 115.2,157.8 103.68,163.56"/><polygon class="win f" style="--d:1" points="121.6,167.9 133.12,162.14 133.12,148.84 121.6,154.6"/><polygon class="win" style="--d:2" points="139.52,158.94 151.04,153.18 151.04,139.88 139.52,145.64"/><line class="lead" x1="162" y1="159" x2="190" y2="159"/><text class="lbl" x="196" y="159">03 PROJECTS</text></g><g class="floor" role="button" tabindex="0" data-t="Experience" aria-label="Experience: karier dan keahlian" style="--i:3"><polygon class="fL" points="32,124 96,156 96,118 32,86"/><polygon class="fR" points="96,156 160,124 160,86 96,118"/><polygon class="win" style="--d:0" points="38.4,113.9 51.2,120.3 51.2,107 38.4,100.6"/><polygon class="win f" style="--d:1" points="57.6,123.5 70.4,129.9 70.4,116.6 57.6,110.2"/><polygon class="win" style="--d:2" points="76.8,133.1 89.6,139.5 89.6,126.2 76.8,119.8"/><polygon class="rack" points="102.4,149 111.36,144.52 111.36,114.12 102.4,118.6"/><polygon class="led" style="--d:0" points="104.32,142.34 108.8,140.1 108.8,137.44 104.32,139.68"/><polygon class="led" style="--d:1" points="104.32,134.74 108.8,132.5 108.8,129.84 104.32,132.08"/><polygon class="led" style="--d:2" points="104.32,127.14 108.8,124.9 108.8,122.24 104.32,124.48"/><polygon class="rack" points="115.2,142.6 124.16,138.12 124.16,107.72 115.2,112.2"/><polygon class="led" style="--d:3" points="117.12,135.94 121.6,133.7 121.6,131.04 117.12,133.28"/><polygon class="led" style="--d:4" points="117.12,128.34 121.6,126.1 121.6,123.44 117.12,125.68"/><polygon class="led" style="--d:5" points="117.12,120.74 121.6,118.5 121.6,115.84 117.12,118.08"/><polygon class="rack" points="128,136.2 136.96,131.72 136.96,101.32 128,105.8"/><polygon class="led" style="--d:6" points="129.92,129.54 134.4,127.3 134.4,124.64 129.92,126.88"/><polygon class="led" style="--d:7" points="129.92,121.94 134.4,119.7 134.4,117.04 129.92,119.28"/><polygon class="led" style="--d:8" points="129.92,114.34 134.4,112.1 134.4,109.44 129.92,111.68"/><polygon class="rack" points="140.8,129.8 149.76,125.32 149.76,94.92 140.8,99.4"/><polygon class="led" style="--d:9" points="142.72,123.14 147.2,120.9 147.2,118.24 142.72,120.48"/><polygon class="led" style="--d:10" points="142.72,115.54 147.2,113.3 147.2,110.64 142.72,112.88"/><polygon class="led" style="--d:11" points="142.72,107.94 147.2,105.7 147.2,103.04 142.72,105.28"/><polygon class="fT" points="32,86 96,118 160,86 96,54"/><line class="lead" x1="162" y1="121" x2="190" y2="121"/><text class="lbl" x="196" y="121">04 EXPERIENCE</text></g><g class="floor" role="button" tabindex="0" data-t="Contact" aria-label="Contact: hubungi saya" style="--i:4"><polygon class="fL" points="62,86 96,103 96,69 62,52"/><polygon class="fR" points="96,103 130,86 130,52 96,69"/><polygon class="fT" points="62,52 96,69 130,52 96,35"/><polygon class="win f" style="--d:1" points="68.8,77.5 89.2,87.7 89.2,74.1 68.8,63.9"/><polygon class="win" style="--d:2" points="102.8,87.7 123.2,77.5 123.2,63.9 102.8,74.1"/><line class="pole" x1="96" y1="52" x2="96" y2="30"/><path class="dish" d="M83 25Q96 42 109 25"/><circle class="beacon" cx="96" cy="23" r="2.6"/><line class="lead" x1="132" y1="77.5" x2="190" y2="77.5"/><text class="lbl" x="196" y="77.5">05 CONTACT</text></g><line class="riser" x1="96" y1="270" x2="96" y2="118"/><circle class="pkt" style="--p:0s;offset-path:path('M96 270V118');" r="2.2"/><circle class="pkt" style="--p:-1.1s;offset-path:path('M96 270V118');" r="2.2"/><circle class="pkt g" style="--p:0s;offset-path:path('M8 240L96 196L184 240L96 284Z');" r="2.2"/><circle class="pkt g" style="--p:-2.4s;offset-path:path('M8 240L96 196L184 240L96 284Z');" r="2.2"/></svg><p class="city-hint">↑ ↓ pilih lantai · Enter masuk · Esc langsung ke Home</p></div>`;
+      const chips = (a) => `<div class="sc-chips">${a.map((c) => `<span class="sc-chip">${esc(c)}</span>`).join("")}</div>`;
+      const SCREEN = `<div class="boot-screen" id="bootScreen"><div class="screen-frame">
+        <div class="screen-tabs" role="tablist" aria-label="Isi layar">${["About", "Skills", "Experience"].map((t, i) => `<button type="button" role="tab" aria-selected="${i === 0}" data-i="${i}">${t.toUpperCase()}</button>`).join("")}</div>
+        <div class="screen-body" role="tabpanel">${DATA.about.split("\n").map((t) => `<p>${esc(t)}</p>`).join("")}${chips(DATA.badges || [])}</div>
+        <div class="screen-body" role="tabpanel" hidden>${Object.entries(DATA.skills).map(([g, items]) => `<h4>${esc(g)}</h4>${chips(items)}`).join("")}</div>
+        <div class="screen-body" role="tabpanel" hidden>${DATA.experience.map((e) => `<h4>${esc(e.title)} · ${esc(e.company)}</h4><small>${esc(e.period)}</small><ul>${(e.points || []).map((p) => `<li>${point(p)}</li>`).join("")}</ul>`).join("")}${(DATA.education || []).map((e) => `<h4>Pendidikan</h4><p>${esc(e.school)} · ${esc(e.degree)} · ${esc(e.period)}</p>`).join("")}</div>
+      </div><div class="screen-actions"><button type="button" class="sbtn" id="bootBack">◂ KEMBALI</button><button type="button" class="sbtn" id="bootFull">BUKA HALAMAN ▸</button></div></div>`;
       el.innerHTML = `<canvas id="bootRain" aria-hidden="true"></canvas><div class="boot-box">
         <div class="boot-stage"><svg class="boot-lock" viewBox="0 0 64 80" aria-hidden="true"><path class="shackle" d="M20 36V24a12 12 0 0 1 24 0v12"/><rect class="body" x="10" y="34" width="44" height="36" rx="6"/><circle class="hole" cx="32" cy="49" r="5"/><rect class="hole" x="30" y="52" width="4" height="9" rx="1.5"/></svg>
         <svg class="boot-mascot" viewBox="0 0 200 200" aria-hidden="true">
@@ -621,7 +653,7 @@
           <rect x="34" y="186" width="132" height="9" rx="4.5" fill="#cdd5e2"/>
         </svg></div>
         <pre id="bootLog" aria-live="polite"></pre><div class="boot-bar"><i id="bootBar"></i></div>
-        <div class="boot-row"><span id="bootPct">0%</span><button type="button" id="bootGo" disabled>MASUK ▸</button></div></div>${CITY}`;
+        <div class="boot-row"><span id="bootPct">0%</span><button type="button" id="bootGo" disabled>MASUK ▸</button></div></div>${CITY}${SCREEN}`;
       document.body.appendChild(el);
 
       // Hujan kode
@@ -641,16 +673,29 @@
       let n = 0, timer, opening = false;
       const close = () => { clearInterval(timer); if (ctx) { cancelAnimationFrame(raf); removeEventListener("resize", fit); } el.remove(); document.removeEventListener("keydown", onKey); };
       const floors = () => Array.from(document.querySelectorAll("#bootCity .floor"));
-      let cityOn = false;
+      let cityOn = false, screenOn = false;
       const onKey = (e) => {
-        if (e.key === "Escape") return close();
-        if (!cityOn || (e.key !== "ArrowUp" && e.key !== "ArrowDown")) return;
+        if (e.key === "Escape") return screenOn ? closeScreen() : close();
+        if (!cityOn || screenOn || (e.key !== "ArrowUp" && e.key !== "ArrowDown")) return;
         const f = floors(), i = f.indexOf(document.activeElement);   // urutan DOM: Home (dasar) ... Contact (atap)
         e.preventDefault(); f[(i + (e.key === "ArrowUp" ? 1 : -1) + f.length) % f.length]?.focus();
       };
       const toCity = () => { cityOn = true; el.classList.add("city"); el.setAttribute("aria-label", "Pilih lantai"); floors()[0]?.focus(); };
-      const pick = (t) => {
-        const target = MENU[t] || "#top";
+      const tabs = Array.from(document.querySelectorAll("#bootScreen [role=tab]")), panes = Array.from(document.querySelectorAll("#bootScreen [role=tabpanel]"));
+      const selectTab = (i) => tabs.forEach((b, j) => { b.setAttribute("aria-selected", String(j === i)); panes[j].hidden = j !== i; });
+      tabs.forEach((b, i) => {
+        b.addEventListener("click", () => selectTab(i));
+        b.addEventListener("keydown", (e) => { if (e.key === "ArrowRight" || e.key === "ArrowLeft") { const n = (i + (e.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length; selectTab(n); tabs[n].focus(); } });
+      });
+      const openScreen = () => {
+        el.classList.add("zoom");
+        setTimeout(() => { screenOn = true; el.classList.add("screen"); el.setAttribute("aria-label", "Layar About"); selectTab(0); tabs[0]?.focus(); }, reduce ? 0 : 450);
+      };
+      const closeScreen = () => { screenOn = false; el.classList.remove("screen", "zoom"); el.setAttribute("aria-label", "Pilih lantai"); floors()[1]?.focus(); };
+      $("bootBack").addEventListener("click", closeScreen);
+      $("bootFull").addEventListener("click", () => go2("#tentang"));
+      const pick = (t) => t === "About" ? openScreen() : go2(MENU[t] || "#top");
+      const go2 = (target) => {
         el.classList.add("out");
         if (target === "#top") window.scrollTo?.(0, 0); else document.querySelector(target)?.scrollIntoView();
         setTimeout(close, 350);
