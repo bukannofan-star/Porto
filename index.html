@@ -191,17 +191,27 @@
     .pl-job { position: relative; display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px 3px 5px; border: 1px solid #2d4a37; border-radius: 999px; color: #cfeedd; font-size: .68rem; }
     .pl-job::before { content: ""; position: absolute; inset: -1px; border-radius: inherit; background: #0f2a1d; border: 1px solid #52d273; opacity: 0; }
     .pl-job.man::before { background: #2b2410; border-color: #ffd98a; }
-    .pl-job i, .pl-job span { position: relative; }
+    .pl-job::before, .pl-job::after { z-index: 0; }
+    .pl-job i, .pl-job span { position: relative; z-index: 1; }
     .pl-job i { width: 12px; height: 12px; border-radius: 50%; background: #2d4a37; }
     .pl-job i::after { content: "\2713"; position: absolute; inset: 0; border-radius: 50%; background: #52d273; color: #06110a; font: 700 8px/12px sans-serif; text-align: center; opacity: 0; }
     .pl-job.man i::after { content: "\25B6"; background: #ffd98a; font-size: 6px; text-indent: 1px; }
+    .pl-job.hot::after { content: ""; position: absolute; inset: -1px; border-radius: inherit; background: #2d1316; border: 1px solid #ff6b6b; opacity: 0; }
+    .pl-job.hot i::before { content: "!"; position: absolute; inset: 0; z-index: 1; border-radius: 50%; background: #ff6b6b; color: #06110a; font: 700 8px/12px sans-serif; text-align: center; opacity: 0; }
+    .pl-run .pl-job.hot::after, .pl-run .pl-job.hot i::before { animation: plok .25s forwards; animation-delay: calc(3s + var(--h) * .45s); }
+    .pl-link { position: relative; height: 12px; }
+    .pl-link i { position: absolute; top: 0; left: var(--x); width: 4px; height: 4px; border-radius: 50%; background: #5cc8ff; opacity: 0; }
+    .pl-run .pl-link i { animation: pldot 1.2s linear infinite; animation-delay: calc(var(--s) * .6s + .6s + var(--k) * .4s); }
+    @keyframes pldot { 0% { opacity: 0; transform: translateY(-2px); } 30%, 60% { opacity: .9; } 100% { opacity: 0; transform: translateY(9px); } }
+    .pl-cap { font-size: .64rem; color: #5f7d6c; }
     .pl-note { font-size: .7rem; color: #ffd98a; opacity: 0; }
+    .pl-note.hot { color: #ff8e8e; }
     .pl-run .pl-job::before, .pl-run .pl-job i::after { animation: plok .25s forwards; animation-delay: calc(var(--s) * .6s + var(--j) * .08s + .3s); }
     .pl-run .pl-job.man i::after { animation: plok .25s forwards, plpulse 1.4s ease-in-out infinite; animation-delay: calc(var(--s) * .6s + var(--j) * .08s + .3s), calc(var(--s) * .6s + 1s); }
-    .pl-run .pl-note { animation: plok .4s forwards; animation-delay: calc(5 * .6s + .9s); }
+    .pl-run .pl-note { animation: plok .4s forwards; animation-delay: var(--nd, 3.9s); }
     @keyframes plok { to { opacity: 1; } }
     @keyframes plpulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
-    @media (prefers-reduced-motion: reduce) { .pl-job::before, .pl-job i::after, .pl-note { opacity: 1 !important; animation: none !important; } }
+    @media (prefers-reduced-motion: reduce) { .pl-job::before, .pl-job i::after, .pl-job.hot::after, .pl-job.hot i::before, .pl-note { opacity: 1 !important; animation: none !important; } .pl-link { display: none; } }
     .screen-actions { display: flex; justify-content: space-between; gap: 10px; margin-top: 12px; }
     .sbtn { font: 700 .78rem ui-monospace, Menlo, Consolas, monospace; letter-spacing: .06em; cursor: pointer; background: transparent; color: #9fe8b0; border: 1px solid #2d4a37; border-radius: 8px; padding: 9px 14px; }
     .sbtn:hover { background: #52d273; color: #06110a; border-color: #52d273; }
@@ -448,8 +458,8 @@
       about: "Saya Platform & DevSecOps Engineer dengan latar jaringan sejak 2013. Saya mengelola platform on-premise dari ujung ke ujung: klaster Kubernetes (kubespray, ArgoCD, Helm), virtualisasi VMware, jaringan, penyimpanan dan backup (Longhorn, MinIO, Veeam), sampai keamanan (GitLab CI, SonarQube, Trivy, Cosign, Wazuh) dan pemantauannya (Prometheus, Grafana, Loki).\nBagi saya semuanya satu rantai: rilis yang cepat baru berarti kalau aman dan terpantau. Latar jaringan membuat saya terbiasa menelusuri masalah dari kabel sampai aplikasi, dan sertifikasi CompTIA Security+ melengkapinya di sisi keamanan.",
       // Sorotan: hasil kerja utama (tanpa angka internal). Tambahkan angka dampak bila sudah ada data yang pasti.
       sorotan: [
-        { title: "Rilis yang terjamin keasliannya", text: "Setiap image ditandatangani dan diperiksa sebelum dijalankan; hanya hasil build resmi yang bisa naik ke produksi.", pl: true, tags: ["Cosign", "SBOM", "Kyverno", "Harbor"] },
-        { title: "Deteksi dan observabilitas", text: "Metrik, log, trace, dan SIEM terpadu: alert untuk klaster, server, jaringan, dan serangan web.", tags: ["Wazuh", "Prometheus", "Grafana", "Loki"] },
+        { title: "Rilis yang terjamin keasliannya", text: "Setiap image ditandatangani dan diperiksa sebelum dijalankan; hanya hasil build resmi yang bisa naik ke produksi.", pl: "pipeline", tags: ["Cosign", "SBOM", "Kyverno", "Harbor"] },
+        { title: "Deteksi dan observabilitas", pl: "deteksi", text: "Metrik, log, trace, dan SIEM terpadu: alert untuk klaster, server, jaringan, dan serangan web.", tags: ["Wazuh", "Prometheus", "Grafana", "Loki"] },
         { title: "GitOps tanpa perubahan manual", text: "Aplikasi dan konfigurasi klaster dikelola dari Git (ArgoCD), dengan promosi dev → staging → prod yang konsisten.", img: "img/argocd-apps.png", alt: "Daftar aplikasi ArgoCD: semua Synced dan Healthy", tags: ["ArgoCD", "Helm", "Kustomize", "Sealed Secrets"] },
         { title: "Ketahanan dan akses terkunci", text: "Pemulihan backup diuji, akses diperketat dengan 2FA, dan Pod Security restricted di produksi.", tags: ["Longhorn", "Veeam", "MinIO", "2FA"] }
       ],
@@ -457,7 +467,7 @@
       // Pipeline untuk animasi di layar Projects (stage/job nyata; "manual" = tahap yang menunggu persetujuan manusia).
       pipeline: {
         title: "recruitment",
-        note: "deploy produksi: persetujuan manual",
+        note: "deploy produksi: persetujuan manual", nd: "3.9s",
         stages: [
           { n: "test", jobs: ["lockfile-check", "phpunit-coverage", "secret-scan", "test", "vitest-coverage"] },
           { n: "scan", jobs: ["semgrep-sast", "sonarqube-scan", "trivy-config", "trivy-fs"] },
@@ -466,6 +476,18 @@
           { n: "verify", hl: true, jobs: ["verify-api", "verify-queue", "verify-web"] },
           { n: "deploy", manual: true, jobs: ["deploy-prod-api", "deploy-prod-queue", "deploy-prod-web"] },
           { n: "report", jobs: ["defectdojo-gitleaks", "defectdojo-semgrep", "defectdojo-sonarqube", "trivy-api", "trivy-web"] }
+        ]
+      },
+      // Alur deteksi untuk animasi (ILUSTRASI: peristiwa contoh, bukan data nyata). h = urutan "serangan terdeteksi" (merah) dari sumber sampai notifikasi.
+      deteksi: {
+        title: "alur deteksi", links: true, hot: true, nd: "5.5s",
+        note: "contoh: serangan web terdeteksi → alert terkirim",
+        cap: "Ilustrasi alur; peristiwa contoh, bukan data nyata.",
+        stages: [
+          { n: "sumber", jobs: ["kubernetes", "server linux/windows", "jaringan (snmp)", { t: "log gateway", h: 0 }] },
+          { n: "kumpul", jobs: ["prometheus", "loki + alloy", { t: "wazuh (siem)", h: 1 }] },
+          { n: "deteksi", jobs: [{ t: "aturan deteksi", h: 2 }, { t: "alertmanager", h: 3 }] },
+          { n: "notif", jobs: [{ t: "email", h: 4 }, "grafana dashboard"] }
         ]
       },
       highlights: [
@@ -674,8 +696,12 @@
         <div class="screen-body" role="tabpanel" hidden>${Object.entries(DATA.skills).map(([g, items]) => `<h4>${esc(g)}</h4>${chips(items)}`).join("")}</div>
         <div class="screen-body" role="tabpanel" hidden>${DATA.experience.map((e) => `<h4>${esc(e.title)} · ${esc(e.company)}</h4><small>${esc(e.period)}</small><ul>${(e.points || []).map((p) => `<li>${point(p)}</li>`).join("")}</ul>`).join("")}${(DATA.education || []).map((e) => `<h4>Pendidikan</h4><p>${esc(e.school)} · ${esc(e.degree)} · ${esc(e.period)}</p>`).join("")}</div>
       </div><div class="screen-actions"><button type="button" class="sbtn" id="bootBack">◂ KEMBALI</button></div></div>`;
-      const plHTML = (d) => `<div class="pl pl-run" role="img" aria-label="Animasi pipeline ${esc(d.title)}: semua tahap lulus; ${esc(d.note)}"><div class="pl-title">PIPELINE · ${esc(d.title)}</div>${d.stages.map((st, si) => `<div class="pl-stage${st.hl ? " hl" : ""}" style="--s:${si}"><b>${esc(st.n)}</b>${st.jobs.map((jb, ji) => `<span class="pl-job${st.manual ? " man" : ""}" style="--j:${ji}"><i></i><span>${esc(jb)}</span></span>`).join("")}</div>`).join("")}<div class="pl-note">⏸ ${esc(d.note)}</div></div>`;
-      const slideHTML = (x) => `<div class="slide" hidden><h4>${esc(x.title)}</h4><p>${esc(x.text)}</p>${x.tags ? chips(x.tags) : ""}${x.pl ? plHTML(DATA.pipeline) : ""}${x.img ? `<a href="${esc(x.img)}" target="_blank" rel="noopener"><img src="${esc(x.img)}" alt="${esc(x.alt || x.title)}" loading="lazy"></a>` : ""}</div>`;
+      const plHTML = (d) => {
+        const link = (si) => `<div class="pl-link" style="--s:${si}">${[22, 50, 78].map((x, k) => `<i style="--x:${x}%;--k:${k}"></i>`).join("")}</div>`;
+        const job = (jb, ji, st) => { const o = typeof jb === "string" ? { t: jb } : jb; return `<span class="pl-job${st.manual ? " man" : ""}${o.h !== undefined ? " hot" : ""}" style="--j:${ji}${o.h !== undefined ? `;--h:${o.h}` : ""}"><i></i><span>${esc(o.t)}</span></span>`; };
+        return `<div class="pl pl-run" role="img" aria-label="Animasi ${esc(d.title)}: ${esc(d.note)}"><div class="pl-title">${d.title === "recruitment" ? "PIPELINE · " : ""}${esc(d.title.toUpperCase())}</div>${d.stages.map((st, si) => `${d.links && si ? link(si - 1) : ""}<div class="pl-stage${st.hl ? " hl" : ""}" style="--s:${si}"><b>${esc(st.n)}</b>${st.jobs.map((jb, ji) => job(jb, ji, st)).join("")}</div>`).join("")}<div class="pl-note${d.hot ? " hot" : ""}" style="--nd:${d.nd || "3.9s"}">${d.hot ? "⚠ " : "⏸ "}${esc(d.note)}</div>${d.cap ? `<div class="pl-cap">${esc(d.cap)}</div>` : ""}</div>`;
+      };
+      const slideHTML = (x) => `<div class="slide" hidden><h4>${esc(x.title)}</h4><p>${esc(x.text)}</p>${x.tags ? chips(x.tags) : ""}${x.pl ? plHTML(DATA[x.pl]) : ""}${x.img ? `<a href="${esc(x.img)}" target="_blank" rel="noopener"><img src="${esc(x.img)}" alt="${esc(x.alt || x.title)}" loading="lazy"></a>` : ""}</div>`;
       const PROJ = `<div class="boot-screen" id="bootProjects"><div class="screen-frame">
         <div class="screen-tabs"><span class="screen-title">PROJECTS · HASIL KERJA UTAMA</span></div>
         <div class="screen-body">${DATA.sorotan.map(slideHTML).join("")}</div>
