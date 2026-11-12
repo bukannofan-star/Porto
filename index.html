@@ -260,6 +260,25 @@
     .ch b { font: 700 .78rem ui-monospace, Menlo, Consolas, monospace; letter-spacing: .06em; }
     .ch span { margin-left: auto; font-size: .74rem; opacity: .85; overflow-wrap: anywhere; text-align: right; }
     @media (prefers-reduced-motion: reduce) { .sig i { animation: none !important; } .cx-a { display: none; } .boot-screen.on .cx-b, .boot-screen.on .ch-row { animation: none; opacity: 1; transform: none; } }
+    /* Layar Home: kartu identitas, stempel akses, baris masuk bertahap (transform/opacity) */
+    .hm { display: flex; gap: 18px; align-items: center; justify-content: center; flex-wrap: wrap; text-align: left; }
+    .hm-ph { position: relative; width: 118px; height: 148px; flex: none; border: 2px solid #52d273; border-radius: 10px; overflow: hidden; background: #0d1a2b; }
+    .hm-ph img { width: 100%; height: 100%; object-fit: cover; object-position: center 18%; display: block; }
+    .hm-ph::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 18px; background: linear-gradient(rgba(82,210,115,0), rgba(82,210,115,.45)); opacity: 0; }
+    .boot-screen.on .hm-ph::after { animation: hmscan 1.2s ease-in-out .2s 1; }
+    @keyframes hmscan { 0% { opacity: .9; transform: translateY(-18px); } 100% { opacity: 0; transform: translateY(148px); } }
+    .hm-tx { flex: 1 1 220px; min-width: 0; }
+    .hm-i { opacity: 0; transform: translateY(8px); }
+    .boot-screen.on .hm-i { animation: tlin .45s ease-out forwards; animation-delay: calc(.3s + var(--i) * .2s); }
+    .hm-id { font: 700 .72rem ui-monospace, Menlo, Consolas, monospace; letter-spacing: .08em; color: #52d273; }
+    .hm-n { margin: 2px 0; font-size: 1.35rem; color: #fff; }
+    .hm-r { margin: 0 0 8px; color: #9fe8b0; font-size: .86rem; }
+    .hm-t { margin: 0 0 10px; color: #cfeedd; font-size: .86rem; }
+    .hm-stamp { display: inline-block; margin-top: 12px; padding: 4px 10px; border: 2px solid #52d273; border-radius: 6px; color: #52d273; font: 700 .78rem ui-monospace, Menlo, Consolas, monospace; letter-spacing: .1em; opacity: 0; transform: rotate(-6deg) scale(1.6); }
+    .boot-screen.on .hm-stamp { animation: hmstamp .35s ease-in forwards; animation-delay: 1.3s; }
+    @keyframes hmstamp { to { opacity: 1; transform: rotate(-6deg) scale(1); } }
+    .screen-actions a.sbtn { text-decoration: none; display: inline-block; }
+    @media (prefers-reduced-motion: reduce) { .hm-ph::after { display: none; } .boot-screen.on .hm-i, .boot-screen.on .hm-stamp { animation: none; opacity: 1; transform: none; } .hm-stamp { transform: rotate(-6deg); } .boot-screen.on .hm-stamp { transform: rotate(-6deg); } }
     .screen-actions { display: flex; justify-content: space-between; gap: 10px; margin-top: 12px; }
     .sbtn { font: 700 .78rem ui-monospace, Menlo, Consolas, monospace; letter-spacing: .06em; cursor: pointer; background: transparent; color: #9fe8b0; border: 1px solid #2d4a37; border-radius: 8px; padding: 9px 14px; }
     .sbtn:hover { background: #52d273; color: #06110a; border-color: #52d273; }
@@ -810,6 +829,16 @@
           <p class="cx-line">Butuh engineer yang bisa membuat rilis cepat <em>dan</em> aman? Mari bicara.</p>
           <div class="ch-list">${chans.map((c, i) => `<div class="ch-row" style="--i:${i}"><a class="ch" href="${esc(c.href)}"${c.ext ? ' target="_blank" rel="noopener"' : ""}${c.dl ? " download" : ""}><i>${c.ic}</i><b>${c.n.toUpperCase()}</b><span>${esc(c.v)}</span></a>${c.copy ? `<button type="button" class="sbtn" id="cxCopy">SALIN</button>` : ""}</div>`).join("")}</div></div>
       </div><div class="screen-actions"><button type="button" class="sbtn" id="cxBack">◂ KEMBALI</button></div></div>`;
+      const HM = `<div class="boot-screen" id="bootHome"><div class="screen-frame">
+        <div class="screen-tabs"><span class="screen-title">HOME · KARTU IDENTITAS</span></div>
+        <div class="screen-body"><div class="hm">${DATA.photo ? `<div class="hm-ph hm-i" style="--i:0"><img src="${esc(DATA.photo)}" alt="${esc(DATA.name)}"></div>` : ""}
+          <div class="hm-tx"><div class="hm-id hm-i" style="--i:1">ID · ${esc((DATA.location || "").toUpperCase())}</div>
+          <h3 class="hm-n hm-i" style="--i:2">${esc(DATA.name)}</h3>
+          <p class="hm-r hm-i" style="--i:3">${esc(DATA.headline.split(" · ").slice(0, 2).join(" · "))}</p>
+          <p class="hm-t hm-i" style="--i:4">${esc(DATA.tagline)}</p>
+          <div class="hm-i" style="--i:5">${chips(DATA.badges || [])}</div>
+          <span class="hm-stamp">✓ AKSES DIBERIKAN</span></div></div></div>
+      </div><div class="screen-actions"><button type="button" class="sbtn" id="homeBack">◂ KEMBALI</button>${L.cv ? `<a class="sbtn" href="${esc(L.cv)}" download>⬇ CV</a>` : ""}</div></div>`;
       el.innerHTML = `<canvas id="bootRain" aria-hidden="true"></canvas><div class="boot-box">
         <div class="boot-stage"><svg class="boot-lock" viewBox="0 0 64 80" aria-hidden="true"><path class="shackle" d="M20 36V24a12 12 0 0 1 24 0v12"/><rect class="body" x="10" y="34" width="44" height="36" rx="6"/><circle class="hole" cx="32" cy="49" r="5"/><rect class="hole" x="30" y="52" width="4" height="9" rx="1.5"/></svg>
         <svg class="boot-mascot" viewBox="0 0 200 200" aria-hidden="true">
@@ -828,7 +857,7 @@
           <rect x="34" y="186" width="132" height="9" rx="4.5" fill="#cdd5e2"/>
         </svg></div>
         <pre id="bootLog" aria-live="polite"></pre><div class="boot-bar"><i id="bootBar"></i></div>
-        <div class="boot-row"><span id="bootPct">0%</span><button type="button" id="bootGo" disabled>MASUK ▸</button></div></div>${CITY}${SCREEN}${PROJ}${EXP}${CX}`;
+        <div class="boot-row"><span id="bootPct">0%</span><button type="button" id="bootGo" disabled>MASUK ▸</button></div></div>${CITY}${SCREEN}${PROJ}${EXP}${CX}${HM}`;
       document.body.appendChild(el);
 
       // Hujan kode
@@ -863,17 +892,17 @@
         b.addEventListener("click", () => selectTab(i));
         b.addEventListener("keydown", (e) => { if (e.key === "ArrowRight" || e.key === "ArrowLeft") { const n = (i + (e.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length; selectTab(n); tabs[n].focus(); } });
       });
-      const panel = (k) => $(k === "proj" ? "bootProjects" : k === "exp" ? "bootExp" : k === "contact" ? "bootContact" : "bootScreen");
+      const panel = (k) => $(k === "proj" ? "bootProjects" : k === "exp" ? "bootExp" : k === "contact" ? "bootContact" : k === "home" ? "bootHome" : "bootScreen");
       const openScreen = (k, origin) => {
         el.style.setProperty("--zo", origin); el.classList.add("zoom");
         setTimeout(() => {
           screenOn = k; el.classList.add("screen"); panel(k).classList.add("on");
-          el.setAttribute("aria-label", k === "proj" ? "Layar Projects" : k === "exp" ? "Layar Experience" : k === "contact" ? "Layar Contact" : "Layar About");
-          if (k === "proj") showSlide(0); else { selectTab(0); tabs[0]?.focus(); }
+          el.setAttribute("aria-label", k === "proj" ? "Layar Projects" : k === "exp" ? "Layar Experience" : k === "contact" ? "Layar Contact" : k === "home" ? "Layar Home" : "Layar About");
+          if (k === "home") $("homeBack").focus(); else if (k === "proj") showSlide(0); else { selectTab(0); tabs[0]?.focus(); }
         }, reduce ? 0 : 450);
       };
-      const closeScreen = () => { const k = screenOn; screenOn = null; if (k) panel(k).classList.remove("on"); el.classList.remove("screen", "zoom"); el.setAttribute("aria-label", "Pilih lantai"); floors()[{ about: 1, proj: 2, exp: 3, contact: 4 }[k]]?.focus(); };
-      $("bootBack").addEventListener("click", closeScreen); $("projBack").addEventListener("click", closeScreen); $("expBack").addEventListener("click", closeScreen); $("cxBack").addEventListener("click", closeScreen);
+      const closeScreen = () => { const k = screenOn; screenOn = null; if (k) panel(k).classList.remove("on"); el.classList.remove("screen", "zoom"); el.setAttribute("aria-label", "Pilih lantai"); floors()[{ home: 0, about: 1, proj: 2, exp: 3, contact: 4 }[k]]?.focus(); };
+      $("bootBack").addEventListener("click", closeScreen); $("projBack").addEventListener("click", closeScreen); $("expBack").addEventListener("click", closeScreen); $("cxBack").addEventListener("click", closeScreen); $("homeBack").addEventListener("click", closeScreen);
       $("cxCopy")?.addEventListener("click", async (e) => {
         const b = e.currentTarget, t = b.textContent;
         try { await navigator.clipboard.writeText(L.email); b.textContent = "TERSALIN ✓"; } catch (err) { b.textContent = "GAGAL"; }
@@ -884,7 +913,7 @@
       $("projPrev").addEventListener("click", () => showSlide(si - 1)); $("projNext").addEventListener("click", () => showSlide(si + 1));
       $("bootProjects").addEventListener("touchstart", (e) => { tx = e.changedTouches[0].clientX; }, { passive: true });
       $("bootProjects").addEventListener("touchend", (e) => { const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 40) showSlide(si + (dx < 0 ? 1 : -1)); }, { passive: true });
-      const pick = (t) => t === "About" ? openScreen("about", "32% 66%") : t === "Projects" ? openScreen("proj", "32% 53%") : t === "Experience" ? openScreen("exp", "32% 40%") : t === "Contact" ? openScreen("contact", "32% 26%") : go2(MENU[t] || "#top");
+      const pick = (t) => t === "About" ? openScreen("about", "32% 66%") : t === "Projects" ? openScreen("proj", "32% 53%") : t === "Experience" ? openScreen("exp", "32% 40%") : t === "Contact" ? openScreen("contact", "32% 26%") : t === "Home" ? openScreen("home", "32% 80%") : go2(MENU[t] || "#top");
       const go2 = (target) => {
         el.classList.add("out");
         if (target === "#top") window.scrollTo?.(0, 0); else document.querySelector(target)?.scrollIntoView();
