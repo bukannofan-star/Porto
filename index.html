@@ -588,7 +588,7 @@
       },
       // Layar Experience: jalur karier + garis waktu. e = indeks experience, ed = indeks education, c = indeks certifications.
       jalur: { title: "jalur karier", ic: "→", tone: "good", nd: "2.4s", note: "dari kabel sampai aplikasi", stages: [{ n: "jalur", jobs: ["jaringan", "platform", "devsecops"] }] },
-      timeline: [{ y: "2013", e: 1 }, { y: "2015", ed: 0 }, { y: "2016", e: 0, now: true }, { y: "2026", c: 0 }],
+      timeline: [{ y: "2013", e: 2 }, { y: "2015", ed: 0 }, { y: "2016", e: 1 }, { y: "2023", e: 0, now: true }, { y: "2026", c: 0 }],
       highlights: [
         { n: "50+", l: "aplikasi dikelola lewat GitOps" },
         { n: "20+", l: "pemeriksaan keamanan otomatis di pipeline" },
@@ -604,13 +604,23 @@
         {
           title: "System Engineer / DevSecOps",
           company: "PNM Venture Capital",
-          period: "2016 – Sekarang",
+          period: "2023 – Sekarang",
           location: "Indonesia",
           // Format poin: "Judul: isi" — teks sebelum ": " ditebalkan.
           points: [
             "Platform GitOps: Mengelola klaster Kubernetes produksi on-premise dengan ArgoCD, Helm, dan Kustomize untuk 50+ aplikasi, dengan rahasia terenkripsi (Sealed Secrets), penyimpanan Longhorn, dan promosi dev → staging → prod.",
             "CI/CD dengan pemeriksaan keamanan: Satu template GitLab CI bersama (20+ job) memeriksa kebocoran rahasia (Gitleaks), kode (Semgrep, SonarQube), image (Trivy), dan aplikasi yang berjalan (ZAP), lalu mengumpulkan hasilnya di DefectDojo. Image ditandatangani (Cosign, SBOM) dan diverifikasi sebelum deploy.",
             "Operasi dan tata kelola: Mengoperasikan Harbor, SonarQube, GitLab Runner, Wazuh (SIEM), Backstage, dan GLPI; menyusun threat model, playbook insiden, runbook, dan menguji pemulihan backup etcd dan volume."
+          ]
+        },
+        {
+          title: "Koordinator Wilayah IT",
+          company: "PNM Holding",
+          period: "2016 – 2023",
+          location: "",
+          points: [
+            "Kepemimpinan tim: Membawahi 10 IT cabang dalam menjalankan operasional teknologi informasi di wilayahnya.",
+            "Infrastruktur dan jaringan: Mengelola infrastruktur dan jaringan di lingkungan PNM Holding."
           ]
         },
         {
