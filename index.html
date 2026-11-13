@@ -522,7 +522,7 @@
       location: "Jakarta",
       tagline: "Saya membangun platform yang membuat rilis cepat, aman, dan terpantau — dari jaringan sampai aplikasi.",
       badges: ["CompTIA Security+ (SY0-701)", "Platform on-premise", "Jaringan → Platform → DevSecOps"],
-      about: "Saya Platform & DevSecOps Engineer dengan latar jaringan sejak 2013. Saya mengelola platform on-premise dari ujung ke ujung: klaster Kubernetes (kubespray, ArgoCD, Helm), virtualisasi VMware, jaringan, penyimpanan dan backup (Longhorn, MinIO, Veeam), sampai keamanan (GitLab CI, SonarQube, Trivy, Cosign, Wazuh) dan pemantauannya (Prometheus, Grafana, Loki).\nBagi saya semuanya satu rantai: rilis yang cepat baru berarti kalau aman dan terpantau. Latar jaringan membuat saya terbiasa menelusuri masalah dari kabel sampai aplikasi, dan sertifikasi CompTIA Security+ melengkapinya di sisi keamanan.",
+      about: "Saya Platform & DevSecOps Engineer dengan latar jaringan sejak 2013. Saya mengelola platform on-premise dari ujung ke ujung: klaster Kubernetes (kubespray, ArgoCD, Helm), virtualisasi VMware, jaringan, penyimpanan dan backup (Longhorn, MinIO, Veeam), sampai keamanan (GitLab CI, SonarQube, Trivy, Cosign, Wazuh) dan pemantauannya (Prometheus, Grafana, Loki).\nBagi saya semuanya satu rantai: rilis yang cepat baru berarti kalau aman dan terpantau. Latar jaringan membuat saya terbiasa menelusuri masalah dari kabel sampai aplikasi, dan sertifikasi CompTIA Security+ melengkapinya di sisi keamanan. Pengalaman saya ada di lingkungan keuangan (PNM Holding, Bank Mandiri).\nSaya memakai AI coding assistant untuk kode infrastruktur dan pipeline; setiap perubahan tetap diperiksa lewat tes otomatis yang ketat dan review sebelum deploy.",
       // Sorotan: hasil kerja utama (tanpa angka internal). Tambahkan angka dampak bila sudah ada data yang pasti.
       sorotan: [
         { title: "Rilis yang terjamin keasliannya", text: "Setiap image ditandatangani dan diperiksa sebelum dijalankan; hanya hasil build resmi yang bisa naik ke produksi.", pl: "pipeline", tags: ["SonarQube", "Trivy", "Cosign", "SBOM", "Harbor", "DefectDojo", "Kyverno", "ZAP (DAST)"] },
@@ -598,7 +598,8 @@
         email: "bukannofan@gmail.com",
         linkedin: "https://www.linkedin.com/in/nofantyo/",
         github: "",
-        cv: "cv-nofantyo-mahendra.pdf"
+        cv: "cv-nofantyo-mahendra.pdf",
+        cvEn: "cv-nofantyo-mahendra-security-en.pdf"
       },
       experience: [
         {
@@ -640,9 +641,9 @@
         { school: "Universitas Nusa Mandiri", degree: "S1 Informatika", period: "Lulus 2015", note: "" }
       ],                               // format: [{ school, degree, period, note }]
       skills: {
-        "Mengelola klaster & rilis": ["Kubernetes", "kubespray", "ArgoCD", "Helm", "Kustomize", "Sealed Secrets", "Kyverno", "Longhorn", "cert-manager"],
-        "Mengamankan jalur rilis": ["GitLab CI/CD", "SonarQube", "Trivy", "Semgrep", "Cosign / SBOM", "DefectDojo", "Harbor", "Wazuh (SIEM)"],
-        "Memantau & mendeteksi masalah": ["Prometheus", "Grafana", "Loki", "Tempo", "OpenTelemetry (Alloy)", "Alertmanager", "SNMP"],
+        "Mengelola klaster & rilis": ["Kubernetes", "Docker", "kubespray", "ArgoCD", "Helm", "Kustomize", "Sealed Secrets", "Kyverno", "Longhorn", "cert-manager"],
+        "Mengamankan jalur rilis": ["Secure SDLC", "GitLab CI/CD", "SonarQube", "Trivy", "Semgrep", "Gitleaks", "ZAP (DAST)", "Cosign / SBOM", "DefectDojo", "Harbor", "Wazuh (SIEM)"],
+        "Memantau & mendeteksi masalah": ["Falco", "Suricata", "Manajemen kerentanan", "Prometheus", "Grafana", "Loki", "Tempo", "OpenTelemetry (Alloy)", "Alertmanager", "SNMP"],
         "Server, penyimpanan & backup": ["Ansible", "Linux (Ubuntu)", "Windows Server", "VMware vSphere", "Veeam", "MinIO", "Traefik / HAProxy / MetalLB", "BIND DNS"],
         "Menghubungkan & mengamankan jaringan": ["Cisco", "MikroTik RouterOS", "OSPF / BGP", "MPLS", "VLAN / ACL", "Firewall & NAT", "WAN / LAN"]
       },
@@ -689,7 +690,8 @@
       L.email && `<a class="btn primary" href="mailto:${esc(L.email)}">✉ Email</a>`,
       L.linkedin && `<a class="btn" href="${esc(L.linkedin)}" target="_blank" rel="noopener">in LinkedIn</a>`,
       L.github && `<a class="btn" href="${esc(L.github)}" target="_blank" rel="noopener">⌥ GitHub</a>`,
-      L.cv && `<a class="btn" href="${esc(L.cv)}" download>⬇ Unduh CV</a>`
+      L.cv && `<a class="btn" href="${esc(L.cv)}" download>⬇ Unduh CV</a>`,
+      L.cvEn && `<a class="btn" href="${esc(L.cvEn)}" download>⬇ CV (EN) Security</a>`
     ].filter(Boolean).join("");
     $("contactActions").innerHTML = buttons;
 
@@ -830,7 +832,8 @@
         L.email && { ic: "✉", n: "Email", v: L.email, href: `mailto:${L.email}`, copy: true },
         L.linkedin && { ic: "in", n: "LinkedIn", v: L.linkedin.replace(/\/$/, "").split("/").pop(), href: L.linkedin, ext: true },
         L.github && { ic: "⌥", n: "GitHub", v: L.github.replace(/\/$/, "").split("/").pop(), href: L.github, ext: true },
-        L.cv && { ic: "⬇", n: "Unduh CV", v: "PDF · 1 halaman", href: L.cv, dl: true }
+        L.cv && { ic: "⬇", n: "Unduh CV", v: "PDF · 1 halaman", href: L.cv, dl: true },
+        L.cvEn && { ic: "⬇", n: "CV (EN)", v: "Security · PDF", href: L.cvEn, dl: true }
       ].filter(Boolean);
       const CX = `<div class="boot-screen" id="bootContact"><div class="screen-frame">
         <div class="screen-tabs"><span class="screen-title">CONTACT · HUBUNGI SAYA</span></div>
